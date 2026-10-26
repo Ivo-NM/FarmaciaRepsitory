@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Maman\\OneDrive\\Desktop\\Trabajos Progra II\\Farmacia_Api\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EEA4D7E0-DE75-9953-74E6-561B67AC2477}|Farmacia_Api\\Farmacia_Api.csproj|c:\\users\\maman\\onedrive\\desktop\\trabajos progra ii\\farmacia_api\\farmacia_api\\controller\\farmaciacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEA4D7E0-DE75-9953-74E6-561B67AC2477}|Farmacia_Api\\Farmacia_Api.csproj|solutionrelative:farmacia_api\\controller\\farmaciacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEA4D7E0-DE75-9953-74E6-561B67AC2477}|Farmacia_Api\\Farmacia_Api.csproj|c:\\users\\maman\\onedrive\\desktop\\trabajos progra ii\\farmacia_api\\farmacia_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEA4D7E0-DE75-9953-74E6-561B67AC2477}|Farmacia_Api\\Farmacia_Api.csproj|solutionrelative:farmacia_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEA4D7E0-DE75-9953-74E6-561B67AC2477}|Farmacia_Api\\Farmacia_Api.csproj|c:\\users\\maman\\onedrive\\desktop\\trabajos progra ii\\farmacia_api\\farmacia_api\\data\\implementations\\clienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEA4D7E0-DE75-9953-74E6-561B67AC2477}|Farmacia_Api\\Farmacia_Api.csproj|solutionrelative:farmacia_api\\data\\implementations\\clienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EEA4D7E0-DE75-9953-74E6-561B67AC2477}|Farmacia_Api\\Farmacia_Api.csproj|c:\\users\\maman\\onedrive\\desktop\\trabajos progra ii\\farmacia_api\\farmacia_api\\data\\interfaces\\iclienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EEA4D7E0-DE75-9953-74E6-561B67AC2477}|Farmacia_Api\\Farmacia_Api.csproj|solutionrelative:farmacia_api\\data\\interfaces\\iclienterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +26,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FarmaciaController.cs",
+              "DocumentMoniker": "C:\\Users\\Maman\\OneDrive\\Desktop\\Trabajos Progra II\\Farmacia_Api\\Farmacia_Api\\Controller\\FarmaciaController.cs",
+              "RelativeDocumentMoniker": "Farmacia_Api\\Controller\\FarmaciaController.cs",
+              "ToolTip": "C:\\Users\\Maman\\OneDrive\\Desktop\\Trabajos Progra II\\Farmacia_Api\\Farmacia_Api\\Controller\\FarmaciaController.cs",
+              "RelativeToolTip": "Farmacia_Api\\Controller\\FarmaciaController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T00:27:49.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Maman\\OneDrive\\Desktop\\Trabajos Progra II\\Farmacia_Api\\Farmacia_Api\\Program.cs",
+              "RelativeDocumentMoniker": "Farmacia_Api\\Program.cs",
+              "ToolTip": "C:\\Users\\Maman\\OneDrive\\Desktop\\Trabajos Progra II\\Farmacia_Api\\Farmacia_Api\\Program.cs",
+              "RelativeToolTip": "Farmacia_Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T00:25:59.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClienteRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Maman\\OneDrive\\Desktop\\Trabajos Progra II\\Farmacia_Api\\Farmacia_Api\\Data\\Implementations\\ClienteRepository.cs",
+              "RelativeDocumentMoniker": "Farmacia_Api\\Data\\Implementations\\ClienteRepository.cs",
+              "ToolTip": "C:\\Users\\Maman\\OneDrive\\Desktop\\Trabajos Progra II\\Farmacia_Api\\Farmacia_Api\\Data\\Implementations\\ClienteRepository.cs",
+              "RelativeToolTip": "Farmacia_Api\\Data\\Implementations\\ClienteRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T00:23:20.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IClienteRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Maman\\OneDrive\\Desktop\\Trabajos Progra II\\Farmacia_Api\\Farmacia_Api\\Data\\Interfaces\\IClienteRepository.cs",
+              "RelativeDocumentMoniker": "Farmacia_Api\\Data\\Interfaces\\IClienteRepository.cs",
+              "ToolTip": "C:\\Users\\Maman\\OneDrive\\Desktop\\Trabajos Progra II\\Farmacia_Api\\Farmacia_Api\\Data\\Interfaces\\IClienteRepository.cs",
+              "RelativeToolTip": "Farmacia_Api\\Data\\Interfaces\\IClienteRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T00:19:55.677Z",
+              "EditorCaption": ""
             }
           ]
         }
