@@ -137,3 +137,5 @@ C:\Users\Maman\OneDrive\Desktop\Trabajos Progra II\Farmacia_Api\Farmacia_Api\obj
 C:\Users\Maman\OneDrive\Desktop\Trabajos Progra II\Farmacia_Api\Farmacia_Api\obj\Debug\net8.0\Farmacia_Api.pdb
 C:\Users\Maman\OneDrive\Desktop\Trabajos Progra II\Farmacia_Api\Farmacia_Api\obj\Debug\net8.0\Farmacia_Api.genruntimeconfig.cache
 C:\Users\Maman\OneDrive\Desktop\Trabajos Progra II\Farmacia_Api\Farmacia_Api\obj\Debug\net8.0\ref\Farmacia_Api.dll
+C:\Users\Maman\OneDrive\Desktop\Trabajos Progra II\Farmacia_Api\Farmacia_Api\obj\Debug\net8.0\Farmacia_Api.sourcelink.json
+C:\Users\Maman\OneDrive\Desktop\Trabajos Progra II\Farmacia_Api\Farmacia_Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

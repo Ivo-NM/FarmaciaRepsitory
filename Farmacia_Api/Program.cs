@@ -1,4 +1,6 @@
 using Farmacia_Api.Data;
+using Farmacia_Api.Data.Implementations;
+using Farmacia_Api.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -13,6 +15,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 var app = builder.Build();
 
