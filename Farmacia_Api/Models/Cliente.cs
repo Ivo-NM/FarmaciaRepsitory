@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Farmacia_Api.Models;
 
@@ -27,6 +28,7 @@ public partial class Cliente
 
     public virtual ObrasSociale? CodObraSocialNavigation { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<Factura> Facturas { get; set; } = new List<Factura>();
 
     public virtual Barrio IdBarrioNavigation { get; set; } = null!;
