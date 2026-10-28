@@ -1,6 +1,12 @@
-﻿namespace Farmacia_Api.Data.Interfaces
+﻿using Farmacia_Api.Models;
+
+namespace Farmacia_Api.Data.Interfaces
 {
     public interface IFacturaRepository
     {
+        Task<IEnumerable<Factura>> GetAllAsync();
+        Task<IEnumerable<Factura>> GetAllInSedeAsync(int id);
+        Task<Factura?> GetByIdAsync(int id);
+        Task<bool> AddAsync(Factura factura);
     }
 }

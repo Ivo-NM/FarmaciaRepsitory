@@ -25,9 +25,9 @@ public partial class Cliente
 
     public int? CodObraSocial { get; set; }
 
-    public virtual ObrasSociale? CodObraSocialNavigation { get; set; }
+    public virtual ObrasSociale? ObraSocialNavigation { get; set; }
 
     public virtual ICollection<Factura> Facturas { get; set; } = new List<Factura>();
 
-    public virtual Barrio IdBarrioNavigation { get; set; } = null!;
+    public virtual Barrio BarrioNavigation { get; set; } = null!;
 }
