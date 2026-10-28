@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Farmacia_Api.Models;
 
@@ -26,6 +25,5 @@ public partial class DetalleFactura
 
     public virtual OtrosProducto? CodProductoNavigation { get; set; }
 
-    [JsonIgnore]
     public virtual Factura NroFacturaNavigation { get; set; } = null!;
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Farmacia_Api.Models;
 
@@ -14,9 +13,7 @@ public partial class Cobertura
 
     public string? TipoCobertura { get; set; }
 
-    [JsonIgnore]
     public virtual Medicamento CodMedicamentoNavigation { get; set; } = null!;
 
-    [JsonIgnore]
     public virtual ObrasSociale CodObraSocialNavigation { get; set; } = null!;
 }

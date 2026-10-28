@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace Farmacia_Api.Models;
 
@@ -14,6 +13,5 @@ public partial class Localidade
 
     public virtual ICollection<Barrio> Barrios { get; set; } = new List<Barrio>();
 
-    [JsonIgnore]
     public virtual Provincia IdProvinciaNavigation { get; set; } = null!;
 }
