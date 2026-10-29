@@ -1,4 +1,6 @@
-﻿namespace Farmacia_Api.Dtos
+﻿using System.Text.Json.Serialization;
+
+namespace Farmacia_Api.Dtos
 {
     public class ReadMedicamentoDto
     {
@@ -8,6 +10,8 @@
         public string? Descripcion { get; set; }
         public string? IndicacionesUso { get; set; }
         public decimal PreUnitario { get; set; }
+
+        [JsonIgnore]
         public ICollection<ReadDetalleFacturasDto> DetalleFacturasDto { get; set; } = new List<ReadDetalleFacturasDto>();
     }
 }
