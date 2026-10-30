@@ -15,6 +15,8 @@ namespace Farmacia_Api.Dtos
         [JsonIgnore]
         public ReadFacturaDto? FacturaDto { get; set; }
         //public ReadSucursalDto? SucursalDto { get; set; }
+
+        [JsonIgnore]
         public ReadMedicamentoDto? MedicamentoDto { get; set; }
     }
 }

@@ -22,20 +22,43 @@ namespace Farmacia_Api.Services.ClassServices
 
         public async Task<IEnumerable<ReadFacturaDto>> ObtenerFacturasAsync()
         {
-  
             var facturas = (await repository.GetAllAsync()).ToList();
             var lista = Mapeo(facturas);
             return lista;
         }
 
-        public Task<Factura?> ObtenerFacturasPorIdAsync(int id)
+        public async Task<ReadFacturaDto?> ObtenerFacturasPorIdAsync(int id)
         {
-            throw new NotImplementedException();
+            //El id debe ser mayor a 0
+
+            if (id <= 0)
+            {
+                throw new ArgumentException("El id debe ser mayor a 0");
+            }
+
+            var factura = await repository.GetByIdAsync(id);
+
+            if (factura == null)
+            {
+                throw new ArgumentException("No existe la factura");
+            }
+
+            var facturaDto = Mapeo(factura);
+            return facturaDto;
         }
 
-        public Task<IEnumerable<Factura>> ObtenerFacturasPorSucursalAsync(int id)
+        public async Task<IEnumerable<ReadFacturaDto>> ObtenerFacturasPorSucursalAsync(int id)
         {
-            throw new NotImplementedException();
+            //El id debe ser mayor a 0
+
+            if (id <= 0)
+            {
+                throw new ArgumentException("El id debe ser mayor a 0");
+            }
+            
+            var facturas = (await repository.GetAllInSedeAsync(id)).ToList();
+            var lista = Mapeo(facturas);
+            return lista;
         }
 
         private List<ReadFacturaDto> Mapeo(List<Factura> facturas)
@@ -68,14 +91,32 @@ namespace Farmacia_Api.Services.ClassServices
                 listaFacturaDto.Add(facturaDto);
             }
             return listaFacturaDto;
-
         }
-    
-    
-    
-    
-    
-    
-    }
 
+        private ReadFacturaDto Mapeo(Factura factura)
+        {
+            ReadFacturaDto facturaDto = new ReadFacturaDto()
+            {
+                NroFactura = factura.NroFactura,
+                Nombsede = factura.NroSucursalNavigation.NomSede,
+                Fecha = factura.Fecha,
+                IdEmpleado = factura.IdEmpleado,
+                IdFormaPago = factura.IdFormaPago,
+
+                DetalleFacturasDto = factura.DetalleFacturas.Select(x => new ReadDetalleFacturasDto()
+                {
+                    nombreMed = x.CodMedicamentoNavigation != null ? x.CodMedicamentoNavigation.NombreMedicamento : string.Empty,
+                    nombreProd = x.CodProductoNavigation != null ? x.CodProductoNavigation.Detalle : string.Empty,
+                    PreUnitario = x.PreUnitario,
+                    Cantidad = x.Cantidad,
+                    DescuentoObraSocial = x.DescuentoPorObraSocial,
+                    Reembolsado = x.Reembolsado
+                }).ToList()
+
+
+            };
+
+            return facturaDto;
+        }
+    }
 }

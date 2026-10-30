@@ -33,5 +33,53 @@ namespace Farmacia_Api.Controller
                 });
             }
         }
+
+        [HttpGet("/facturas/sucursal/{idSucursal}")]
+        public async Task<IActionResult> RecuperarFacturaPorSucursal(int idSucursal)
+        {
+            try
+            {
+                var facturas = await service.ObtenerFacturasPorSucursalAsync(idSucursal);
+                return Ok(facturas);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"ERROR: {ex.Message}"
+                });
+            }
+        }
+
+        [HttpGet("/facturas/{idFactura}")]
+        public async Task<IActionResult> RecuperarFacturaPorId(int idFactura)
+        {
+            try
+            {
+                var factura = await service.ObtenerFacturasPorIdAsync(idFactura);
+                return Ok(factura);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"ERROR: {ex.Message}"
+                });
+            }
+        }
     }
 }
