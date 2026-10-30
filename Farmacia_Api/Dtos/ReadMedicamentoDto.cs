@@ -5,7 +5,7 @@ namespace Farmacia_Api.Dtos
     public class ReadMedicamentoDto
     {
         public int CodMedicamento { get; set; }
-        public string NombreMedicamento { get; set; }
+        public string? NombreMedicamento { get; set; }
         public bool PrescripcionMedica { get; set; }
         public string? Descripcion { get; set; }
         public string? IndicacionesUso { get; set; }

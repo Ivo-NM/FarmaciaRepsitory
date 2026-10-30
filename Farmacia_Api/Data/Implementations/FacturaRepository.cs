@@ -21,7 +21,6 @@ namespace Farmacia_Api.Data.Implementations
         {
             return await _context.Facturas
                 .Include(f => f.NroSucursalNavigation)
-                    .ThenInclude(s => s.NomSede)
                 .Include(f => f.DetalleFacturas)
                     .ThenInclude(df => df.CodMedicamentoNavigation)
                 .Include(f => f.DetalleFacturas)
@@ -35,7 +34,6 @@ namespace Farmacia_Api.Data.Implementations
             return await _context.Facturas
                 .Where(f => f.NroSucursal == id)
                 .Include(f => f.NroSucursalNavigation)
-                    .ThenInclude(s => s.NomSede)
                 .Include(f => f.DetalleFacturas)
                     .ThenInclude(df => df.CodMedicamentoNavigation)
                 .Include(f => f.DetalleFacturas)
@@ -48,7 +46,6 @@ namespace Farmacia_Api.Data.Implementations
         {
             return await _context.Facturas
                 .Include(f => f.NroSucursalNavigation)
-                    .ThenInclude(s => s.NomSede)
                 .Include(f => f.DetalleFacturas)
                     .ThenInclude(df => df.CodMedicamentoNavigation)
                 .Include(f => f.DetalleFacturas)

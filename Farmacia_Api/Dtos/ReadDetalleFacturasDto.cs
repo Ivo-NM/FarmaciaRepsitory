@@ -12,10 +12,11 @@ namespace Farmacia_Api.Dtos
         public decimal PreUnitario { get; set; }
         public int Cantidad { get; set; }
         public decimal? DescuentoObraSocial { get; set; }
-        
+        public bool Reembolsado { get; set; }
+
         [JsonIgnore]
-        public ReadFacturaDto FacturaDto { get; set; }
-        public ReadSucursalDto SucursalDto { get; set; }
-        public ReadMedicamentoDto MedicamentoDto { get; set; }
+        public ReadFacturaDto? FacturaDto { get; set; }
+        public ReadSucursalDto? SucursalDto { get; set; }
+        public ReadMedicamentoDto? MedicamentoDto { get; set; }
     }
 }

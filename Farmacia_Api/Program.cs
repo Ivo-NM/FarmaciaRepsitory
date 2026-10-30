@@ -1,4 +1,8 @@
 using Farmacia_Api.Data;
+using Farmacia_Api.Data.Implementations;
+using Farmacia_Api.Data.Interfaces;
+using Farmacia_Api.Services.ClassServices;
+using Farmacia_Api.Services.InterfacesService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -13,6 +17,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IFacturaRepository, FacturaRepository>();
+builder.Services.AddScoped<IFacturaService, FacturaService>();
 
 var app = builder.Build();
 

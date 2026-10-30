@@ -102,11 +102,11 @@ public partial class FarmaciaDbContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.NroTelefono).HasColumnName("Nro_telefono");
 
-            entity.HasOne(d => d.CodObraSocialNavigation).WithMany(p => p.Clientes)
+            entity.HasOne(d => d.ObraSocialNavigation).WithMany(p => p.Clientes)
                 .HasForeignKey(d => d.CodObraSocial)
                 .HasConstraintName("FK_CLIENTE_ObraSocial");
 
-            entity.HasOne(d => d.IdBarrioNavigation).WithMany(p => p.Clientes)
+            entity.HasOne(d => d.BarrioNavigation).WithMany(p => p.Clientes)
                 .HasForeignKey(d => d.IdBarrio)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CLIENTE_BARRIO");
