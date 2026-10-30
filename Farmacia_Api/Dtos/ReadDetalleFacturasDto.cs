@@ -5,10 +5,8 @@ namespace Farmacia_Api.Dtos
 {
     public class ReadDetalleFacturasDto
     {
-        public int NroDetalle { get; set; }
-        public int NroFactura { get; set; }
-        public int? CodMedicamento { get; set; }
-        public int? CodProducto { get; set; }
+        public string? nombreMed { get; set; }
+        public string? nombreProd { get; set; }
         public decimal PreUnitario { get; set; }
         public int Cantidad { get; set; }
         public decimal? DescuentoObraSocial { get; set; }
@@ -16,7 +14,7 @@ namespace Farmacia_Api.Dtos
 
         [JsonIgnore]
         public ReadFacturaDto? FacturaDto { get; set; }
-        public ReadSucursalDto? SucursalDto { get; set; }
+        //public ReadSucursalDto? SucursalDto { get; set; }
         public ReadMedicamentoDto? MedicamentoDto { get; set; }
     }
 }
