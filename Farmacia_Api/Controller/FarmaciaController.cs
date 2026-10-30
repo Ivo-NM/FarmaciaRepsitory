@@ -81,5 +81,41 @@ namespace Farmacia_Api.Controller
                 });
             }
         }
+
+        [HttpPost("/facturas/crear")]
+        public async Task<IActionResult> CrearFactura([FromBody] CreateFacturaDto dto)
+        {
+            try
+            {
+                bool exito = await service.CrearFacturaAsync(dto);
+
+                if (!exito)
+                {
+                    return BadRequest(new
+                    {
+                        message = "Error al crear la factura"
+                    });
+                }
+
+                return Ok(new
+                {
+                    message = "Factura creada"
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"ERROR: {ex.Message}"
+                });
+            }
+        }
     }
 }

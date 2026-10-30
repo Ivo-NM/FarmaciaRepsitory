@@ -15,9 +15,29 @@ namespace Farmacia_Api.Services.ClassServices
             this.repository = repository;
         }
 
-        public Task<bool> CrearFacturaAsync(Factura factura)
+        public async Task<bool> CrearFacturaAsync(CreateFacturaDto factura)
         {
-            throw new NotImplementedException();
+            Factura f = new Factura()
+            {
+                NroSucursal = factura.NroSucursal,
+                Fecha = factura.Fecha,
+                IdEmpleado = factura.IdEmpleado,
+                IdCliente = factura.IdCliente,
+                IdFormaPago = factura.IdFormaPago,
+
+                DetalleFacturas = factura.DetalleFacturasDtos.Select(df => new DetalleFactura
+                {
+                    CodMedicamento = df.CodMedicamento,
+                    CodProducto = df.CodProducto,
+                    PreUnitario = df.PreUnitario,
+                    Cantidad = df.Cantidad,
+                    DescuentoPorObraSocial = df.DescuentoPorObraSocial,
+                    Reembolsado = df.Reembolsado
+                })
+                .ToList()
+            };
+
+            return await repository.AddAsync(f);
         }
 
         public async Task<IEnumerable<ReadFacturaDto>> ObtenerFacturasAsync()
