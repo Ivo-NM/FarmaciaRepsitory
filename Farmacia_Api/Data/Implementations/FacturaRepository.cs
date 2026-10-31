@@ -54,5 +54,24 @@ namespace Farmacia_Api.Data.Implementations
                 .FirstOrDefaultAsync(f => f.NroFactura == id);
 
         }
+
+        public async Task<Cliente>? GetClienteByIdAsync(int id)
+        {
+            return await _context.Clientes.FirstOrDefaultAsync(c => c.IdCliente == id);
+        }
+
+        public async Task<Empleado>? GetEmpleadoByIdAsync(int id)
+        {
+            return await _context.Empleados.FirstOrDefaultAsync(e => e.IdEmpleado == id);
+        }
+
+        public async Task<FormasDePago> GetFormaDePagoByIdAsync(int id)
+        {
+            return await _context.FormasDePagos.FirstOrDefaultAsync(f => f.IdFormaPago == id);
+        }
+        public async Task<Sucursale>? GetSedeByIdAsync(int id)
+        {
+            return await _context.Sucursales.FirstOrDefaultAsync(s => s.NroSucursal == id);
+        }
     }
 }

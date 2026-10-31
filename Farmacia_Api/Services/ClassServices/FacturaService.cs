@@ -17,6 +17,101 @@ namespace Farmacia_Api.Services.ClassServices
 
         public async Task<bool> CrearFacturaAsync(CreateFacturaDto factura)
         {
+            //La sucursal es requerida
+
+            if (factura.NroSucursal <= 0)
+            {
+                throw new ArgumentException("La sucursal es requerida");
+            }
+            
+            //La sucursal debe existir
+
+            Sucursale? sede = await ObtenerSedePorIdAsync(factura.NroSucursal);
+
+            if (sede == null)
+            {
+                throw new ArgumentException("La sucursal debe existir");
+            }
+
+            //La fecha debe ser posterior a la fecha de hoy
+
+            if (factura.Fecha < DateTime.Now)
+            {
+                throw new ArgumentException("La fecha debe ser posterior a la fecha de hoy");
+            }
+
+            //El id del empleado es requerido
+
+            if (factura.IdEmpleado <= 0)
+            {
+                throw new ArgumentException("El id del empleado es requerido");
+            }
+
+            //No existe ese empleado
+
+            Empleado? e = await ObtenerEmpleadoPorIdAsync(factura.IdEmpleado);
+
+            if (e == null)
+            {
+                throw new ArgumentException("No existe ese empleado");
+            }
+
+            //El id del cliente es requerido
+
+            if (factura.IdCliente <= 0)
+            {
+                throw new ArgumentException("El id del cliente es requerido");
+            }
+
+            //No existe ese cliente
+
+            Cliente? c = await ObtenerClientePorIdAsync(factura.IdCliente);
+
+            if (c == null)
+            {
+                throw new ArgumentException("El id del cliente debe existir");
+            }
+
+            //El id de la forma de pago es requerido
+
+            if (factura.IdFormaPago <= 0)
+            {
+                throw new ArgumentException("El id de la forma de pago es requerido");
+            }
+
+            //No existe esa forma de pago
+
+            FormasDePago? fp = await ObtenerFormaDePagoPorIdAsync(factura.IdFormaPago);
+
+            if (fp == null)
+            {
+                throw new ArgumentException("No existe esa forma de pago");
+            }
+
+            foreach (CreateDetalleFacturasDto detalle in factura.DetalleFacturasDtos)
+            {
+                //Debe poner código de medicamento o código de producto
+
+                if (detalle.CodMedicamento <= 0 && detalle.CodProducto <= 0)
+                {
+                    throw new ArgumentException("Debe poner código de medicamento o código de producto");
+                }
+
+                //El precio unitario debe ser mayor a 0
+
+                if (detalle.PreUnitario <= 0)
+                {
+                    throw new ArgumentException("El precio unitario debe ser mayor a 0");
+                }
+
+                //La cantidad debe ser mayor a 0
+
+                if (detalle.Cantidad <= 0)
+                {
+                    throw new ArgumentException("La cantidad debe ser mayor a 0");
+                }
+            }
+
             Factura f = new Factura()
             {
                 NroSucursal = factura.NroSucursal,
@@ -38,6 +133,15 @@ namespace Farmacia_Api.Services.ClassServices
             };
 
             return await repository.AddAsync(f);
+        }
+        public async Task<Cliente>? ObtenerClientePorIdAsync(int id)
+        {
+            return await repository.GetClienteByIdAsync(id);
+        }
+
+        public async Task<Empleado>? ObtenerEmpleadoPorIdAsync(int id)
+        {
+            return await repository.GetEmpleadoByIdAsync(id);
         }
 
         public async Task<IEnumerable<ReadFacturaDto>> ObtenerFacturasAsync()
@@ -75,10 +179,29 @@ namespace Farmacia_Api.Services.ClassServices
             {
                 throw new ArgumentException("El id debe ser mayor a 0");
             }
+
+            //La sucursal debe existir
+
+            Sucursale? s = await ObtenerSedePorIdAsync(id);
+
+            if (s  == null)
+            {
+                throw new ArgumentException("La sucursal debe existir");
+            }
             
             var facturas = (await repository.GetAllInSedeAsync(id)).ToList();
             var lista = Mapeo(facturas);
             return lista;
+        }
+
+        public async Task<FormasDePago> ObtenerFormaDePagoPorIdAsync(int id)
+        {
+            return await repository.GetFormaDePagoByIdAsync(id);
+        }
+
+        public async Task<Sucursale>? ObtenerSedePorIdAsync(int id)
+        {
+            return await repository.GetSedeByIdAsync(id);
         }
 
         private List<ReadFacturaDto> Mapeo(List<Factura> facturas)
