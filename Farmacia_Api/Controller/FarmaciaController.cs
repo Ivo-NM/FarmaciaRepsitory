@@ -170,5 +170,34 @@ namespace Farmacia_Api.Controller
                 });
             }
         }
+
+        [HttpPost("/entregas/crear")]
+        public async Task<IActionResult> CrearEntrega([FromBody] CreateEntregaDto dto)
+        {
+            try
+            {
+                bool exito = await serviceEntrega.CrearEntregaAsync(dto);
+
+                if (!exito)
+                {
+                    return BadRequest(new
+                    {
+                        mensaje = "No se pudo crear la entrega"
+                    });
+                }
+
+                return Ok(new
+                {
+                    mensaje = "Se pudo crear la entrega"
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = ex.Message
+                });
+            }
+        }
     }
 }

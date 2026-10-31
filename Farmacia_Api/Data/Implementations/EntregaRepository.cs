@@ -51,6 +51,5 @@ namespace Farmacia_Api.Data.Implementations
                 .AsSplitQuery()
                 .FirstOrDefaultAsync();
         }
-
     }
 }

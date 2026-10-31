@@ -15,9 +15,26 @@ namespace Farmacia_Api.Services.ClassServices
             this.repository = repository;
         }
 
-        public Task<bool> CrearEntregaAsync(Entrega entrega)
+        public async Task<bool> CrearEntregaAsync(CreateEntregaDto entrega)
         {
-            throw new NotImplementedException();
+            Entrega e = new Entrega()
+            {
+                NroSucursal = entrega.NroSucursal,
+                Fecha = entrega.Fecha,
+                FirmaEmpresa = entrega.FirmaEmpresa,
+                RespEntrega = entrega.RespuestaEntrega,
+                IdEmpleado = entrega.IdEmpleado,
+            };
+
+            e.DetalleEntregas = entrega.DetalleEntregasDtos.Select(de => new DetalleEntrega()
+            {
+                CodMedicamento = de.CodMedicamento,
+                CodProducto = de.CodProducto,
+                Cant = de.Cant
+            })
+            .ToList();
+
+            return await repository.AddAsync(e);
         }
 
         public async Task<ReadEntregaDto?> RecuperarEntregaPorIdAsync(int id)
@@ -46,7 +63,6 @@ namespace Farmacia_Api.Services.ClassServices
             var lstEntregas = Mapeo(entregas);
             return lstEntregas;
         }
-
         private List<ReadEntregaDto> Mapeo(List<Entrega> lista)
         {
             List<ReadEntregaDto> listaDto = new List<ReadEntregaDto>();
