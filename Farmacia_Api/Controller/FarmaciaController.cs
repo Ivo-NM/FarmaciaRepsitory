@@ -10,11 +10,13 @@ namespace Farmacia_Api.Controller
     [ApiController]
     public class FarmaciaController : ControllerBase
     {
-        private readonly IFacturaService service;
+        private readonly IFacturaService serviceFactura;
+        private readonly IEntregaService serviceEntrega;
 
-        public FarmaciaController(IFacturaService service)
+        public FarmaciaController(IFacturaService serviceFactura, IEntregaService serviceEntrega)
         {
-            this.service = service;
+            this.serviceFactura = serviceFactura;
+            this.serviceEntrega = serviceEntrega;
         }
 
         [HttpGet("/facturas")]
@@ -22,7 +24,7 @@ namespace Farmacia_Api.Controller
         {
             try
             {
-                var lista = await service.ObtenerFacturasAsync();
+                var lista = await serviceFactura.ObtenerFacturasAsync();
                 return Ok(lista);
             }
             catch (Exception ex)
@@ -39,7 +41,7 @@ namespace Farmacia_Api.Controller
         {
             try
             {
-                var facturas = await service.ObtenerFacturasPorSucursalAsync(idSucursal);
+                var facturas = await serviceFactura.ObtenerFacturasPorSucursalAsync(idSucursal);
                 return Ok(facturas);
             }
             catch (ArgumentException ex)
@@ -63,7 +65,7 @@ namespace Farmacia_Api.Controller
         {
             try
             {
-                var factura = await service.ObtenerFacturasPorIdAsync(idFactura);
+                var factura = await serviceFactura.ObtenerFacturasPorIdAsync(idFactura);
                 return Ok(factura);
             }
             catch (ArgumentException ex)
@@ -87,7 +89,7 @@ namespace Farmacia_Api.Controller
         {
             try
             {
-                bool exito = await service.CrearFacturaAsync(dto);
+                bool exito = await serviceFactura.CrearFacturaAsync(dto);
 
                 if (!exito)
                 {
@@ -108,6 +110,57 @@ namespace Farmacia_Api.Controller
                 {
                     message = ex.Message
                 });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"ERROR: {ex.Message}"
+                });
+            }
+        }
+
+        [HttpGet("/entregas")]
+        public async Task<IActionResult> RecuperarEntregas()
+        {
+            try
+            {
+                var lista = await serviceEntrega.RecuperarEntregasAsync();
+                return Ok(lista);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"ERROR: {ex.Message}"
+                });
+            }
+        }
+
+        [HttpGet("/entregas/sedes/{idSede}")]
+        public async Task<IActionResult> RecuperarEntregasPorSede(int idSede)
+        {
+            try
+            {
+                var lista = await serviceEntrega.RecuperarEntregasPorSedeAsync(idSede);
+                return Ok(lista);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"ERROR: {ex.Message}"
+                });
+            }
+        }
+
+        [HttpGet("/entregas/{idEntrega}")]
+        public async Task<IActionResult> RecuperarEntregaPorId(int idEntrega)
+        {
+            try
+            {
+                var entrega = await serviceEntrega.RecuperarEntregaPorIdAsync(idEntrega);
+                return Ok(entrega);
             }
             catch (Exception ex)
             {
