@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Farmacia_Api.Dtos
+namespace Farmacia_Api.Dtos.FacturasDto
 {
     public class CreateDetalleFacturasDto
     {

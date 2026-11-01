@@ -1,4 +1,4 @@
-﻿using Farmacia_Api.Dtos;
+﻿using Farmacia_Api.Dtos.FacturasDto;
 using Farmacia_Api.Models;
 
 namespace Farmacia_Api.Services.InterfacesService

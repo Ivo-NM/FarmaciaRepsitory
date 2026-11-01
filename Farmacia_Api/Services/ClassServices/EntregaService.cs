@@ -1,5 +1,5 @@
 ﻿using Farmacia_Api.Data.Interfaces;
-using Farmacia_Api.Dtos;
+using Farmacia_Api.Dtos.EntregasDto;
 using Farmacia_Api.Models;
 using Farmacia_Api.Services.InterfacesService;
 using System.Reflection.Metadata.Ecma335;

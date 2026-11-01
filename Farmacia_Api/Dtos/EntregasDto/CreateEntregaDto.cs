@@ -1,4 +1,4 @@
-﻿namespace Farmacia_Api.Dtos
+﻿namespace Farmacia_Api.Dtos.EntregasDto
 {
     public class CreateEntregaDto
     {

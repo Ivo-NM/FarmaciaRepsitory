@@ -1,4 +1,4 @@
-﻿namespace Farmacia_Api.Dtos
+﻿namespace Farmacia_Api.Dtos.FacturasDto
 {
     public class ReadFacturaDto
     {

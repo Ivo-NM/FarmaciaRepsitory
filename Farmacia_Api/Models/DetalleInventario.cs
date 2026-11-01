@@ -15,9 +15,9 @@ public partial class DetalleInventario
 
     public int Stock { get; set; }
 
-    public virtual Medicamento? CodMedicamentoNavigation { get; set; }
+    public virtual Medicamento? CodMedicamentoNavigation { get; set; } = null;
 
-    public virtual OtrosProducto? CodProductoNavigation { get; set; }
+    public virtual OtrosProducto? CodProductoNavigation { get; set; } = null;
 
-    public virtual Inventario? NroInventarioNavigation { get; set; }
+    public virtual Inventario? NroInventarioNavigation { get; set; } = null;
 }

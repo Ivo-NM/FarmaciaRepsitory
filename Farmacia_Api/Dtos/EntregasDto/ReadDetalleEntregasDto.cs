@@ -1,7 +1,7 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using System.Text.Json.Serialization;
 
-namespace Farmacia_Api.Dtos
+namespace Farmacia_Api.Dtos.EntregasDto
 {
     public class ReadDetalleEntregasDto
     {

@@ -12,8 +12,7 @@ namespace Farmacia_Api.Data.Interfaces
         Task<bool> UpdateAsync(Inventario inventario);
 
         // Movimientos y control de stock
-        Task<bool> VerificarStockDisponibleAsync(int sucursalId, int InsumoId, int cantidadRequerida);
-        Task<bool> RestarStockPorVentaAsync(int sucursalId, int InsumoId, int cantidadVendida);
-        Task<bool> SumarStockPorEntregaAsync(int sucursalId, int InsumoId, int cantidadRecibida);
+        Task<DetalleInventario?> VerificarStockDisponibleAsync(int sucursalId, int insumoId, int cantidadRequerida, bool esMedicamento);
+        Task<bool> ModificarStockAsync(DetalleInventario detalleInventario, int cantidad, bool esResta);
     }
 }

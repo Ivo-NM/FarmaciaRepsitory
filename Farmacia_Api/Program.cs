@@ -17,10 +17,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//Inyectando Facturas
 builder.Services.AddScoped<IFacturaRepository, FacturaRepository>();
 builder.Services.AddScoped<IFacturaService, FacturaService>();
+//Inyectando Entregas
 builder.Services.AddScoped<IEntregaRepository, EntregaRepository>();
 builder.Services.AddScoped<IEntregaService, EntregaService>();
+//Inyectando Inventarios
+builder.Services.AddScoped<IInventarioRepository, InventarioRepository>();
+builder.Services.AddScoped<IInventarioService, InventarioService>();
 
 var app = builder.Build();
 
