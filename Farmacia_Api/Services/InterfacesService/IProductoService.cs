@@ -1,9 +1,10 @@
-﻿using Farmacia_Api.Models;
+﻿using Farmacia_Api.Dtos.OtrosProductosDto;
+using Farmacia_Api.Models;
 
 namespace Farmacia_Api.Services.InterfacesService
 {
     public interface IProductoService
     {
-        Task<List<OtrosProducto?>> RecuperarProductoPorMes(int mesInicio, int mesFin);
+        Task<List<ReadProductoDto?>> RecuperarProductosVendidosPorFecha(DateTime fechaInicio, DateTime fechaFin);
     }
 }

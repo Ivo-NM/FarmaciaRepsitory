@@ -4,6 +4,6 @@ namespace Farmacia_Api.Data.Interfaces
 {
     public interface IProductoRepository
     {
-        Task<List<OtrosProducto?>> GetByMonth(int mesInicio, int mesFin);
+        Task<List<OtrosProducto?>> GetVendidosByFecha(DateTime fechaInicio, DateTime fechaFin);
     }
 }

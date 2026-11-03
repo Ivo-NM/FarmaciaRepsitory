@@ -13,11 +13,11 @@ namespace Farmacia_Api.Data.Implementations
             this.context = context;
         }
 
-        public async Task<List<OtrosProducto?>> GetByMonth(int mesInicio, int mesFin)
+        public async Task<List<OtrosProducto?>> GetVendidosByFecha(DateTime fechaInicio, DateTime fechaFin)
         {
             return await context.OtrosProductos
-                         .Where(p => p.DetalleFacturas.Any(df => df.NroFacturaNavigation.Fecha.Month >= mesInicio &&
-                         df.NroFacturaNavigation.Fecha.Month <= mesFin))
+                         .Where(p => p.DetalleFacturas.Any(df => df.NroFacturaNavigation.Fecha >= fechaInicio &&
+                         df.NroFacturaNavigation.Fecha <= fechaFin))
                          .ToListAsync();
         }
     }
