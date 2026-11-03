@@ -9,10 +9,12 @@ namespace Farmacia_Api.Services.ClassServices
     public class FacturaService: IFacturaService
     {
         private readonly IFacturaRepository repository;
+        private readonly IInventarioService _inventario;
 
-        public FacturaService(IFacturaRepository repository)
+        public FacturaService(IFacturaRepository repository, IInventarioService _inventario)
         {
             this.repository = repository;
+            this._inventario = _inventario;
         }
 
         public async Task<bool> CrearFacturaAsync(CreateFacturaDto factura)
@@ -131,6 +133,28 @@ namespace Farmacia_Api.Services.ClassServices
                 })
                 .ToList()
             };
+
+            var id = f.NroSucursal;
+
+            var id_prod = f.DetalleFacturas.Select(f => f.CodProducto) != null ? f.DetalleFacturas.Select(f => f.CodProducto) : f.DetalleFacturas.Select(f => f.CodMedicamento);
+            var esMed = true;
+
+            if (f.DetalleFacturas.Select(f => f.CodProducto) != null)
+            {
+                esMed = false;
+            }
+
+            var cant = f.DetalleFacturas.Select(f => f.Cantidad);
+
+            if (_inventario.RestarStockPorVentaAsync(id,id_prod,cant,esMed))
+            {
+                //Restar stock -> Resta en el inventario la cantidad que diga la factura
+                //Sumar stock -> Suma en el inventario la cantidad que diga la entrega
+            }
+
+
+
+
 
             return await repository.AddAsync(f);
         }
