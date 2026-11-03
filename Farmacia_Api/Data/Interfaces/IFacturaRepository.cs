@@ -7,7 +7,7 @@ namespace Farmacia_Api.Data.Interfaces
         Task<IEnumerable<Factura>> GetAllAsync();
         Task<IEnumerable<Factura>> GetAllInSedeAsync(int id);
         Task<Factura?> GetByIdAsync(int id);
-        Task<List<Factura?>> GetByMonthAsync(int mesInicio, int mesFin);
+        Task<List<Factura?>> GetByDateAsync(DateTime fechaInicio, DateTime fechaFin);
         Task<bool> AddAsync(Factura factura);
         Task<Sucursale>? GetSedeByIdAsync(int id);
         Task<Empleado>? GetEmpleadoByIdAsync(int id);

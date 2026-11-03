@@ -79,13 +79,13 @@ namespace Farmacia_Api.Controller
             }
         }
 
-        [HttpGet("/facturas/meses/{mesInicio}/{mesFin}")]
+        [HttpGet("/facturas/meses/{fechaInicio}/{fechaFin}")]
         
-        public async Task<IActionResult> RecuperarFacturasPorMes(int mesInicio, int mesFin)
+        public async Task<IActionResult> RecuperarFacturasPorFecha(DateTime fechaInicio, DateTime fechaFin)
         {
             try
             {
-                var lstFactura = await _serviceFactura.ObtenerFacturasPorMes(mesInicio, mesFin);
+                var lstFactura = await _serviceFactura.ObtenerFacturasPorFecha(fechaInicio, fechaFin);
 
                 if (lstFactura == null)
                 {

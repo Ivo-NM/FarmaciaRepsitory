@@ -55,7 +55,7 @@ namespace Farmacia_Api.Data.Implementations
 
         }
 
-        public async Task<List<Factura?>> GetByMonthAsync(int mesInicio, int mesFin)
+        public async Task<List<Factura?>> GetByDateAsync(DateTime fechaInicio, DateTime fechaFin)
         {
             return await _context.Facturas
                         .Include(f => f.NroSucursalNavigation)
@@ -64,7 +64,7 @@ namespace Farmacia_Api.Data.Implementations
                         .Include(f => f.DetalleFacturas)
                         .ThenInclude(df => df.CodProductoNavigation)
                         .AsSplitQuery()
-                        .Where(f => f.Fecha.Month >= mesInicio && f.Fecha.Month <= mesFin)
+                        .Where(f => f.Fecha >= fechaInicio && f.Fecha <= fechaFin)
                         .ToListAsync();
         }
 

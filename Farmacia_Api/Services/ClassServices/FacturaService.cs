@@ -171,24 +171,14 @@ namespace Farmacia_Api.Services.ClassServices
             return facturaDto;
         }
 
-        public async Task<List<ReadFacturaDto>> ObtenerFacturasPorMes(int mesInicio, int mesFin)
+        public async Task<List<ReadFacturaDto>> ObtenerFacturasPorFecha(DateTime fechaInicio, DateTime fechaFin)
         {
-            List<int> lstMeses = new List<int>()
+            if (fechaInicio > fechaFin)
             {
-                1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
-            };
-
-            if (!lstMeses.Contains(mesInicio) || !lstMeses.Contains(mesFin))
-            {
-                throw new ArgumentException("El número del mes debe ser del 1 al 12");
+                throw new ArgumentException("La fecha de inicio debe ser anterior o igual a la fecha de fin");
             }
 
-            if (mesInicio > mesFin)
-            {
-                throw new ArgumentException("El 1° mes, el mes del inicio, debe ser menor o igual al 2° mes");
-            }
-
-            List<Factura>? facturas = await repository.GetByMonthAsync(mesInicio, mesFin);
+            List<Factura>? facturas = await repository.GetByDateAsync(fechaInicio, fechaFin);
 
             if (facturas == null)
             {
