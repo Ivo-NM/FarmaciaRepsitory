@@ -79,6 +79,39 @@ namespace Farmacia_Api.Controller
             }
         }
 
+        [HttpGet("/facturas/meses/{mesInicio}/{mesFin}")]
+        
+        public async Task<IActionResult> RecuperarFacturasPorMes(int mesInicio, int mesFin)
+        {
+            try
+            {
+                var lstFactura = await _serviceFactura.ObtenerFacturasPorMes(mesInicio, mesFin);
+
+                if (lstFactura == null)
+                {
+                    return NotFound(new
+                    {
+                        message = "No se encontraron facturas durante ese mes"
+                    });
+                }
+                return Ok(lstFactura);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"ERROR: {ex.Message}"
+                });
+            }
+        }
+
         [HttpPost("/facturas/crear")]
         public async Task<IActionResult> CrearFactura([FromBody] CreateFacturaDto dto)
         {

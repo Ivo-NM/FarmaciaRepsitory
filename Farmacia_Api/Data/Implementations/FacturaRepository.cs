@@ -55,6 +55,19 @@ namespace Farmacia_Api.Data.Implementations
 
         }
 
+        public async Task<List<Factura?>> GetByMonthAsync(int mesInicio, int mesFin)
+        {
+            return await _context.Facturas
+                        .Include(f => f.NroSucursalNavigation)
+                        .Include(f => f.DetalleFacturas)
+                        .ThenInclude(df => df.CodMedicamentoNavigation)
+                        .Include(f => f.DetalleFacturas)
+                        .ThenInclude(df => df.CodProductoNavigation)
+                        .AsSplitQuery()
+                        .Where(f => f.Fecha.Month >= mesInicio && f.Fecha.Month <= mesFin)
+                        .ToListAsync();
+        }
+
         public async Task<Cliente>? GetClienteByIdAsync(int id)
         {
             return await _context.Clientes.FirstOrDefaultAsync(c => c.IdCliente == id);
@@ -65,7 +78,7 @@ namespace Farmacia_Api.Data.Implementations
             return await _context.Empleados.FirstOrDefaultAsync(e => e.IdEmpleado == id);
         }
 
-        public async Task<FormasDePago> GetFormaDePagoByIdAsync(int id)
+        public async Task<FormasDePago>? GetFormaDePagoByIdAsync(int id)
         {
             return await _context.FormasDePagos.FirstOrDefaultAsync(f => f.IdFormaPago == id);
         }

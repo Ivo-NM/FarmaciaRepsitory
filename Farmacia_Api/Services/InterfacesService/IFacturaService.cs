@@ -8,6 +8,7 @@ namespace Farmacia_Api.Services.InterfacesService
         Task<IEnumerable<ReadFacturaDto>> ObtenerFacturasAsync();
         Task<IEnumerable<ReadFacturaDto>> ObtenerFacturasPorSucursalAsync(int id);
         Task<ReadFacturaDto?> ObtenerFacturasPorIdAsync(int id);
+        Task<List<ReadFacturaDto>> ObtenerFacturasPorMes(int mesInicio, int mesFin);
         Task<bool> CrearFacturaAsync(CreateFacturaDto factura);
         Task<Sucursale>? ObtenerSedePorIdAsync(int id);
         Task<Empleado>? ObtenerEmpleadoPorIdAsync(int id);
