@@ -1,5 +1,6 @@
 ﻿using Farmacia_Api.Data.Interfaces;
 using Farmacia_Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Farmacia_Api.Data.Implementations
 {
@@ -12,9 +13,12 @@ namespace Farmacia_Api.Data.Implementations
             this.context = context;
         }
 
-        public Task<List<OtrosProducto?>> GetByMonth(int mesInicio, int mesFin)
+        public async Task<List<OtrosProducto?>> GetByMonth(int mesInicio, int mesFin)
         {
-            return
+            return await context.OtrosProductos
+                         .Where(p => p.DetalleFacturas.Any(df => df.NroFacturaNavigation.Fecha.Month >= mesInicio &&
+                         df.NroFacturaNavigation.Fecha.Month <= mesFin))
+                         .ToListAsync();
         }
     }
 }
