@@ -3,12 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace Farmacia_Api.Dtos.OtrosProductosDto
 {
-    public class ReadProductoDto
+    public class ReadMovimientoDto
     {
-        public string Detalle { get; set; }
+        public string? Producto { get; set; }
+        public int Cantidad { get; set; }
         public decimal Precio { get; set; }
-
-        [JsonIgnore]
-        public ReadDetalleFacturasDto? DetalleFacturasDto { get; set; }
     }
 }

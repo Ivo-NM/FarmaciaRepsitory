@@ -26,6 +26,8 @@ builder.Services.AddScoped<IEntregaService, EntregaService>();
 //Inyectando Inventarios
 builder.Services.AddScoped<IInventarioRepository, InventarioRepository>();
 builder.Services.AddScoped<IInventarioService, InventarioService>();
+builder.Services.AddScoped<IMovimientoRepository, MovimientoRepository>();
+builder.Services.AddScoped<IMovimientoService, MovimientoService>();
 
 var app = builder.Build();
 
