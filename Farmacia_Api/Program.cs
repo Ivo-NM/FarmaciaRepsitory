@@ -3,6 +3,7 @@ using Farmacia_Api.Data.Implementations;
 using Farmacia_Api.Data.Interfaces;
 using Farmacia_Api.Services.ClassServices;
 using Farmacia_Api.Services.InterfacesService;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -14,13 +15,13 @@ builder.Services.AddDbContext<FarmaciaDbContext>(options
     =>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //Configuración para que en caso de fallar de que EF falle en la conversión de un dato a int,
-//Muestre el mensaje del DTO
+//Muestre este mensaje
 
 builder.Services.AddControllers()
     .AddMvcOptions(options =>
     {
         options.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor(
-            (value, field) => $"El campo {field} debe contener un número entero válido."
+            (value, field) => $"El campo {field} debe contener un número entero positivo."
         );
     });
 
