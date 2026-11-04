@@ -32,9 +32,7 @@ namespace Farmacia_Api.Data.Implementations
         {
             return await _context.Clientes
                 .Include(c => c.ObraSocialNavigation)
-                         .ThenInclude(o => o.Detalle)
                 .Include(c => c.BarrioNavigation)
-                         .ThenInclude(b => b.NombreBarrio)
                 .ToListAsync();
         }
 
@@ -42,9 +40,7 @@ namespace Farmacia_Api.Data.Implementations
         {
             return await _context.Clientes
                .Include(c => c.ObraSocialNavigation)
-                        .ThenInclude(o => o.Detalle)
                .Include(c => c.BarrioNavigation)
-                        .ThenInclude(b => b.NombreBarrio)
                .FirstOrDefaultAsync(c => c.IdCliente == id);
         }
 
