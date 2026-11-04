@@ -24,9 +24,10 @@ namespace Farmacia_Api.Services.ClassServices
             throw new NotImplementedException();
         }
 
-        public Task<bool> CrearClienteAsync(CreateClienteDto clienteDto)
+        public async Task<bool> CrearClienteAsync(CreateClienteDto clienteDto)
         {
-            throw new NotImplementedException();
+            Cliente c = Mapeo(clienteDto);
+            return await repository.AddAsync(c);
         }
 
         public async Task<ReadClienteDto?> RecuperarClientePorIdAsync(int id)
@@ -86,6 +87,24 @@ namespace Farmacia_Api.Services.ClassServices
             };
 
             return clienteDto;
+        }
+
+        public Cliente Mapeo(CreateClienteDto clientDto)
+        {
+            Cliente cliente = new Cliente()
+            {
+                Nombre = clientDto.Nombre,
+                Apellido = clientDto.Apellido,
+                Documento = clientDto.Documento,
+                Calle = clientDto.Calle,
+                Altura = clientDto.Altura,
+                IdBarrio = clientDto.IdBarrio,
+                NroTelefono = clientDto.NroTelefono,
+                EMail = clientDto.Email,
+                CodObraSocial = clientDto.CodObraSocial
+            };
+
+            return cliente;
         }
     }
 }
