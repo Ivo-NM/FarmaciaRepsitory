@@ -130,5 +130,42 @@ namespace Farmacia_Api.Controller
                 });
             }
         }
+
+        [HttpDelete("clientes/{clienteId}")]
+
+        public async Task<IActionResult> BorrarCliente(int clienteId)
+        {
+            try
+            {
+                bool exito = await clienteService.BorrarClienteAsync(clienteId);
+
+                if (!exito)
+                {
+                    return BadRequest(new
+                    {
+                        message = "No se pudo borrar el cliente"
+                    });
+                }
+
+                return Ok(new
+                {
+                    message = "Se pudo borrar el cliente"
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"Error en el servidor: {ex.Message}"
+                });
+            }
+        }
     }
 }
