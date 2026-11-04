@@ -29,9 +29,17 @@ namespace Farmacia_Api.Services.ClassServices
             throw new NotImplementedException();
         }
 
-        public Task<ReadClienteDto?> RecuperarClientePorIdAsync(int id)
+        public async Task<ReadClienteDto?> RecuperarClientePorIdAsync(int id)
         {
-            throw new NotImplementedException();
+            Cliente? c = await repository.GetByIdAsync(id);
+
+            if (c == null)
+            {
+                return null;
+            }
+
+            ReadClienteDto clienteDto = Mapeo(c);
+            return clienteDto;
         }
 
         public async Task<IEnumerable<ReadClienteDto>> RecuperarClientesAsync()
@@ -62,6 +70,22 @@ namespace Farmacia_Api.Services.ClassServices
             }
 
             return lstClienteDto;
+        }
+
+        public ReadClienteDto Mapeo(Cliente cliente)
+        {
+            ReadClienteDto clienteDto = new ReadClienteDto()
+            {
+                Nombre = cliente.Nombre,
+                Apellido = cliente.Apellido,
+                Documento = cliente.Documento,
+                NroTelefono = cliente.NroTelefono,
+                Email = cliente.EMail,
+                Barrio = cliente.BarrioNavigation.NombreBarrio,
+                ObraSocialNombre = cliente.ObraSocialNavigation != null ? cliente.ObraSocialNavigation.Detalle : string.Empty
+            };
+
+            return clienteDto;
         }
     }
 }
