@@ -14,9 +14,16 @@ namespace Farmacia_Api.Services.ClassServices
             this.repository = repository;
         }
 
-        public Task<bool> ActualizarClienteAsync(UpdateClienteDto clienteDto)
+        public async Task<bool> ActualizarClienteAsync(UpdateClienteDto clienteDto, int id)
         {
-            throw new NotImplementedException();
+            Cliente? cliente = await Mapeo(clienteDto, id);
+
+            if (cliente == null)
+            {
+                throw new ArgumentException("No se encontro el cliente");
+            }
+
+            return await repository.UpdateAsync(cliente);
         }
 
         public Task<bool> BorrarClienteAsync(int id)
@@ -105,6 +112,28 @@ namespace Farmacia_Api.Services.ClassServices
             };
 
             return cliente;
+        }
+
+        public async Task<Cliente?> Mapeo(UpdateClienteDto clientDto, int idCliente)
+        {
+            Cliente c = await repository.GetByIdAsync(idCliente);
+
+            if (c == null)
+            {
+                return c;
+            }
+
+            c.Nombre = clientDto.Nombre != null ? clientDto.Nombre : c.Nombre;
+            c.Apellido = clientDto.Apellido != null ? clientDto.Apellido : c.Apellido;
+            c.Documento = clientDto.Documento.HasValue ? clientDto.Documento.Value : c.Documento;
+            c.Calle = clientDto.Calle != null ? clientDto.Calle : c.Calle;
+            c.Altura = clientDto.Altura.HasValue ? clientDto.Altura.Value : c.Altura;
+            c.IdBarrio = clientDto.IdBarrio.HasValue ? clientDto.IdBarrio.Value : c.IdBarrio;
+            c.NroTelefono = clientDto.NroTelefono.HasValue ? clientDto.NroTelefono.Value : c.NroTelefono;
+            c.EMail = clientDto.Email != null ? clientDto.Email : c.EMail;
+            c.CodObraSocial = clientDto.CodObraSocial.HasValue ? clientDto.CodObraSocial.Value : c.CodObraSocial;
+
+            return c;
         }
     }
 }

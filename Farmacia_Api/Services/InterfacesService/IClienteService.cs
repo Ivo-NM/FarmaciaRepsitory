@@ -8,7 +8,7 @@ namespace Farmacia_Api.Services.InterfacesService
         Task<IEnumerable<ReadClienteDto>> RecuperarClientesAsync();
         Task<ReadClienteDto?> RecuperarClientePorIdAsync(int id);
         Task<bool> CrearClienteAsync(CreateClienteDto clienteDto);
-        Task<bool> ActualizarClienteAsync(UpdateClienteDto clienteDto);
+        Task<bool> ActualizarClienteAsync(UpdateClienteDto clienteDto, int id);
         Task<bool> BorrarClienteAsync(int id);
     }
 }
