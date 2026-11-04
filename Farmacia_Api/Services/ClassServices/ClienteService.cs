@@ -26,9 +26,16 @@ namespace Farmacia_Api.Services.ClassServices
             return await repository.UpdateAsync(cliente);
         }
 
-        public Task<bool> BorrarClienteAsync(int id)
+        public async Task<bool> BorrarClienteAsync(int id)
         {
-            throw new NotImplementedException();
+            Cliente? c = await repository.GetByIdAsync(id);
+
+            if (c == null)
+            {
+                throw new ArgumentException("No se encontro el cliente");
+            }
+
+            return await repository.DeleteAsync(c.IdCliente);
         }
 
         public async Task<bool> CrearClienteAsync(CreateClienteDto clienteDto)
