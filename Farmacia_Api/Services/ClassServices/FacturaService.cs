@@ -134,6 +134,8 @@ namespace Farmacia_Api.Services.ClassServices
                 .ToList()
             };
 
+            /*
+
             var id = f.NroSucursal;
 
             var id_prod = f.DetalleFacturas.Select(f => f.CodProducto) != null ? f.DetalleFacturas.Select(f => f.CodProducto) : f.DetalleFacturas.Select(f => f.CodMedicamento);
@@ -152,9 +154,7 @@ namespace Farmacia_Api.Services.ClassServices
                 //Sumar stock -> Suma en el inventario la cantidad que diga la entrega
             }
 
-
-
-
+            */
 
             return await repository.AddAsync(f);
         }
