@@ -63,5 +63,35 @@ namespace Farmacia_Api.Controller
                 });
             }
         }
+
+        [HttpPost("clientes")]
+
+        public async Task<IActionResult> CrearCliente([FromBody] CreateClienteDto clienteDto)
+        {
+            try
+            {
+                bool exito = await clienteService.CrearClienteAsync(clienteDto);
+
+                if (!exito)
+                {
+                    return BadRequest(new
+                    {
+                        message = "No se pudo guardar el cliente"
+                    });
+                }
+
+                return Ok(new
+                {
+                    message = "Se pudo guardar el cliente"
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    message = $"Error en el servidor: {ex.Message}"
+                });
+            }
+        }
     }
 }
