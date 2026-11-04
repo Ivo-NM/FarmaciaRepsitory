@@ -13,8 +13,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<FarmaciaDbContext>(options
     =>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+//Configuración para que en caso de fallar de que EF falle en la conversión de un dato a int,
+//Muestre el mensaje del DTO
+
+builder.Services.AddControllers()
+    .AddMvcOptions(options =>
+    {
+        options.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor(
+            (value, field) => $"El campo {field} debe contener un número entero válido."
+        );
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //Inyectando Facturas
