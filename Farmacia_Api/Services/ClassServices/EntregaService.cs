@@ -17,6 +17,66 @@ namespace Farmacia_Api.Services.ClassServices
 
         public async Task<bool> CrearEntregaAsync(CreateEntregaDto entrega)
         {
+            //La sucursal debe existir
+
+            Sucursale? s = await GetSucursalesByIdAsync(entrega.NroSucursal);
+
+            if (s == null)
+            {
+                throw new ArgumentException("La sucursal debe existir");
+            }
+
+            //El empleado debe existir
+
+            Empleado? empleado = await GetEmpleadoByIdAsync(entrega.IdEmpleado);
+
+            if (empleado  == null)
+            {
+                throw new ArgumentException("El empleado debe existir");
+            }
+
+            foreach (CreateDetalleEntregasDto dto in entrega.DetalleEntregasDtos)
+            {
+                //Debe colocar un medicamento o un producto
+                
+                if ((!dto.CodMedicamento.HasValue && !dto.CodProducto.HasValue) ||
+                    dto.CodMedicamento.HasValue && dto.CodProducto.HasValue)
+                {
+                    throw new ArgumentException("Debe colocar un medicamento o producto");
+                }
+
+                //El medicamento no existe
+
+                if (dto.CodMedicamento.HasValue)
+                {
+                    Medicamento? m = await GetMedicamentoByIdAsync(dto.CodMedicamento.Value);
+
+                    if (m  == null)
+                    {
+                        throw new ArgumentException("El medicamento no existe");
+                    }
+                }
+
+                //El producto no existe
+
+                if (dto.CodProducto.HasValue)
+                {
+                    OtrosProducto? p = await GetProductoByIdAsync(dto.CodProducto.Value);
+
+                    if (p == null)
+                    {
+                        throw new ArgumentException("El producto no existe");
+                    }
+                }
+            }
+
+            //La fecha debe ser igual o anterior a la fecha de hoy
+
+            if (entrega.Fecha > DateTime.Today)
+            {
+                throw new ArgumentException("La fecha debe ser igual o anterior a la fecha de hoy");
+            }
+            
             Entrega e = new Entrega()
             {
                 NroSucursal = entrega.NroSucursal,
@@ -37,13 +97,33 @@ namespace Farmacia_Api.Services.ClassServices
             return await repository.AddAsync(e);
         }
 
+        public async Task<Empleado>? GetEmpleadoByIdAsync(int idEmpleado)
+        {
+            return await repository.GetEmpleadoByIdAsync(idEmpleado);
+        }
+
+        public async Task<Medicamento>? GetMedicamentoByIdAsync(int codMedicamento)
+        {
+            return await repository.GetMedicamentoByIdAsync(codMedicamento);
+        }
+
+        public async Task<OtrosProducto>? GetProductoByIdAsync(int codProducto)
+        {
+            return await repository.GetProductoByIdAsync(codProducto);
+        }
+
+        public async Task<Sucursale>? GetSucursalesByIdAsync(int idSucursal)
+        {
+            return await repository.GetSucursalesByIdAsync(idSucursal);
+        }
+
         public async Task<ReadEntregaDto?> RecuperarEntregaPorIdAsync(int id)
         {
             Entrega? entrega = await repository.GetByIdAsync(id);
             
             if (entrega == null)
             {
-                return null;
+                throw new ArgumentException("No se encontro la entrega");
             }
 
             ReadEntregaDto entregaDto = Mapeo(entrega);
@@ -59,6 +139,15 @@ namespace Farmacia_Api.Services.ClassServices
 
         public async Task<IEnumerable<ReadEntregaDto>> RecuperarEntregasPorSedeAsync(int id)
         {
+            //La sucursal debe existir
+
+            Sucursale? s = await GetSucursalesByIdAsync(id);
+
+            if (s  == null)
+            {
+                throw new ArgumentException("La sucursal debe existir");
+            }
+            
             List<Entrega> entregas = (await repository.GetAllInSedeAsync(id)).ToList();
             var lstEntregas = Mapeo(entregas);
             return lstEntregas;

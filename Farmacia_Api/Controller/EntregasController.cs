@@ -40,6 +40,13 @@ namespace Farmacia_Api.Controller
                 var lista = await _serviceEntrega.RecuperarEntregasPorSedeAsync(idSede);
                 return Ok(lista);
             }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
             catch (Exception ex)
             {
                 return StatusCode(500, new
@@ -56,6 +63,13 @@ namespace Farmacia_Api.Controller
             {
                 var entrega = await _serviceEntrega.RecuperarEntregaPorIdAsync(idEntrega);
                 return Ok(entrega);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
             }
             catch (Exception ex)
             {
@@ -84,6 +98,13 @@ namespace Farmacia_Api.Controller
                 return Ok(new
                 {
                     mensaje = "Se pudo crear la entrega"
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
                 });
             }
             catch (Exception ex)
