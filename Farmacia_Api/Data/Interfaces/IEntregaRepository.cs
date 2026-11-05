@@ -10,7 +10,6 @@ namespace Farmacia_Api.Data.Interfaces
         Task<bool> AddAsync(Entrega entrega);
         Task<Sucursale>? GetSucursalesByIdAsync(int idSucursal);
         Task<Empleado>? GetEmpleadoByIdAsync(int idEmpleado);
-        Task<Medicamento>? GetMedicamentoByIdAsync(int codMedicamento);
         Task<OtrosProducto>? GetProductoByIdAsync(int codProducto);
     }
 }

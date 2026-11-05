@@ -14,7 +14,6 @@ namespace Farmacia_Api.Services.InterfacesService
         Task<Empleado>? ObtenerEmpleadoPorIdAsync(int id);
         Task<Cliente>? ObtenerClientePorIdAsync(int id);
         Task<FormasDePago> ObtenerFormaDePagoPorIdAsync(int id);
-        Task<Medicamento>? GetMedicamentoByIdAsync(int idMedicamento);
         Task<OtrosProducto>? GetProductoByIdAsync(int codProducto);
     }
 }

@@ -11,7 +11,6 @@ namespace Farmacia_Api.Services.InterfacesService
         Task<bool> CrearEntregaAsync(CreateEntregaDto entrega);
         Task<Sucursale>? GetSucursalesByIdAsync(int idSucursal);
         Task<Empleado>? GetEmpleadoByIdAsync(int idEmpleado);
-        Task<Medicamento>? GetMedicamentoByIdAsync(int codMedicamento);
         Task<OtrosProducto>? GetProductoByIdAsync(int codProducto);
     }
 }
