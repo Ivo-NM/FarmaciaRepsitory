@@ -12,18 +12,20 @@ namespace Farmacia_Api.Services.ClassServices
         private readonly IMedicamentoService _medicamento;
         private readonly IProductoService _producto;
 
-        public EntregaService(IEntregaRepository repository, IMedicamentoService _medicamento, IProductoService _producto)
+        private readonly ISucursalService _sucursal;
+        public EntregaService(IEntregaRepository repository, IMedicamentoService _medicamento, IProductoService _producto, ISucursalService _sucursal)
         {
             this.repository = repository;
             this._medicamento = _medicamento;
             this._producto = _producto;
+            this._sucursal = _sucursal;
         }
 
         public async Task<bool> CrearEntregaAsync(CreateEntregaDto entrega)
         {
             //La sucursal debe existir
 
-            Sucursale? s = await GetSucursalesByIdAsync(entrega.NroSucursal);
+            Sucursale? s = await _sucursal.ObtenerSucursalPorId(entrega.NroSucursal);
 
             if (s == null)
             {
@@ -105,10 +107,6 @@ namespace Farmacia_Api.Services.ClassServices
         {
             return await repository.GetEmpleadoByIdAsync(idEmpleado);
         }
-        public async Task<Sucursale>? GetSucursalesByIdAsync(int idSucursal)
-        {
-            return await repository.GetSucursalesByIdAsync(idSucursal);
-        }
 
         public async Task<ReadEntregaDto?> RecuperarEntregaPorIdAsync(int id)
         {
@@ -134,7 +132,7 @@ namespace Farmacia_Api.Services.ClassServices
         {
             //La sucursal debe existir
 
-            Sucursale? s = await GetSucursalesByIdAsync(id);
+            Sucursale? s = await _sucursal.ObtenerSucursalPorId(id);
 
             if (s  == null)
             {

@@ -9,7 +9,6 @@ namespace Farmacia_Api.Services.InterfacesService
         Task<IEnumerable<ReadEntregaDto>> RecuperarEntregasPorSedeAsync(int id);
         Task<ReadEntregaDto?> RecuperarEntregaPorIdAsync(int id);
         Task<bool> CrearEntregaAsync(CreateEntregaDto entrega);
-        Task<Sucursale>? GetSucursalesByIdAsync(int idSucursal);
         Task<Empleado>? GetEmpleadoByIdAsync(int idEmpleado);
     }
 }
