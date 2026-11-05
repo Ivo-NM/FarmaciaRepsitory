@@ -13,14 +13,15 @@ namespace Farmacia_Api.Services.ClassServices
         private readonly IMedicamentoService _medicamento;
         private readonly IProductoService _producto;
         private readonly ISucursalService _sucursal;
-
-        public FacturaService(IFacturaRepository repository, IInventarioService _inventario, IMedicamentoService _medicamento, IProductoService _producto, ISucursalService _sucursal)
+        private readonly IEmpleadoService _empleado;
+        public FacturaService(IFacturaRepository repository, IInventarioService _inventario, IMedicamentoService _medicamento, IProductoService _producto, ISucursalService _sucursal, IEmpleadoService _empleado)
         {
             this.repository = repository;
             this._inventario = _inventario;
             this._medicamento = _medicamento;
             this._producto = _producto;
             this._sucursal = _sucursal;
+            this._empleado = _empleado;
         }
 
         public async Task<bool> CrearFacturaAsync(CreateFacturaDto factura)
@@ -43,7 +44,7 @@ namespace Farmacia_Api.Services.ClassServices
 
             //No existe ese empleado
 
-            Empleado? e = await ObtenerEmpleadoPorIdAsync(factura.IdEmpleado);
+            Empleado? e = await _empleado.ObtenerEmpleadoPorIdAsync(factura.IdEmpleado);
 
             if (e == null)
             {
@@ -158,19 +159,12 @@ namespace Farmacia_Api.Services.ClassServices
         {
             return await repository.GetClienteByIdAsync(id);
         }
-
-        public async Task<Empleado>? ObtenerEmpleadoPorIdAsync(int id)
-        {
-            return await repository.GetEmpleadoByIdAsync(id);
-        }
-
         public async Task<IEnumerable<ReadFacturaDto>> ObtenerFacturasAsync()
         {
             var facturas = (await repository.GetAllAsync()).ToList();
             var lista = Mapeo(facturas);
             return lista;
         }
-
         public async Task<ReadFacturaDto?> ObtenerFacturasPorIdAsync(int id)
         {
             var factura = await repository.GetByIdAsync(id);
@@ -183,7 +177,6 @@ namespace Farmacia_Api.Services.ClassServices
             var facturaDto = Mapeo(factura);
             return facturaDto;
         }
-
         public async Task<List<ReadFacturaDto>> ObtenerFacturasPorFecha(DateTime fechaInicio, DateTime fechaFin)
         {
             if (fechaInicio > fechaFin)
@@ -201,7 +194,6 @@ namespace Farmacia_Api.Services.ClassServices
             List<ReadFacturaDto> facturasDto = Mapeo(facturas);
             return facturasDto;
         }
-
         public async Task<IEnumerable<ReadFacturaDto>>? ObtenerFacturasPorSucursalAsync(int id)
         {
             //La sucursal debe existir
@@ -223,7 +215,6 @@ namespace Farmacia_Api.Services.ClassServices
             var lista = Mapeo(facturas);
             return lista;
         }
-
         public async Task<FormasDePago> ObtenerFormaDePagoPorIdAsync(int id)
         {
             return await repository.GetFormaDePagoByIdAsync(id);
@@ -259,7 +250,6 @@ namespace Farmacia_Api.Services.ClassServices
             }
             return listaFacturaDto;
         }
-
         private ReadFacturaDto Mapeo(Factura factura)
         {
             ReadFacturaDto facturaDto = new ReadFacturaDto()

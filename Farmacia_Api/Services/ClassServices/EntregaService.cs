@@ -11,14 +11,15 @@ namespace Farmacia_Api.Services.ClassServices
         private readonly IEntregaRepository repository;
         private readonly IMedicamentoService _medicamento;
         private readonly IProductoService _producto;
-
         private readonly ISucursalService _sucursal;
-        public EntregaService(IEntregaRepository repository, IMedicamentoService _medicamento, IProductoService _producto, ISucursalService _sucursal)
+        private readonly IEmpleadoService _empleado;
+        public EntregaService(IEntregaRepository repository, IMedicamentoService _medicamento, IProductoService _producto, ISucursalService _sucursal, IEmpleadoService _empleado)
         {
             this.repository = repository;
             this._medicamento = _medicamento;
             this._producto = _producto;
             this._sucursal = _sucursal;
+            this._empleado = _empleado;
         }
 
         public async Task<bool> CrearEntregaAsync(CreateEntregaDto entrega)
@@ -34,7 +35,7 @@ namespace Farmacia_Api.Services.ClassServices
 
             //El empleado debe existir
 
-            Empleado? empleado = await GetEmpleadoByIdAsync(entrega.IdEmpleado);
+            Empleado? empleado = await _empleado.ObtenerEmpleadoPorIdAsync(entrega.IdEmpleado);
 
             if (empleado  == null)
             {
@@ -102,12 +103,6 @@ namespace Farmacia_Api.Services.ClassServices
 
             return await repository.AddAsync(e);
         }
-
-        public async Task<Empleado>? GetEmpleadoByIdAsync(int idEmpleado)
-        {
-            return await repository.GetEmpleadoByIdAsync(idEmpleado);
-        }
-
         public async Task<ReadEntregaDto?> RecuperarEntregaPorIdAsync(int id)
         {
             Entrega? entrega = await repository.GetByIdAsync(id);
@@ -170,7 +165,6 @@ namespace Farmacia_Api.Services.ClassServices
 
             return listaDto;
         }
-
         private ReadEntregaDto Mapeo(Entrega entrega)
         {
             ReadEntregaDto entregaDto = new ReadEntregaDto()

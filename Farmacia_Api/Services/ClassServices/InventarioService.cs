@@ -17,7 +17,6 @@ namespace Farmacia_Api.Services.ClassServices
         {
             throw new NotImplementedException();
         }
-
         public async Task<ReadInventarioDto?> ObtenerInventarioPorIdAsync(int id)
         {
             if (id <= 0)
@@ -53,14 +52,12 @@ namespace Farmacia_Api.Services.ClassServices
 
             return listadto;
         }
-
         public async Task<IEnumerable<ReadInventarioDto>> ObtenerInventariosAsync()
         {
             var Inventario = (await _inventarioRepository.GetAllAsync()).ToList();
             var listadto = Mapeo(Inventario);
             return listadto;
         }
-
 
         /// <summary>
         // Metodos y validaciones para restar o agregar insumos al inventario
@@ -102,7 +99,6 @@ namespace Farmacia_Api.Services.ClassServices
 
         }
 
-
         /// <summary>
         // Metodos internos Mapeo()
         /// </summary>
@@ -132,8 +128,6 @@ namespace Farmacia_Api.Services.ClassServices
             }
             return listaInv;
         }
-
-
         private ReadInventarioDto Mapeo(Inventario Inventario)
         {
             ReadInventarioDto Dto = new ReadInventarioDto()
@@ -154,17 +148,5 @@ namespace Farmacia_Api.Services.ClassServices
             };
             return Dto;
         }
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
