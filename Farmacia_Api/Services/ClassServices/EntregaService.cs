@@ -10,11 +10,13 @@ namespace Farmacia_Api.Services.ClassServices
     {
         private readonly IEntregaRepository repository;
         private readonly IMedicamentoService _medicamento;
+        private readonly IProductoService _producto;
 
-        public EntregaService(IEntregaRepository repository, IMedicamentoService _medicamento)
+        public EntregaService(IEntregaRepository repository, IMedicamentoService _medicamento, IProductoService _producto)
         {
             this.repository = repository;
             this._medicamento = _medicamento;
+            this._producto = _producto;
         }
 
         public async Task<bool> CrearEntregaAsync(CreateEntregaDto entrega)
@@ -63,7 +65,7 @@ namespace Farmacia_Api.Services.ClassServices
 
                 if (dto.CodProducto.HasValue)
                 {
-                    OtrosProducto? p = await GetProductoByIdAsync(dto.CodProducto.Value);
+                    OtrosProducto? p = await _producto.ObtenerProductoPorId(dto.CodProducto.Value);
 
                     if (p == null)
                     {
@@ -102,10 +104,6 @@ namespace Farmacia_Api.Services.ClassServices
         public async Task<Empleado>? GetEmpleadoByIdAsync(int idEmpleado)
         {
             return await repository.GetEmpleadoByIdAsync(idEmpleado);
-        }
-        public async Task<OtrosProducto>? GetProductoByIdAsync(int codProducto)
-        {
-            return await repository.GetProductoByIdAsync(codProducto);
         }
         public async Task<Sucursale>? GetSucursalesByIdAsync(int idSucursal)
         {

@@ -11,12 +11,14 @@ namespace Farmacia_Api.Services.ClassServices
         private readonly IFacturaRepository repository;
         private readonly IInventarioService _inventario;
         private readonly IMedicamentoService _medicamento;
+        private readonly IProductoService _producto;
 
-        public FacturaService(IFacturaRepository repository, IInventarioService _inventario, IMedicamentoService _medicamento)
+        public FacturaService(IFacturaRepository repository, IInventarioService _inventario, IMedicamentoService _medicamento, IProductoService _producto)
         {
             this.repository = repository;
             this._inventario = _inventario;
             this._medicamento = _medicamento;
+            this._producto = _producto;
         }
 
         public async Task<bool> CrearFacturaAsync(CreateFacturaDto factura)
@@ -90,7 +92,7 @@ namespace Farmacia_Api.Services.ClassServices
 
                 if (detalle.CodProducto.HasValue)
                 {
-                    OtrosProducto? p = await GetProductoByIdAsync(detalle.CodProducto.Value);
+                    OtrosProducto? p = await _producto.ObtenerProductoPorId(detalle.CodProducto.Value);
 
                     if (p == null)
                     {
@@ -286,10 +288,6 @@ namespace Farmacia_Api.Services.ClassServices
             };
 
             return facturaDto;
-        }
-        public async Task<OtrosProducto>? GetProductoByIdAsync(int codProducto)
-        {
-            return await repository.GetProductoByIdAsync(codProducto);
         }
     }
 }
