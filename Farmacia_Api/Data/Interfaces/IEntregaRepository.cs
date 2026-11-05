@@ -8,7 +8,6 @@ namespace Farmacia_Api.Data.Interfaces
         Task<IEnumerable<Entrega>> GetAllInSedeAsync(int id);
         Task<Entrega?> GetByIdAsync(int id);
         Task<bool> AddAsync(Entrega entrega);
-        Task<Sucursale>? GetSucursalesByIdAsync(int idSucursal);
         Task<Empleado>? GetEmpleadoByIdAsync(int idEmpleado);
     }
 }

@@ -82,9 +82,5 @@ namespace Farmacia_Api.Data.Implementations
         {
             return await _context.FormasDePagos.FirstOrDefaultAsync(f => f.IdFormaPago == id);
         }
-        public async Task<Sucursale>? GetSedeByIdAsync(int id)
-        {
-            return await _context.Sucursales.FirstOrDefaultAsync(s => s.NroSucursal == id);
-        }
     }
 }
