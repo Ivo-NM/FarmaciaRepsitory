@@ -44,6 +44,16 @@ namespace Farmacia_Api.Data.Implementations
                .FirstOrDefaultAsync(c => c.IdCliente == id);
         }
 
+        public async Task<Barrio>? RecuperarBarrioAsync(int idBarrio)
+        {
+            return await _context.Barrios.FirstOrDefaultAsync(b => b.IdBarrio == idBarrio);
+        }
+
+        public async Task<ObrasSociale>? RecuperarObraSocialAsync(int idObraSocial)
+        {
+            return await _context.ObrasSociales.FirstOrDefaultAsync(os => os.CodObraSocial == idObraSocial);
+        }
+
         public async Task<bool> UpdateAsync(Cliente cliente)
         {
             _context.Clientes.Update(cliente);

@@ -10,5 +10,8 @@ namespace Farmacia_Api.Services.InterfacesService
         Task<bool> CrearClienteAsync(CreateClienteDto clienteDto);
         Task<bool> ActualizarClienteAsync(UpdateClienteDto clienteDto, int id);
         Task<bool> BorrarClienteAsync(int id);
+
+        Task<Barrio>? RecuperarBarrioAsync(int idBarrio);
+        Task<ObrasSociale>? RecuperarObraSocialAsync(int idObraSocial);
     }
 }

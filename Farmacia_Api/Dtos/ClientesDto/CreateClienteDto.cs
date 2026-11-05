@@ -21,8 +21,6 @@ namespace Farmacia_Api.Dtos.ClientesDto
         public int Documento { get; set; }
 
         [StringLength(30, ErrorMessage = "La calle debe tener como máximo 30 caracteres")]
-        [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$",
-            ErrorMessage = "La calle solo puede contener letras y espacios.")]
         public string? Calle { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "El altura debe ser un número entero positivo")]
@@ -37,8 +35,6 @@ namespace Farmacia_Api.Dtos.ClientesDto
 
         [StringLength(30, ErrorMessage = "El email debe tener como máximo 30 caracteres")]
         [EmailAddress(ErrorMessage = "El correo electrónico ingresado no tiene un formato válido")]
-        [RegularExpression(@"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$",
-            ErrorMessage = "El email solo puede contener letras y espacios.")]
         public string? Email { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage = "El id de la obra social debe ser un número entero positivo")]

@@ -55,6 +55,13 @@ namespace Farmacia_Api.Controller
 
                 return Ok(cliente);
             }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    mensaje = ex.Message
+                });
+            }
             catch (Exception ex)
             {
                 return StatusCode(500, new
@@ -83,6 +90,13 @@ namespace Farmacia_Api.Controller
                 return Ok(new
                 {
                     message = "Se pudo guardar el cliente"
+                });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    mensaje = ex.Message
                 });
             }
             catch (Exception ex)

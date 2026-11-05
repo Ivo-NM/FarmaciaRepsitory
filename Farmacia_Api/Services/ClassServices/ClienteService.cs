@@ -16,6 +16,30 @@ namespace Farmacia_Api.Services.ClassServices
 
         public async Task<bool> ActualizarClienteAsync(UpdateClienteDto clienteDto, int id)
         {
+            //No existe el barrio
+
+            if (clienteDto.IdBarrio.HasValue)
+            {
+                Barrio? barrio = await RecuperarBarrioAsync(clienteDto.IdBarrio.Value);
+
+                if (barrio == null)
+                {
+                    throw new ArgumentException("No existe el barrio");
+                }
+            }
+
+            //No existe la obra social
+
+            if (clienteDto.CodObraSocial.HasValue)
+            {
+                ObrasSociale? os = await RecuperarObraSocialAsync(clienteDto.CodObraSocial.Value);
+
+                if (os == null)
+                {
+                    throw new ArgumentException("No existe la obra social");
+                }
+            }
+
             Cliente? cliente = await Mapeo(clienteDto, id);
 
             if (cliente == null)
@@ -40,6 +64,27 @@ namespace Farmacia_Api.Services.ClassServices
 
         public async Task<bool> CrearClienteAsync(CreateClienteDto clienteDto)
         {
+            //No existe el barrio
+
+            Barrio? barrio = await RecuperarBarrioAsync(clienteDto.IdBarrio);
+
+            if (barrio == null)
+            {
+                throw new ArgumentException("No existe el barrio");
+            }
+
+            //No existe la obra social
+
+            if (clienteDto.CodObraSocial.HasValue)
+            {
+                ObrasSociale? os = await RecuperarObraSocialAsync(clienteDto.CodObraSocial.Value);
+
+                if (os == null)
+                {
+                    throw new ArgumentException("No existe la obra social");
+                }
+            }
+            
             Cliente c = Mapeo(clienteDto);
             return await repository.AddAsync(c);
         }
@@ -141,6 +186,16 @@ namespace Farmacia_Api.Services.ClassServices
             c.CodObraSocial = clientDto.CodObraSocial.HasValue ? clientDto.CodObraSocial.Value : c.CodObraSocial;
 
             return c;
+        }
+
+        public async Task<Barrio>? RecuperarBarrioAsync(int idBarrio)
+        {
+            return await repository.RecuperarBarrioAsync(idBarrio);
+        }
+
+        public async Task<ObrasSociale>? RecuperarObraSocialAsync(int idObraSocial)
+        {
+            return await repository.RecuperarObraSocialAsync(idObraSocial);
         }
     }
 }

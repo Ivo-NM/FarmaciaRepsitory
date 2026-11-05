@@ -9,5 +9,7 @@ namespace Farmacia_Api.Data.Interfaces
         Task<bool> AddAsync(Cliente cliente);
         Task<bool> UpdateAsync(Cliente cliente);
         Task<bool> DeleteAsync(int id);
+        Task<Barrio>? RecuperarBarrioAsync(int idBarrio);
+        Task<ObrasSociale>? RecuperarObraSocialAsync(int idObraSocial);
     }
 }
