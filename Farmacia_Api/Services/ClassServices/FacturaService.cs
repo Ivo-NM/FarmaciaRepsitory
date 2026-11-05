@@ -18,14 +18,7 @@ namespace Farmacia_Api.Services.ClassServices
         }
 
         public async Task<bool> CrearFacturaAsync(CreateFacturaDto factura)
-        {
-            //La sucursal es requerida
-
-            if (factura.NroSucursal <= 0)
-            {
-                throw new ArgumentException("La sucursal es requerida");
-            }
-            
+        {   
             //La sucursal debe existir
 
             Sucursale? sede = await ObtenerSedePorIdAsync(factura.NroSucursal);
@@ -35,18 +28,11 @@ namespace Farmacia_Api.Services.ClassServices
                 throw new ArgumentException("La sucursal debe existir");
             }
 
-            //La fecha debe ser posterior a la fecha de hoy
+            //La fecha debe ser posterior o igual a la fecha de hoy
 
-            if (factura.Fecha < DateTime.Now)
+            if (factura.Fecha > DateTime.Now)
             {
-                throw new ArgumentException("La fecha debe ser posterior a la fecha de hoy");
-            }
-
-            //El id del empleado es requerido
-
-            if (factura.IdEmpleado <= 0)
-            {
-                throw new ArgumentException("El id del empleado es requerido");
+                throw new ArgumentException("La fecha debe ser posterior o igual a la fecha de hoy");
             }
 
             //No existe ese empleado
@@ -58,13 +44,6 @@ namespace Farmacia_Api.Services.ClassServices
                 throw new ArgumentException("No existe ese empleado");
             }
 
-            //El id del cliente es requerido
-
-            if (factura.IdCliente <= 0)
-            {
-                throw new ArgumentException("El id del cliente es requerido");
-            }
-
             //No existe ese cliente
 
             Cliente? c = await ObtenerClientePorIdAsync(factura.IdCliente);
@@ -72,13 +51,6 @@ namespace Farmacia_Api.Services.ClassServices
             if (c == null)
             {
                 throw new ArgumentException("El id del cliente debe existir");
-            }
-
-            //El id de la forma de pago es requerido
-
-            if (factura.IdFormaPago <= 0)
-            {
-                throw new ArgumentException("El id de la forma de pago es requerido");
             }
 
             //No existe esa forma de pago
@@ -94,23 +66,41 @@ namespace Farmacia_Api.Services.ClassServices
             {
                 //Debe poner código de medicamento o código de producto
 
-                if (detalle.CodMedicamento <= 0 && detalle.CodProducto <= 0)
+                if (detalle.CodMedicamento.HasValue && detalle.CodProducto.HasValue ||
+                    !detalle.CodMedicamento.HasValue && !detalle.CodProducto.HasValue)
                 {
                     throw new ArgumentException("Debe poner código de medicamento o código de producto");
                 }
 
-                //El precio unitario debe ser mayor a 0
+                //El medicamento no existe
 
-                if (detalle.PreUnitario <= 0)
+                if (detalle.CodMedicamento.HasValue)
                 {
-                    throw new ArgumentException("El precio unitario debe ser mayor a 0");
+                    Medicamento? m = await GetMedicamentoByIdAsync(detalle.CodMedicamento.Value);
+
+                    if (m  == null)
+                    {
+                        throw new ArgumentException("El medicamento no existe");
+                    }
                 }
 
-                //La cantidad debe ser mayor a 0
+                //El producto no existe
 
-                if (detalle.Cantidad <= 0)
+                if (detalle.CodProducto.HasValue)
                 {
-                    throw new ArgumentException("La cantidad debe ser mayor a 0");
+                    OtrosProducto? p = await GetProductoByIdAsync(detalle.CodProducto.Value);
+
+                    if (p == null)
+                    {
+                        throw new ArgumentException("El producto no existe");
+                    }
+                }
+
+                //Reembolsado debe ser true o false
+
+                if (detalle.Reembolsado != false && detalle.Reembolsado != true)
+                {
+                    throw new ArgumentException("Reembolsado debe ser true o false");
                 }
             }
 
@@ -177,13 +167,6 @@ namespace Farmacia_Api.Services.ClassServices
 
         public async Task<ReadFacturaDto?> ObtenerFacturasPorIdAsync(int id)
         {
-            //El id debe ser mayor a 0
-
-            if (id <= 0)
-            {
-                throw new ArgumentException("El id debe ser mayor a 0");
-            }
-
             var factura = await repository.GetByIdAsync(id);
 
             if (factura == null)
@@ -206,22 +189,15 @@ namespace Farmacia_Api.Services.ClassServices
 
             if (facturas == null)
             {
-                return null;
+                throw new ArgumentException("No se encontraron facturas");
             }
 
             List<ReadFacturaDto> facturasDto = Mapeo(facturas);
             return facturasDto;
         }
 
-        public async Task<IEnumerable<ReadFacturaDto>> ObtenerFacturasPorSucursalAsync(int id)
+        public async Task<IEnumerable<ReadFacturaDto>>? ObtenerFacturasPorSucursalAsync(int id)
         {
-            //El id debe ser mayor a 0
-
-            if (id <= 0)
-            {
-                throw new ArgumentException("El id debe ser mayor a 0");
-            }
-
             //La sucursal debe existir
 
             Sucursale? s = await ObtenerSedePorIdAsync(id);
@@ -231,7 +207,13 @@ namespace Farmacia_Api.Services.ClassServices
                 throw new ArgumentException("La sucursal debe existir");
             }
             
-            var facturas = (await repository.GetAllInSedeAsync(id)).ToList();
+            List<Factura>? facturas = (await repository.GetAllInSedeAsync(id)).ToList();
+            
+            if (facturas == null)
+            {
+                throw new ArgumentException("No se encontraron facturas");
+            }
+
             var lista = Mapeo(facturas);
             return lista;
         }
@@ -302,6 +284,16 @@ namespace Farmacia_Api.Services.ClassServices
             };
 
             return facturaDto;
+        }
+
+        public async Task<Medicamento>? GetMedicamentoByIdAsync(int idMedicamento)
+        {
+            return await repository.GetMedicamentoByIdAsync(idMedicamento);
+        }
+
+        public async Task<OtrosProducto>? GetProductoByIdAsync(int codProducto)
+        {
+            return await repository.GetProductoByIdAsync(codProducto);
         }
     }
 }

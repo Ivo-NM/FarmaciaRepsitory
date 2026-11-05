@@ -29,7 +29,7 @@ namespace Farmacia_Api.Data.Implementations
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Factura>> GetAllInSedeAsync(int id)
+        public async Task<IEnumerable<Factura>>? GetAllInSedeAsync(int id)
         {
             return await _context.Facturas
                 .Where(f => f.NroSucursal == id)
@@ -85,6 +85,16 @@ namespace Farmacia_Api.Data.Implementations
         public async Task<Sucursale>? GetSedeByIdAsync(int id)
         {
             return await _context.Sucursales.FirstOrDefaultAsync(s => s.NroSucursal == id);
+        }
+
+        public async Task<Medicamento>? GetMedicamentoByIdAsync(int idMedicamento)
+        {
+            return await _context.Medicamentos.FirstOrDefaultAsync(m => m.CodMedicamento == idMedicamento);
+        }
+
+        public async Task<OtrosProducto>? GetProductoByIdAsync(int codProducto)
+        {
+            return await _context.OtrosProductos.FirstOrDefaultAsync(p => p.CodProducto == codProducto);
         }
     }
 }

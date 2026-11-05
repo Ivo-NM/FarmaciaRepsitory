@@ -5,7 +5,7 @@ namespace Farmacia_Api.Data.Interfaces
     public interface IFacturaRepository
     {
         Task<IEnumerable<Factura>> GetAllAsync();
-        Task<IEnumerable<Factura>> GetAllInSedeAsync(int id);
+        Task<IEnumerable<Factura?>> GetAllInSedeAsync(int id);
         Task<Factura?> GetByIdAsync(int id);
         Task<List<Factura?>> GetByDateAsync(DateTime fechaInicio, DateTime fechaFin);
         Task<bool> AddAsync(Factura factura);
@@ -13,5 +13,7 @@ namespace Farmacia_Api.Data.Interfaces
         Task<Empleado>? GetEmpleadoByIdAsync(int id);
         Task<Cliente>? GetClienteByIdAsync(int id);
         Task<FormasDePago>? GetFormaDePagoByIdAsync(int id);
+        Task<Medicamento>? GetMedicamentoByIdAsync(int idMedicamento);
+        Task<OtrosProducto>? GetProductoByIdAsync(int codProducto);
     }
 }
