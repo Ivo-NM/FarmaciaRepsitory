@@ -51,10 +51,5 @@ namespace Farmacia_Api.Data.Implementations
                 .AsSplitQuery()
                 .FirstOrDefaultAsync();
         }
-
-        public async Task<Empleado>? GetEmpleadoByIdAsync(int idEmpleado)
-        {
-            return await _context.Empleados.FirstOrDefaultAsync(e => e.IdEmpleado == idEmpleado);
-        }
     }
 }

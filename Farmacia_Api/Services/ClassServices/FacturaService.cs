@@ -12,20 +12,22 @@ namespace Farmacia_Api.Services.ClassServices
         private readonly IInventarioService _inventario;
         private readonly IMedicamentoService _medicamento;
         private readonly IProductoService _producto;
+        private readonly ISucursalService _sucursal;
 
-        public FacturaService(IFacturaRepository repository, IInventarioService _inventario, IMedicamentoService _medicamento, IProductoService _producto)
+        public FacturaService(IFacturaRepository repository, IInventarioService _inventario, IMedicamentoService _medicamento, IProductoService _producto, ISucursalService _sucursal)
         {
             this.repository = repository;
             this._inventario = _inventario;
             this._medicamento = _medicamento;
             this._producto = _producto;
+            this._sucursal = _sucursal;
         }
 
         public async Task<bool> CrearFacturaAsync(CreateFacturaDto factura)
         {   
             //La sucursal debe existir
 
-            Sucursale? sede = await ObtenerSedePorIdAsync(factura.NroSucursal);
+            Sucursale? sede = await _sucursal.ObtenerSucursalPorId(factura.NroSucursal);
 
             if (sede == null)
             {
@@ -204,7 +206,7 @@ namespace Farmacia_Api.Services.ClassServices
         {
             //La sucursal debe existir
 
-            Sucursale? s = await ObtenerSedePorIdAsync(id);
+            Sucursale? s = await _sucursal.ObtenerSucursalPorId(id);
 
             if (s  == null)
             {
@@ -226,12 +228,6 @@ namespace Farmacia_Api.Services.ClassServices
         {
             return await repository.GetFormaDePagoByIdAsync(id);
         }
-
-        public async Task<Sucursale>? ObtenerSedePorIdAsync(int id)
-        {
-            return await repository.GetSedeByIdAsync(id);
-        }
-
         private List<ReadFacturaDto> Mapeo(List<Factura> facturas)
         {
        
