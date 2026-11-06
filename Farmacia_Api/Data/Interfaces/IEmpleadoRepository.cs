@@ -5,5 +5,7 @@ namespace Farmacia_Api.Data.Interfaces
     public interface IEmpleadoRepository
     {
         Task<Empleado>? GetByIdAsync(int id);
+        Task<Empleado>? GetByIdandSedeAsync(int id,int idsucursal);
+
     }
 }

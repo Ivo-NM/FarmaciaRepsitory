@@ -13,13 +13,15 @@ namespace Farmacia_Api.Services.ClassServices
         private readonly IProductoService _producto;
         private readonly ISucursalService _sucursal;
         private readonly IEmpleadoService _empleado;
-        public EntregaService(IEntregaRepository repository, IMedicamentoService _medicamento, IProductoService _producto, ISucursalService _sucursal, IEmpleadoService _empleado)
+        private readonly IInventarioService _inventario;
+        public EntregaService(IEntregaRepository repository, IMedicamentoService _medicamento, IProductoService _producto, ISucursalService _sucursal, IEmpleadoService _empleado, IInventarioService inventario)
         {
             this.repository = repository;
             this._medicamento = _medicamento;
             this._producto = _producto;
             this._sucursal = _sucursal;
             this._empleado = _empleado;
+            _inventario = inventario;
         }
 
         public async Task<bool> CrearEntregaAsync(CreateEntregaDto entrega)
@@ -35,11 +37,11 @@ namespace Farmacia_Api.Services.ClassServices
 
             //El empleado debe existir
 
-            Empleado? empleado = await _empleado.ObtenerEmpleadoPorIdAsync(entrega.IdEmpleado);
+            Empleado? empleado = await _empleado.ObtenerEmpleadoPorIdySedeAsync(entrega.IdEmpleado,entrega.NroSucursal);
 
             if (empleado  == null)
             {
-                throw new ArgumentException("El empleado debe existir");
+                throw new ArgumentException("El empleado debe existir y ser empleado de esa sucursal");
             }
 
             foreach (CreateDetalleEntregasDto dto in entrega.DetalleEntregasDtos)
@@ -83,7 +85,22 @@ namespace Farmacia_Api.Services.ClassServices
             {
                 throw new ArgumentException("La fecha debe ser igual o anterior a la fecha de hoy");
             }
-            
+
+            foreach (var detalle in entrega.DetalleEntregasDtos)
+            {
+                int sucursalId = entrega.NroSucursal;
+                bool esMed = detalle.CodMedicamento.HasValue;
+                int itemId = esMed ? detalle.CodMedicamento.Value : detalle.CodProducto.Value;
+                int cantidad = detalle.Cant;
+
+                bool stockRestado = await _inventario.SumarStockPorEntregaAsync(sucursalId, itemId, cantidad, esMed);
+                if (!stockRestado)
+                {
+                    throw new InvalidOperationException($"No se pudo descontar el stock para el ítem con ID {itemId}.");
+                }
+            }
+
+
             Entrega e = new Entrega()
             {
                 NroSucursal = entrega.NroSucursal,

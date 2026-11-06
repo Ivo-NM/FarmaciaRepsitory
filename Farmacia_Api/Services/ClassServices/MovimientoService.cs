@@ -18,11 +18,41 @@ namespace Farmacia_Api.Services.ClassServices
         {
             var facturas = await repository.GetVendidosByFecha(fechaInicio, fechaFin);
             var lstDto = Mapeo(facturas);
-            return lstDto;
+            
+            var agrupados = lstDto
+             .GroupBy(x => x.Producto)
+             .Select(g => new ReadMovimientoDto
+             {
+                 Producto = g.Key,
+                 Cantidad = g.Sum(x => x.Cantidad),
+                 Precio = g.First().Precio
+             }).ToList();
+
+            return agrupados;
         }
 
+        public async Task<List<ReadMovimientoDto?>> RecuperarProductosRecibidosPorFecha(DateTime fechaInicio, DateTime fechaFin)
+        {
+            var entregas = await repository.GetRecibidosByFecha(fechaInicio, fechaFin);
+            var lstDto = Mapeo(entregas);
+            var agrupados = lstDto
+                .GroupBy(x => x.Producto)
+                .Select(g => new ReadMovimientoDto
+                {
+                    Producto = g.Key,
+                    Cantidad = g.Sum(x => x.Cantidad),
+                    Precio = g.First().Precio
+                }).ToList();
+
+            return agrupados;
+        }
+
+        /// <summary>
+        // Metodos de mapeo
+        /// </summary>
         public List<ReadMovimientoDto> Mapeo(List<Factura> facturas)
         {
+
             List<ReadMovimientoDto> lstDto = new List<ReadMovimientoDto>();
             
             foreach (Factura f in facturas)
@@ -64,11 +94,6 @@ namespace Farmacia_Api.Services.ClassServices
             return lstDto;
         }
 
-        public async Task<List<ReadMovimientoDto?>> RecuperarProductosRecibidosPorFecha(DateTime fechaInicio, DateTime fechaFin)
-        {
-            var entregas = await repository.GetRecibidosByFecha(fechaInicio, fechaFin);
-            var lstDto = Mapeo(entregas);
-            return lstDto;
-        }
+        
     }
 }

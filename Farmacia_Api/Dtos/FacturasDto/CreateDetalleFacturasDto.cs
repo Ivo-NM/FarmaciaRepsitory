@@ -6,10 +6,10 @@ namespace Farmacia_Api.Dtos.FacturasDto
     public class CreateDetalleFacturasDto
     {
         [Range(1, int.MaxValue, ErrorMessage = "El código del medicamento debe ser un número entero positivo")]
-        public int? CodMedicamento { get; set; }
+        public int? CodMedicamento { get; set; } = null;
 
         [Range(1, int.MaxValue, ErrorMessage = "El código del producto debe ser un número entero positivo")]
-        public int? CodProducto { get; set; }
+        public int? CodProducto { get; set; } = null;
 
         [Required(ErrorMessage = "Se requiere el precio unitario")]
         public decimal PreUnitario { get; set; }

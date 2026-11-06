@@ -13,6 +13,11 @@ namespace Farmacia_Api.Services.ClassServices
             this.repository = repository;
         }
 
+        public async Task<Empleado>? ObtenerEmpleadoPorIdySedeAsync(int id, int idsucursal)
+        {
+            return await repository.GetByIdandSedeAsync(id, idsucursal);
+        }
+
         public async Task<Empleado>? ObtenerEmpleadoPorIdAsync(int id)
         {
             return await repository.GetByIdAsync(id);

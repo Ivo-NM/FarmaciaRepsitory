@@ -24,11 +24,11 @@ namespace Farmacia_Api.Services.ClassServices
             this._empleado = _empleado;
         }
 
-        public async Task<bool> CrearFacturaAsync(CreateFacturaDto factura)
+        public async Task<bool> CrearFacturaAsync(CreateFacturaDto facturaDto)
         {   
             //La sucursal debe existir
 
-            Sucursale? sede = await _sucursal.ObtenerSucursalPorId(factura.NroSucursal);
+            Sucursale? sede = await _sucursal.ObtenerSucursalPorId(facturaDto.NroSucursal);
 
             if (sede == null)
             {
@@ -37,23 +37,23 @@ namespace Farmacia_Api.Services.ClassServices
 
             //La fecha debe ser posterior o igual a la fecha de hoy
 
-            if (factura.Fecha > DateTime.Now)
+            if (facturaDto.Fecha > DateTime.Now)
             {
                 throw new ArgumentException("La fecha debe ser posterior o igual a la fecha de hoy");
             }
 
             //No existe ese empleado
 
-            Empleado? e = await _empleado.ObtenerEmpleadoPorIdAsync(factura.IdEmpleado);
+            Empleado? e = await _empleado.ObtenerEmpleadoPorIdySedeAsync(facturaDto.IdEmpleado,facturaDto.NroSucursal);
 
             if (e == null)
             {
-                throw new ArgumentException("No existe ese empleado");
+                throw new ArgumentException("el empleado debe existir y formar parte de esa sucursal");
             }
 
             //No existe ese cliente
 
-            Cliente? c = await ObtenerClientePorIdAsync(factura.IdCliente);
+            Cliente? c = await ObtenerClientePorIdAsync(facturaDto.IdCliente);
 
             if (c == null)
             {
@@ -62,19 +62,19 @@ namespace Farmacia_Api.Services.ClassServices
 
             //No existe esa forma de pago
 
-            FormasDePago? fp = await ObtenerFormaDePagoPorIdAsync(factura.IdFormaPago);
+            FormasDePago? fp = await ObtenerFormaDePagoPorIdAsync(facturaDto.IdFormaPago);
 
             if (fp == null)
             {
                 throw new ArgumentException("No existe esa forma de pago");
             }
 
-            foreach (CreateDetalleFacturasDto detalle in factura.DetalleFacturasDtos)
+            foreach (CreateDetalleFacturasDto detalle in facturaDto.DetalleFacturasDtos)
             {
                 //Debe poner código de medicamento o código de producto
 
-                if (detalle.CodMedicamento.HasValue && detalle.CodProducto.HasValue ||
-                    !detalle.CodMedicamento.HasValue && !detalle.CodProducto.HasValue)
+                if (!detalle.CodMedicamento.HasValue && !detalle.CodProducto.HasValue||
+                    detalle.CodMedicamento.HasValue && detalle.CodProducto.HasValue)
                 {
                     throw new ArgumentException("Debe poner código de medicamento o código de producto");
                 }
@@ -111,15 +111,31 @@ namespace Farmacia_Api.Services.ClassServices
                 }
             }
 
-            Factura f = new Factura()
+            //Verificamos que haya stock del producto seleccionado
+            foreach (var detalle in facturaDto.DetalleFacturasDtos)
             {
-                NroSucursal = factura.NroSucursal,
-                Fecha = factura.Fecha,
-                IdEmpleado = factura.IdEmpleado,
-                IdCliente = factura.IdCliente,
-                IdFormaPago = factura.IdFormaPago,
+                int sucursalId = facturaDto.NroSucursal;
+                bool esMed = detalle.CodMedicamento.HasValue;
+                int itemId = esMed ? detalle.CodMedicamento.Value : detalle.CodProducto.Value;
+                int cantidad = detalle.Cantidad;
 
-                DetalleFacturas = factura.DetalleFacturasDtos.Select(df => new DetalleFactura
+                bool stockRestado = await _inventario.RestarStockPorVentaAsync(sucursalId, itemId, cantidad, esMed);
+                if (!stockRestado)
+                {
+                    throw new InvalidOperationException($"No se pudo descontar el stock para el ítem con ID {itemId}.");
+                }
+            }
+
+
+            Factura factura = new Factura()
+            {
+                NroSucursal = facturaDto.NroSucursal,
+                Fecha = facturaDto.Fecha,
+                IdEmpleado = facturaDto.IdEmpleado,
+                IdCliente = facturaDto.IdCliente,
+                IdFormaPago = facturaDto.IdFormaPago,
+
+                DetalleFacturas = facturaDto.DetalleFacturasDtos.Select(df => new DetalleFactura
                 {
                     CodMedicamento = df.CodMedicamento,
                     CodProducto = df.CodProducto,
@@ -131,30 +147,10 @@ namespace Farmacia_Api.Services.ClassServices
                 .ToList()
             };
 
-            /*
-
-            var id = f.NroSucursal;
-
-            var id_prod = f.DetalleFacturas.Select(f => f.CodProducto) != null ? f.DetalleFacturas.Select(f => f.CodProducto) : f.DetalleFacturas.Select(f => f.CodMedicamento);
-            var esMed = true;
-
-            if (f.DetalleFacturas.Select(f => f.CodProducto) != null)
-            {
-                esMed = false;
-            }
-
-            var cant = f.DetalleFacturas.Select(f => f.Cantidad);
-
-            if (_inventario.RestarStockPorVentaAsync(id,id_prod,cant,esMed))
-            {
-                //Restar stock -> Resta en el inventario la cantidad que diga la factura
-                //Sumar stock -> Suma en el inventario la cantidad que diga la entrega
-            }
-
-            */
-
-            return await repository.AddAsync(f);
+            return await repository.AddAsync(factura);
         }
+
+
         public async Task<Cliente>? ObtenerClientePorIdAsync(int id)
         {
             return await repository.GetClienteByIdAsync(id);
