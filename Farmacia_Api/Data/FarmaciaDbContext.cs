@@ -55,6 +55,7 @@ public partial class FarmaciaDbContext : DbContext
     public virtual DbSet<Provincia> Provincias { get; set; }
 
     public virtual DbSet<Sucursale> Sucursales { get; set; }
+    public virtual DbSet<Usuario> Usuarios { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -262,6 +263,7 @@ public partial class FarmaciaDbContext : DbContext
                 .HasForeignKey(d => d.NroSucursal)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_EMPLEADO_FARMACIA");
+
         });
 
         modelBuilder.Entity<Entrega>(entity =>
@@ -521,9 +523,19 @@ public partial class FarmaciaDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SUCURSAL_BARRIO");
         });
+        modelBuilder.Entity<Usuario>()
+            .HasKey(u => u.id_empleado);
+        modelBuilder.Entity<Usuario>()
+            .HasOne(u => u.EmpleadosNavegador)
+            .WithOne(e => e.UsuariosNavegation)
+            .HasForeignKey<Usuario>(u => u.id_empleado);
+
 
         OnModelCreatingPartial(modelBuilder);
     }
+
+    
+
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

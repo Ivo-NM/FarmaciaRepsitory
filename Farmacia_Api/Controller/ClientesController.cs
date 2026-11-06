@@ -1,6 +1,7 @@
 ﻿using Farmacia_Api.Dtos.ClientesDto;
 using Farmacia_Api.Models;
 using Farmacia_Api.Services.InterfacesService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
@@ -20,7 +21,7 @@ namespace Farmacia_Api.Controller
         }
 
         [HttpGet("clientes")]
-
+        [Authorize]
         public async Task<IActionResult> ObtenerClientes()
         {
             try
