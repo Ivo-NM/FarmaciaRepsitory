@@ -56,6 +56,7 @@ public partial class FarmaciaDbContext : DbContext
 
     public virtual DbSet<Sucursale> Sucursales { get; set; }
 
+    public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -523,6 +524,13 @@ public partial class FarmaciaDbContext : DbContext
         });
 
         OnModelCreatingPartial(modelBuilder);
+
+        modelBuilder.Entity<Usuario>()
+        .HasKey(u => u.IdEmpleado);
+        modelBuilder.Entity<Usuario>()
+            .HasOne(u => u.EmpleadoNavigation)
+            .WithOne(e => e.UsuarioNavigation)
+            .HasForeignKey<Usuario>(u => u.IdEmpleado);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
