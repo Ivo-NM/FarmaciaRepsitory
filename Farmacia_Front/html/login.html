@@ -3,7 +3,7 @@
   <!--begin::Head-->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- Primary AdminLTE CSS -->
+      <!-- Primary AdminLTE CSS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4/dist/css/adminlte.min.css">
       <!-- Required Plugins CSS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDutQn5406J9Lg3jZJv87x58l88=" crossorigin="anonymous">
@@ -114,14 +114,14 @@
   <body class="login-page bg-body-secondary">
     <main class="login-box">
       <h1 class="login-logo">
-        <a href="../index2.html"><b>City</b> Farmacia</a>
+          <b>City</b> Farmacia</a>
       </h1>
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
-          <p class="login-box-msg">Sign in to start your session</p>
+          <p class="login-box-msg">iniciar sesion</p>
 
-          <form action="../index3.html" method="post">
+          <form id="formLogin" action="index.html" method="post">
             <label class="visually-hidden" for="loginEmail">Email</label>
             <div class="input-group mb-3">
               <input id="loginEmail" type="email" class="form-control" placeholder="Email" />
@@ -129,7 +129,7 @@
                 <span class="bi bi-envelope"></span>
               </div>
             </div>
-            <label class="visually-hidden" for="loginPassword">Password</label>
+            <label class="visually-hidden" for="loginPassword">Contraseña</label>
             <div class="input-group mb-3">
               <input
                 id="loginPassword"
@@ -146,13 +146,13 @@
               <div class="col-8">
                 <div class="form-check">
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                  <label class="form-check-label" for="flexCheckDefault"> Remember Me </label>
+                  <label class="form-check-label" for="flexCheckDefault"> Recordar usuario </label>
                 </div>
               </div>
               <!-- /.col -->
               <div class="col-4">
-                <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-primary">Sign In</button>
+                <div class="d-grid gap-5">
+                  <button type="submit" class="btn btn-primary px-1" >Iniciar Sesion</button>
                 </div>
               </div>
               <!-- /.col -->
@@ -161,21 +161,21 @@
           </form>
 
           <div class="social-auth-links text-center mb-3 d-grid gap-2">
-            <p>- OR -</p>
-            <a href="#" class="btn btn-primary">
-              <i class="bi bi-facebook me-2"></i> Sign in using Facebook
+            <p>- O -</p>
+            <a href="https://www.facebook.com/?locale=es_LA" class="btn btn-primary">
+              <i class="bi bi-facebook me-2"></i> Iniciar Sesion con Facebook
             </a>
-            <a href="#" class="btn btn-danger">
-              <i class="bi bi-google me-2"></i> Sign in using Google
+            <a href="https://accounts.google.com/v3/signin/identifier?hl=es&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S2030869001:1794178522547274" class="btn btn-danger">
+              <i class="bi bi-google me-2"></i> Iniciar Sesion con Google
             </a>
           </div>
           <!-- /.social-auth-links -->
 
           <p class="mb-1">
-            <a href="forgot-password.html">I forgot my password</a>
+            <a href="Mantenimiento.html">Olvide mi Contraseña</a>
           </p>
           <p class="mb-0">
-            <a href="register.html" class="text-center"> Register a new membership </a>
+            <a href="Mantenimiento.html" class="text-center"> Nuevo usuario </a>
           </p>
         </div>
         <!-- /.login-card-body -->
