@@ -9,6 +9,17 @@ using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirFrontend", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+
 // Add services to the container.
 
 builder.Services.AddDbContext<FarmaciaDbContext>(options
@@ -89,6 +100,8 @@ builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 var app = builder.Build();
+
+app.UseCors("PermitirFrontend");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

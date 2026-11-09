@@ -16,7 +16,7 @@ namespace Farmacia_Api.Controller
             this.service = service;
         }
 
-        [HttpPost("usuarios")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginUsuarioDto dto)
         {
             try
