@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Farmacia_Api.Dtos.FacturasDto;
 
-namespace Farmacia_Api.Dtos
+namespace Farmacia_Api.Dtos.MedicamentoDto
 {
     public class ReadMedicamentoDto
     {

@@ -1,4 +1,5 @@
-﻿using Farmacia_Api.Models;
+﻿using Farmacia_Api.Dtos.MedicamentoDto;
+using Farmacia_Api.Models;
 using System.Text.Json.Serialization;
 
 namespace Farmacia_Api.Dtos.FacturasDto
