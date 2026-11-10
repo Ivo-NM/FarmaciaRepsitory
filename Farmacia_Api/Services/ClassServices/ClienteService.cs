@@ -29,8 +29,8 @@ namespace Farmacia_Api.Services.ClassServices
             }
 
             //No existe la obra social
-
-            if (clienteDto.CodObraSocial.HasValue)
+            
+            if (clienteDto.CodObraSocial.HasValue && clienteDto.CodObraSocial.Value != 0)
             {
                 ObrasSociale? os = await RecuperarObraSocialAsync(clienteDto.CodObraSocial.Value);
 
@@ -39,6 +39,7 @@ namespace Farmacia_Api.Services.ClassServices
                     throw new ArgumentException("No existe la obra social");
                 }
             }
+            
 
             Cliente? cliente = await Mapeo(clienteDto, id);
 
@@ -117,12 +118,17 @@ namespace Farmacia_Api.Services.ClassServices
             {
                 ReadClienteDto clienteDto = new ReadClienteDto()
                 {
+                    idCliente = cliente.IdCliente,
                     Nombre = cliente.Nombre,
                     Apellido = cliente.Apellido,
                     Documento = cliente.Documento,
                     NroTelefono = cliente.NroTelefono,
                     Email = cliente.EMail,
+                    Id_barrio = cliente.IdBarrio,
                     Barrio = cliente.BarrioNavigation.NombreBarrio,
+                    calle = cliente.Calle,
+                    Altura = cliente.Altura,
+                    cod_ObraSocial = cliente.ObraSocialNavigation != null ? cliente.ObraSocialNavigation.CodObraSocial : 0,
                     ObraSocialNombre = cliente.ObraSocialNavigation != null ? cliente.ObraSocialNavigation.Detalle : string.Empty
                 };
 
@@ -183,7 +189,8 @@ namespace Farmacia_Api.Services.ClassServices
             c.IdBarrio = clientDto.IdBarrio.HasValue ? clientDto.IdBarrio.Value : c.IdBarrio;
             c.NroTelefono = clientDto.NroTelefono.HasValue ? clientDto.NroTelefono.Value : c.NroTelefono;
             c.EMail = clientDto.Email != null ? clientDto.Email : c.EMail;
-            c.CodObraSocial = clientDto.CodObraSocial.HasValue ? clientDto.CodObraSocial.Value : c.CodObraSocial;
+            if (clientDto.CodObraSocial.HasValue)
+                c.CodObraSocial = clientDto.CodObraSocial.Value == 0 ? null : clientDto.CodObraSocial.Value;
 
             return c;
         }

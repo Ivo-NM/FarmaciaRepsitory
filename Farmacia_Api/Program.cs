@@ -98,6 +98,10 @@ builder.Services.AddScoped<IEmpleadoRepository, EmpleadoRepository>();
 builder.Services.AddScoped<IEmpleadoService, EmpleadoService>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+//Agregando utils
+builder.Services.AddScoped<IUtilsRepository, UtilsRepository>();
+builder.Services.AddScoped<IUtilsService, UtilsService>();
+
 
 var app = builder.Build();
 

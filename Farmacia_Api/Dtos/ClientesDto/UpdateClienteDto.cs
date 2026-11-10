@@ -32,7 +32,7 @@ namespace Farmacia_Api.Dtos.ClientesDto
         [EmailAddress(ErrorMessage = "El correo electrónico ingresado no tiene un formato válido")]
         public string? Email { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "El id de la obra social debe ser un número entero positivo")]
+        [Range(0, int.MaxValue, ErrorMessage = "El id de la obra social debe ser un número entero positivo")]
         public int? CodObraSocial { get; set; }
     }
 }
