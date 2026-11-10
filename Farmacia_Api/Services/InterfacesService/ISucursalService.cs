@@ -6,5 +6,6 @@ namespace Farmacia_Api.Services.InterfacesService
     public interface ISucursalService
     {
         Task<Sucursale>? ObtenerSucursalPorId(int idSucursal);
+        Task<List<Sucursale>> ObtenerSucursales();
     }
 }

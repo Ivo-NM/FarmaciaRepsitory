@@ -13,6 +13,11 @@ namespace Farmacia_Api.Data.Implementations
             this._context = _context;
         }
 
+        public async Task<List<Sucursale>> GetAllAsync()
+        {
+            return await _context.Sucursales.ToListAsync();
+        }
+
         public async Task<Sucursale>? GetByIdAsync(int idSucursal)
         {
             return await _context.Sucursales.FirstOrDefaultAsync(s => s.NroSucursal == idSucursal);
