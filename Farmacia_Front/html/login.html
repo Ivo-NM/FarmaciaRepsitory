@@ -6,9 +6,10 @@
       <!-- Primary AdminLTE CSS -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4/dist/css/adminlte.min.css">
       <!-- Required Plugins CSS -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDutQn5406J9Lg3jZJv87x58l88=" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css" integrity="sha256-tZHrRjVqNSRyWg2wbppGVT833E/Ys0DHWGwT04GqQg=" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <title>City Farmacia | Login Page</title>
 
     <!--begin::Theme Init (prevents flash of incorrect theme on load, #6043)-->
@@ -75,7 +76,6 @@
     <!--begin::Accessibility Features-->
     <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
-    <link rel="preload" href="../css/adminlte.css" as="style" />
     <!--end::Accessibility Features-->
 
     <!--begin::Fonts-->
@@ -105,8 +105,6 @@
     />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
 
-    <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="../css/adminlte.css" />
     <!--end::Required Plugin(AdminLTE)-->
   </head>
   <!--end::Head-->
@@ -121,7 +119,7 @@
         <div class="card-body login-card-body">
           <p class="login-box-msg">iniciar sesion</p>
 
-          <form id="formLogin" action="index.html" method="post">
+          <form id="formLogin">
             <label  class="visually-hidden" for="loginEmail">Email</label>
             <div class="input-group mb-3">
               <input id="loginEmail" name="email" type="email" class="form-control" placeholder="Email" />
@@ -144,40 +142,19 @@
             </div>
             <!--begin::Row-->
             <div class="row">
-              <div class="col-8">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                  <label class="form-check-label" for="flexCheckDefault"> Recordar usuario </label>
-                </div>
-              </div>
+
               <!-- /.col -->
               <div class="col-4">
                 <div class="d-grid gap-5">
-                  <button id="loginButton" type="submit" class="btn btn-primary px-1" >Iniciar Sesion</button>
+                  <button id="loginButton" type="button" class="btn btn-primary px-1" >Iniciar Sesion</button>
                 </div>
               </div>
               <!-- /.col -->
             </div>
             <!--end::Row-->
           </form>
-
-          <div class="social-auth-links text-center mb-3 d-grid gap-2">
-            <p>- O -</p>
-            <a href="https://www.facebook.com/?locale=es_LA" class="btn btn-primary">
-              <i class="bi bi-facebook me-2"></i> Iniciar Sesion con Facebook
-            </a>
-            <a href="https://accounts.google.com/v3/signin/identifier?hl=es&flowName=GlifWebSignIn&flowEntry=ServiceLogin&dsh=S2030869001:1794178522547274" class="btn btn-danger">
-              <i class="bi bi-google me-2"></i> Iniciar Sesion con Google
-            </a>
-          </div>
           <!-- /.social-auth-links -->
 
-          <p class="mb-1">
-            <a href="Mantenimiento.html">Olvide mi Contraseña</a>
-          </p>
-          <p class="mb-0">
-            <a href="Mantenimiento.html" class="text-center"> Nuevo usuario </a>
-          </p>
         </div>
         <!-- /.login-card-body -->
       </div>
@@ -200,10 +177,8 @@
       crossorigin="anonymous"
     ></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="../js/adminlte.js"></script>
     <!--end::Required Plugin(AdminLTE)-->
     <!-- Tu script de login -->
-    <script src="../js/login.js"></script>
     <!--begin::OverlayScrollbars Configure-->
     <script>
       const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
@@ -242,6 +217,8 @@
     <!--end::Color Mode Toggle-->
 
     <!--end::Script-->
+    <script src= "../js/login.js"></script>
   </body>
+  
   <!--end::Body-->
 </html>

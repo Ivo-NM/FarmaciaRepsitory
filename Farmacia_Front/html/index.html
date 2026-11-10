@@ -4,12 +4,16 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
       <!-- Primary AdminLTE CSS -->
+      <!-- AdminLTE 4 -->
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4/dist/css/adminlte.min.css">
-      <!-- Required Plugins CSS -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDutQn5406J9Lg3jZJv87x58l88=" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css" integrity="sha256-tZHrRjVqNSRyWg2wbppGVT833E/Ys0DHWGwT04GqQg=" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous">
-    <title>AdminLTE | Dashboard v3</title>
+      <!-- Fontsource -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.3.0/index.css">
+      <!-- OverlayScrollbars -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.16.0/styles/overlayscrollbars.min.css">
+      <!-- Bootstrap Icons -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+      <title>AdminLTE | Dashboard v3</title>
 
     <!--begin::Theme Init (prevents flash of incorrect theme on load, #6043)-->
     <script>
@@ -75,7 +79,6 @@
     <!--begin::Accessibility Features-->
     <!-- Skip links will be dynamically added by accessibility.js -->
     <meta name="supported-color-schemes" content="light dark" />
-    <link rel="preload" href="./css/adminlte.css" as="style" />
     <!--end::Accessibility Features-->
 
     <!--begin::Fonts-->
@@ -105,8 +108,6 @@
     />
     <!--end::Third Party Plugin(Bootstrap Icons)-->
 
-    <!--begin::Required Plugin(AdminLTE)-->
-    <link rel="stylesheet" href="./css/adminlte.css" />
     <!--end::Required Plugin(AdminLTE)-->
   </head>
 
@@ -193,13 +194,7 @@
                 <a href="#" class="dropdown-item">
                   <!--begin::Message-->
                   <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <img
-                        src="./assets/img/user1-128x128.jpg"
-                        alt=""
-                        class="img-size-50 rounded-circle me-3"
-                      />
-                    </div>
+
                     <div class="flex-grow-1">
                       <p class="dropdown-item-title">
                         Brad Diesel
@@ -219,13 +214,6 @@
                 <a href="#" class="dropdown-item">
                   <!--begin::Message-->
                   <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <img
-                        src="./assets/img/user8-128x128.jpg"
-                        alt=""
-                        class="img-size-50 rounded-circle me-3"
-                      />
-                    </div>
                     <div class="flex-grow-1">
                       <p class="dropdown-item-title">
                         John Pierce
@@ -245,13 +233,6 @@
                 <a href="#" class="dropdown-item">
                   <!--begin::Message-->
                   <div class="d-flex">
-                    <div class="flex-shrink-0">
-                      <img
-                        src="./assets/img/user3-128x128.jpg"
-                        alt=""
-                        class="img-size-50 rounded-circle me-3"
-                      />
-                    </div>
                     <div class="flex-grow-1">
                       <p class="dropdown-item-title">
                         Nora Silvester
@@ -422,11 +403,6 @@
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
                 <li class="user-header text-bg-primary">
-                  <img
-                    src="./assets/img/user2-160x160.jpg"
-                    class="rounded-circle shadow"
-                    alt="Alexander Pierce"
-                  />
                   <p>
                     Alexander Pierce - Web Developer
                     <small>Member since Nov. 2023</small>
@@ -629,136 +605,34 @@
                 </div>
                 <!-- /.card -->
 
-                 <!--Card de movimiento de inventarios-->
-                 <div class="card mb-4">
-                  <div class="card-header border-0">
-                    <h3 class="card-title">Movimientos de inventario</h3>
-                    <div class="card-tools">
-                      <a href="#" class="btn btn-tool btn-sm" aria-label="Download">
-                        <i class="bi bi-download"></i>
-                      </a>
-                      <a href="#" class="btn btn-tool btn-sm" aria-label="More options">
-                        <i class="bi bi-list"></i>
-                      </a>
+                <!--Card de movimiento de inventarios-->
+                <div id = "cartas" class="card mb-4">
+                    <div class="card-header border-0">
+                      <h3 class="card-title">Movimientos de inventario</h3>
+                      
+                      <div class="card-tools">
+                          <a href="#" class="btn btn-tool btn-sm" aria-label="Download">
+                          <i class="bi bi-download"></i>
+                          </a>
+                          <a href="#" class="btn btn-tool btn-sm" aria-label="More options">
+                          <i class="bi bi-list"></i>
+                          </a>
+
+                          <div class="card-body table-responsive p-0">
+                            <table class="table table-striped align-middle">
+                            
+                            <thead>
+                              <tr>
+                                <th>Producto</th>
+                                <th>Stock</th>
+                                <th>Ver Movimiento</th>
+                              </tr>
+                            </thead>
+                          </div>
+                      </div>
                     </div>
-                  </div>
-                  <div class="card-body table-responsive p-0">
-                    <table class="table table-striped align-middle">
-                      <thead>
-                        <tr>
-                          <th>Producto</th>
-                          <th>Movimiento</th>
-                          <th>Más</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <img
-                              src="./assets/img/default-150x150.png"
-                              alt="Product 1"
-                              class="rounded-circle img-size-32 me-2"
-                            />
-                            Some Product
-                          </td>
-                          <td>
-                            <span class="text-success-emphasis me-1">
-                              <i class="bi bi-arrow-up"></i>
-                              120
-                            </span>
-                          </td>
-                          <td>
-                            <a
-                              href="#"
-                              class="text-body-secondary"
-                              aria-label="View product details"
-                            >
-                              <i class="bi bi-search"></i>
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img
-                              src="./assets/img/default-150x150.png"
-                              alt="Product 1"
-                              class="rounded-circle img-size-32 me-2"
-                            />
-                            Another Product
-                          </td>
-                          <td>
-                            <span class="text-info-emphasis me-1">
-                              <i class="bi bi-arrow-down"></i>
-                              45
-                            </span>
-                          </td>
-                          <td>
-                            <a
-                              href="#"
-                              class="text-body-secondary"
-                              aria-label="View product details"
-                            >
-                              <i class="bi bi-search"></i>
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img
-                              src="./assets/img/default-150x150.png"
-                              alt="Product 1"
-                              class="rounded-circle img-size-32 me-2"
-                            />
-                            Amazing Product
-                          </td>
-                          <td>
-                            <span class="text-danger-emphasis me-1">
-                              <i class="bi bi-arrow-down"></i>
-                              12
-                            </span>
-                          </td>
-                          <td>
-                            <a
-                              href="#"
-                              class="text-body-secondary"
-                              aria-label="View product details"
-                            >
-                              <i class="bi bi-search"></i>
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <img
-                              src="./assets/img/default-150x150.png"
-                              alt="Product 1"
-                              class="rounded-circle img-size-32 me-2"
-                            />
-                            Perfect Item
-                            <span class="badge text-bg-danger">NEW</span>
-                          </td>
-                          <td>
-                            <span class="text-success-emphasis me-1">
-                              <i class="bi bi-arrow-up"></i>
-                              300
-                            </span>
-                          </td>
-                          <td>
-                            <a
-                              href="#"
-                              class="text-body-secondary"
-                              aria-label="View product details"
-                            >
-                              <i class="bi bi-search"></i>
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
                 </div>
                 <!-- /.card -->
-              </div>
               <!-- /.col-md-6 -->
               <div class="col-lg-4">
                 <div class="card mb-4">
@@ -768,8 +642,7 @@
                       <a
                         href="javascript:void(0);"
                         class="link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
-                        >Ver Reporte</a
-                      >
+                        >Ver Reporte</a>
                     </div>
                   </div>
                   <div class="card-body">
@@ -833,20 +706,14 @@
     <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <script
       src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.16.0/browser/overlayscrollbars.browser.es6.min.js"
-      crossorigin="anonymous"
     ></script>
     <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
     <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      crossorigin="anonymous"
-    ></script>
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <!--end::Required Plugin(popperjs for Bootstrap 5)--><!--begin::Required Plugin(Bootstrap 5)-->
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"
-      crossorigin="anonymous"
-    ></script>
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js"></script>
     <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
-    <script src="./js/adminlte.js"></script>
     <!--end::Required Plugin(AdminLTE)-->
     <!--begin::OverlayScrollbars Configure-->
     <script>
@@ -1166,7 +1033,8 @@
           setTheme(savedTheme);
         });
     </script>
-    <!--End Theme Script-->>
+    <!--End Theme Script-->
+    <script src = "../js/index.js"></script>
   </body>
   <!--end::Body-->
 </html>
