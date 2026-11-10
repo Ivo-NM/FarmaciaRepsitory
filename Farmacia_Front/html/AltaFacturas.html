@@ -3,7 +3,8 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>City Farmacia | Facturas</title>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
@@ -145,7 +146,7 @@
           <form
             class="navbar-search d-none d-xl-block ms-3"
             role="search"
-            action="../pages/search-results.html"
+            action=""
           >
             <label for="navbar-search-input" class="visually-hidden">Search</label>
             <div class="navbar-search-field">
@@ -168,7 +169,7 @@
           <ul class="navbar-nav ms-auto">
             <!--begin::Search (small screens: the field above is hidden, so link to the search page)-->
             <li class="nav-item d-xl-none">
-              <a class="nav-link" href="../pages/search-results.html" aria-label="Search">
+              <a class="nav-link" href="" aria-label="Search">
                 <i class="bi bi-search" aria-hidden="true"></i>
               </a>
             </li>
@@ -386,21 +387,11 @@
             <!--begin::User Menu Dropdown-->
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <img
-                  src="../assets/img/user2-160x160.jpg"
-                  class="user-image rounded-circle shadow"
-                  alt="Alexander Pierce"
-                />
                 <span class="d-none d-xl-inline">Alexander Pierce</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
                 <li class="user-header text-bg-primary">
-                  <img
-                    src="../assets/img/user2-160x160.jpg"
-                    class="rounded-circle shadow"
-                    alt="Alexander Pierce"
-                  />
                   <p>
                     Alexander Pierce - Web Developer
                     <small>Member since Nov. 2023</small>
@@ -446,11 +437,6 @@
           <!--begin::Brand Link-->
           <a href="../index.html" class="brand-link">
             <!--begin::Brand Image-->
-            <img
-              src="../assets/img/AdminLTELogo.png"
-              alt="AdminLTE Logo"
-              class="brand-image opacity-75 shadow"
-            />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
             <span class="brand-text fw-light">AdminLTE 4</span>
@@ -586,10 +572,6 @@
                                             style="width: 60%"
                                             required>
 
-                                            <option value="">
-                                                Sucursal
-                                            </option>
-
                                         </select>
                                     </div>
                                 </div>
@@ -694,7 +676,7 @@
 
                             <!-- Botones -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-warning">
+                                <button id = "btn-crear-factura" type="button" class="btn btn-warning">
                                     Crear Factura
                                 </button>
 
@@ -755,6 +737,6 @@
         minuteIncrement: 5
     });
 </script>
-<script src = "AltaFacturas.html"></script>
+<script src = "../js/altaFacturas.js"></script>
   </body>
 </html>
