@@ -161,6 +161,8 @@ function cargarMovimiento()
                 return;
             }
 
+            console.log(d);
+
             d.forEach(inventario => {
 
             inventario.detalleInventarios.forEach(i => {
