@@ -15,7 +15,7 @@ namespace Farmacia_Api.Controller
         {
             _serviceEntrega = serviceEntrega;
         }
-        [HttpGet("/entregas")]
+        [HttpGet("entregas")]
         public async Task<IActionResult> RecuperarEntregas()
         {
             try
@@ -32,7 +32,7 @@ namespace Farmacia_Api.Controller
             }
         }
 
-        [HttpGet("/entregas/sedes/{idSede}")]
+        [HttpGet("entregas/sedes/{idSede}")]
         public async Task<IActionResult> RecuperarEntregasPorSede(int idSede)
         {
             try
@@ -56,7 +56,7 @@ namespace Farmacia_Api.Controller
             }
         }
 
-        [HttpGet("/entregas/{idEntrega}")]
+        [HttpGet("entregas/{idEntrega}")]
         public async Task<IActionResult> RecuperarEntregaPorId(int idEntrega)
         {
             try
@@ -80,7 +80,7 @@ namespace Farmacia_Api.Controller
             }
         }
 
-        [HttpPost("/entregas/crear")]
+        [HttpPost("entregas/crear")]
         public async Task<IActionResult> CrearEntrega([FromBody] CreateEntregaDto dto)
         {
             try

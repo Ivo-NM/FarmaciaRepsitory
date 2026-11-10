@@ -14,7 +14,7 @@ namespace Farmacia_Api.Controller
         {
             _serviceFactura = serviceFactura;
         }
-        [HttpGet("/facturas")]
+        [HttpGet("facturas")]
         public async Task<IActionResult> RecuperarFacturas()
         {
             try
@@ -31,7 +31,7 @@ namespace Farmacia_Api.Controller
             }
         }
 
-        [HttpGet("/facturas/sucursal/{idSucursal}")]
+        [HttpGet("facturas/sucursal/{idSucursal}")]
         public async Task<IActionResult> RecuperarFacturaPorSucursal(int idSucursal)
         {
             try
@@ -55,7 +55,7 @@ namespace Farmacia_Api.Controller
             }
         }
 
-        [HttpGet("/facturas/{idFactura}")]
+        [HttpGet("facturas/{idFactura}")]
         public async Task<IActionResult> RecuperarFacturaPorId(int idFactura)
         {
             try
@@ -79,7 +79,7 @@ namespace Farmacia_Api.Controller
             }
         }
 
-        [HttpGet("/facturas/meses/{fechaInicio}/{fechaFin}")]
+        [HttpGet("facturas/meses/{fechaInicio}/{fechaFin}")]
         
         public async Task<IActionResult> RecuperarFacturasPorFecha(DateTime fechaInicio, DateTime fechaFin)
         {
@@ -112,7 +112,7 @@ namespace Farmacia_Api.Controller
             }
         }
 
-        [HttpPost("/facturas/crear")]
+        [HttpPost("facturas/crear")]
         public async Task<IActionResult> CrearFactura([FromBody] CreateFacturaDto dto)
         {
             try
