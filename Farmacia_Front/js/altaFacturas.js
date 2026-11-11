@@ -1,4 +1,4 @@
-function crearFactura()
+async function crearFactura()
 {
     let exito = validarDatos();
 
@@ -6,9 +6,10 @@ function crearFactura()
     {
         return;
     }
-
+    
     let url = "https://localhost:7032/api/Facturas/facturas/crear";
-    let putaFactura = obtenerFactura();
+
+    let putaFactura = await obtenerFactura();
 
     fetch(url, {
         method: "POST",
@@ -19,29 +20,34 @@ function crearFactura()
     })
     .then(r => {
         
-        if (r.status === 400)
+        if (r.status === 404 | r.status === 400)
         {
-            return false;
+            //Retorna objeto
+
+            return r.json()
+                .then(d => ({
+                    error: true,
+                    message: d.message
+                }));
         }
-        
+
         if (!r.ok)
         {
             return null;
         }
-
+        
         return r.json();
     })
     .then(d => {
-        
-        console.log(d);
-        
-        if (d === false)
+        //Verifica si d contiene la propiedad error
+
+        if (d.error)
         {
             return Swal.fire({
                     icon: "error",
                     title: "Error",
                     text: d.message
-                    });
+            });
         }
 
         if (d === null)
@@ -198,6 +204,8 @@ function validarDatos()
         Swal.fire("El descuento debe ser un número entero positivo");
         return false;
     }
+
+    return true;
 }
 
 function cargarSucursales()
@@ -235,7 +243,7 @@ function cargarSucursales()
         })
 }
 
-function obtenerFactura()
+async function obtenerFactura()
 {
     const $inputSucursal = document.getElementById("opciones-sucursales");
     const $inputFechaHora = document.getElementById("fechaFactura");
@@ -250,12 +258,25 @@ function obtenerFactura()
     const $cbkReembolsado = document.getElementById("ckbReembolsado");
 
     let idSucursal = Number($inputSucursal.value);
-    let fechaHora = $inputFechaHora.value;
+    let fechaHora = new Date($inputFechaHora.value);
     let idEmpleado = Number($inputIdEmpleado.value);
     let idCliente = Number($inputIdCliente.value);
     let idFormaPago = Number($inputIdFormaPago.value);
-    let codMed = Number($inputCodMed.value);
-    let codProd = Number($inputCodProd.value);
+
+    let codMed = null;
+
+    if ($inputCodMed.value.trim() !== "")
+    {
+        codMed = Number($inputCodMed.value);
+    };
+    
+    let codProd = null;
+
+    if ($inputCodProd.value.trim() !== "")
+    {
+        codProd = Number($inputCodProd.value);
+    }
+
     let preUnitario = Number($inputPreUnitario.value);
     let cant = Number($inputCant.value);
     let descuento = Number($inputDescuento.value);
