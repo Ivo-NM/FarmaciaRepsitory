@@ -16,5 +16,10 @@ namespace Farmacia_Api.Services.ClassServices
         {
             return await repository.GetProductoByIdAsync(id);
         }
+
+        public Task<List<OtrosProducto>> ObtenerProductos()
+        {
+            return repository.GetProductosAsync();
+        }
     }
 }

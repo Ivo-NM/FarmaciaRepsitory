@@ -7,5 +7,6 @@ namespace Farmacia_Api.Services.InterfacesService
     public interface IProductoService
     {
         Task<OtrosProducto>? ObtenerProductoPorId(int id);
+        Task<List<OtrosProducto>> ObtenerProductos();
     }
 }
