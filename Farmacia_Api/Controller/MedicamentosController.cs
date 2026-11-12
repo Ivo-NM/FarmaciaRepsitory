@@ -15,6 +15,8 @@ namespace Farmacia_Api.Controller
         {
             this.service = service;
         }
+
+        [HttpGet("medicamentos")]
         public async Task<IActionResult> ObtenerMedicamentos()
         {
             try
