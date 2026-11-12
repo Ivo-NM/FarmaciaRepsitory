@@ -110,7 +110,6 @@ function cargarSucursales()
         })
 }
 
-
 function cargarFactura()
 {
     let $cuerpoTabla = document.getElementById("cuerpo_tabla");
@@ -195,7 +194,6 @@ function cargarFactura()
             Swal.fire("Lo sentimos, hubo problemas cargando la factura");
         });
 }
-
 
 function cargarFacturas()
 {
