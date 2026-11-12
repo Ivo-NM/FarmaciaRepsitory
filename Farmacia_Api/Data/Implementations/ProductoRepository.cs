@@ -17,5 +17,10 @@ namespace Farmacia_Api.Data.Implementations
         {
             return await _context.OtrosProductos.FirstOrDefaultAsync(p => p.CodProducto == id);
         }
+
+        public async Task<List<OtrosProducto>> GetProductosAsync()
+        {
+            return await _context.OtrosProductos.ToListAsync();
+        }
     }
 }

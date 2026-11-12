@@ -5,5 +5,6 @@ namespace Farmacia_Api.Data.Interfaces
     public interface IProductoRepository
     {
         Task<OtrosProducto>? GetProductoByIdAsync(int id);
+        Task<List<OtrosProducto>> GetProductosAsync();
     }
 }

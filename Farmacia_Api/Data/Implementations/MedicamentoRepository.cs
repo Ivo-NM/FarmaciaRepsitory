@@ -17,5 +17,10 @@ namespace Farmacia_Api.Data.Implementations
         {
             return await _context.Medicamentos.FirstOrDefaultAsync(m => m.CodMedicamento == idMedicamento);
         }
+
+        public async Task<List<Medicamento>> GetMedicamentosAsync()
+        {
+            return await _context.Medicamentos.ToListAsync();
+        }
     }
 }
