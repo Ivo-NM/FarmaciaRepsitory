@@ -232,8 +232,8 @@ namespace Farmacia_Api.Services.ClassServices
 
                     DetalleFacturasDto = itemF.DetalleFacturas.Select(x => new ReadDetalleFacturasDto()
                     {
-                        nombreMed = x.CodMedicamentoNavigation != null ? x.CodMedicamentoNavigation.NombreMedicamento : string.Empty,
-                        nombreProd = x.CodProductoNavigation != null ? x.CodProductoNavigation.Detalle : string.Empty,
+                        nombreMed = x.CodMedicamentoNavigation != null ? x.CodMedicamentoNavigation.NombreMedicamento : null,
+                        nombreProd = x.CodProductoNavigation != null ? x.CodProductoNavigation.Detalle : null,
                         PreUnitario = x.PreUnitario,
                         Cantidad = x.Cantidad,
                         DescuentoObraSocial = x.DescuentoPorObraSocial,
@@ -258,8 +258,8 @@ namespace Farmacia_Api.Services.ClassServices
 
                 DetalleFacturasDto = factura.DetalleFacturas.Select(x => new ReadDetalleFacturasDto()
                 {
-                    nombreMed = x.CodMedicamentoNavigation != null ? x.CodMedicamentoNavigation.NombreMedicamento : string.Empty,
-                    nombreProd = x.CodProductoNavigation != null ? x.CodProductoNavigation.Detalle : string.Empty,
+                    nombreMed = x.CodMedicamentoNavigation != null ? x.CodMedicamentoNavigation.NombreMedicamento : null,
+                    nombreProd = x.CodProductoNavigation != null ? x.CodProductoNavigation.Detalle : null,
                     PreUnitario = x.PreUnitario,
                     Cantidad = x.Cantidad,
                     DescuentoObraSocial = x.DescuentoPorObraSocial,
