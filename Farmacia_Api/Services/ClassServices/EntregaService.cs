@@ -170,9 +170,9 @@ namespace Farmacia_Api.Services.ClassServices
                     DetalleEntregasDtos = entrega.DetalleEntregas.Select(de => new ReadDetalleEntregasDto()
                     {
                         CodMedicamento = de.CodMedicamento,
-                        NombreMedicamento = de.CodMedicamentoNavigation != null ? de.CodMedicamentoNavigation.NombreMedicamento : string.Empty,
+                        NombreMedicamento = de.CodMedicamentoNavigation != null ? de.CodMedicamentoNavigation.NombreMedicamento : null,
                         CodProducto = de.CodProducto,
-                        NombreProducto = de.CodProductoNavigation != null ? de.CodProductoNavigation.Detalle : string.Empty,
+                        NombreProducto = de.CodProductoNavigation != null ? de.CodProductoNavigation.Detalle : null,
                         Cantidad = de.Cant
                     }).ToList()
                 };
@@ -193,9 +193,9 @@ namespace Farmacia_Api.Services.ClassServices
                 DetalleEntregasDtos = entrega.DetalleEntregas.Select(de => new ReadDetalleEntregasDto()
                 {
                     CodMedicamento = de.CodMedicamento,
-                    NombreMedicamento = de.CodMedicamentoNavigation != null ? de.CodMedicamentoNavigation.NombreMedicamento : string.Empty,
+                    NombreMedicamento = de.CodMedicamentoNavigation != null ? de.CodMedicamentoNavigation.NombreMedicamento : null,
                     CodProducto = de.CodProducto,
-                    NombreProducto = de.CodProductoNavigation != null ? de.CodProductoNavigation.Detalle : string.Empty,
+                    NombreProducto = de.CodProductoNavigation != null ? de.CodProductoNavigation.Detalle : null,
                     Cantidad = de.Cant
                 }).ToList()
             };
