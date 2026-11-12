@@ -27,72 +27,50 @@ function buscarFacturaPorSucursal()
             }
 
             d.forEach(f => {
-
-                let $fila = document.createElement("tr");
-
-                // Nro. Factura
-                let $celdaNroFactura = document.createElement("td");
-                let $contenidoCeldaNroFactura = document.createElement("p");
-                $contenidoCeldaNroFactura.textContent = f.nroFactura;
-
-                // Sucursal
-                let $celdaSucursal = document.createElement("td");
-                let $contenidoCeldaSucursal = document.createElement("p");
-                $contenidoCeldaSucursal.textContent = f.nombsede;
-
-                // Fecha
-                let $celdaFecha = document.createElement("td");
-                let $contenidoCeldaFecha = document.createElement("p");
-                let fecha = dayjs(f.fecha);
-                let fechaFormateada = dayjs(fecha).format("DD/MM/YYYY");
-                $contenidoCeldaFecha.textContent = fechaFormateada;
-
-                // Cod. Empleado
-                let $celdaCodEmpleado = document.createElement("td");
-                let $contenidoCeldaEmpleado = document.createElement("p");
-                $contenidoCeldaEmpleado.textContent = f.idEmpleado;
-
-                // Cod. Forma Pago
-                let $celdaCodFormaPago = document.createElement("td");
-                let $contenidoCeldaFormaPago = document.createElement("p");
-                $contenidoCeldaFormaPago.textContent = f.idFormaPago;
-
-                $celdaNroFactura.appendChild($contenidoCeldaNroFactura);
-                $celdaSucursal.appendChild($contenidoCeldaSucursal);
-                $celdaFecha.appendChild($contenidoCeldaFecha);
-                $celdaCodEmpleado.appendChild($contenidoCeldaEmpleado);
-                $celdaCodFormaPago.appendChild($contenidoCeldaFormaPago);
-
-                $fila.appendChild($celdaNroFactura);
-                $fila.appendChild($celdaSucursal);
-                $fila.appendChild($celdaFecha);
-                $fila.appendChild($celdaCodEmpleado);
-                $fila.appendChild($celdaCodFormaPago);
-
-                // Detalles de factura
+                
                 f.detalleFacturasDto.forEach(df => {
+                    let $fila = document.createElement("tr");
 
-                    // Medicamento / Producto
+                    //Nro. Factura
+                    let $celdaNroFactura = document.createElement("td");
+                    $celdaNroFactura.textContent = f.nroFactura;
+
+                    //Sucursal
+                    let $celdaSucursal = document.createElement("td");
+                    $celdaSucursal.textContent = f.nombsede;
+
+                    //Fecha
+                    let $celdaFecha = document.createElement("td");
+                    $celdaFecha.textContent = dayjs(f.fecha).format("DD/MM/YYYY");
+
+                    //Cod. Empleado
+                    let $celdaCodEmpleado = document.createElement("td");
+                    $celdaCodEmpleado.textContent = f.idEmpleado;
+
+                    //Cod. Forma Pago
+                    let $celdaCodFormaPago = document.createElement("td");
+                    $celdaCodFormaPago.textContent = f.idFormaPago;
+
+                    //Medicamento/Producto
                     let $celdaMedProd = document.createElement("td");
-                    let $contenidoCeldaMedProd = document.createElement("p");
+                    $celdaMedProd.textContent =
+                    df.nombreMed != null? df.nombreMed : df.nombreProd;
 
-                    $contenidoCeldaMedProd.textContent =
-                        df.nombreMed != null ? df.nombreMed : df.nombreProd;
-
-                    $celdaMedProd.appendChild($contenidoCeldaMedProd);
-
-                    // Cantidad
+                    //Cantidad
                     let $celdaCant = document.createElement("td");
-                    let $contenidoCeldaCant = document.createElement("p");
-                    $contenidoCeldaCant.textContent = df.cantidad;
+                    $celdaCant.textContent = df.cantidad;
 
-                    $celdaCant.appendChild($contenidoCeldaCant);
-
+                    //Agregar celdas a la fila
+                    $fila.appendChild($celdaNroFactura);
+                    $fila.appendChild($celdaSucursal);
+                    $fila.appendChild($celdaFecha);
+                    $fila.appendChild($celdaCodEmpleado);
+                    $fila.appendChild($celdaCodFormaPago);
                     $fila.appendChild($celdaMedProd);
                     $fila.appendChild($celdaCant);
-                });
 
-                $cuerpoTabla.appendChild($fila);
+                    $cuerpoTabla.appendChild($fila);
+                });
             });
         })
 }
@@ -132,6 +110,7 @@ function cargarSucursales()
         })
 }
 
+
 function cargarFactura()
 {
     let $cuerpoTabla = document.getElementById("cuerpo_tabla");
@@ -140,7 +119,7 @@ function cargarFactura()
     const $inputNroFactura = document.getElementById("input-nro-factura");
     let nroFactura = $inputNroFactura.value;
 
-    //isNan devuelve true si nroFactura no es un número
+    //isNaN devuelve true si nroFactura no es un número
     if (isNaN(nroFactura))
     {
         Swal.fire("El número de factura debe ser un número entero positivo");
@@ -152,12 +131,6 @@ function cargarFactura()
     fetch(url)
         .then(r => {
 
-            if (r.status === 404)
-            {
-                Swal.fire("No se encontró la factura");
-                return;
-            }
-
             if (!r.ok)
             {
                 return null;
@@ -167,83 +140,62 @@ function cargarFactura()
         })
         .then(d => {
 
-            if (d === null)
+            if (d === null || d === undefined)
             {
                 Swal.fire("Lo sentimos, hubo problemas cargando la factura");
                 return;
             }
 
-            let $fila = document.createElement("tr");
-
-            // Nro. Factura
-            let $celdaNroFactura = document.createElement("td");
-            let $contenidoCeldaNroFactura = document.createElement("p");
-            $contenidoCeldaNroFactura.textContent = d.nroFactura;
-
-            // Sucursal
-            let $celdaSucursal = document.createElement("td");
-            let $contenidoCeldaSucursal = document.createElement("p");
-            $contenidoCeldaSucursal.textContent = d.nombsede;
-
-            // Fecha
-            let $celdaFecha = document.createElement("td");
-            let $contenidoCeldaFecha = document.createElement("p");
-            let fecha = dayjs(d.fecha);
-            let fechaFormateada = dayjs(fecha).format("DD/MM/YYYY");
-            $contenidoCeldaFecha.textContent = fechaFormateada;
-
-            // Cod. Empleado
-            let $celdaCodEmpleado = document.createElement("td");
-            let $contenidoCeldaEmpleado = document.createElement("p");
-            $contenidoCeldaEmpleado.textContent = d.idEmpleado;
-
-            // Cod. Forma Pago
-            let $celdaCodFormaPago = document.createElement("td");
-            let $contenidoCeldaFormaPago = document.createElement("p");
-            $contenidoCeldaFormaPago.textContent = d.idFormaPago;
-
-            $celdaNroFactura.appendChild($contenidoCeldaNroFactura);
-            $celdaSucursal.appendChild($contenidoCeldaSucursal);
-            $celdaFecha.appendChild($contenidoCeldaFecha);
-            $celdaCodEmpleado.appendChild($contenidoCeldaEmpleado);
-            $celdaCodFormaPago.appendChild($contenidoCeldaFormaPago);
-
-            $fila.appendChild($celdaNroFactura);
-            $fila.appendChild($celdaSucursal);
-            $fila.appendChild($celdaFecha);
-            $fila.appendChild($celdaCodEmpleado);
-            $fila.appendChild($celdaCodFormaPago);
-
-            // Detalles de factura
             d.detalleFacturasDto.forEach(df => {
 
-                // Medicamento / Producto
-                let $celdaMedProd = document.createElement("td");
-                let $contenidoCeldaMedProd = document.createElement("p");
+                let $fila = document.createElement("tr");
 
-                $contenidoCeldaMedProd.textContent =
+                //Nro. Factura
+                let $celdaNroFactura = document.createElement("td");
+                $celdaNroFactura.textContent = d.nroFactura;
+
+                //Sucursal
+                let $celdaSucursal = document.createElement("td");
+                $celdaSucursal.textContent = d.nombsede;
+
+                //Fecha
+                let $celdaFecha = document.createElement("td");
+                $celdaFecha.textContent = dayjs(d.fecha).format("DD/MM/YYYY");
+
+                //Cod. Empleado
+                let $celdaCodEmpleado = document.createElement("td");
+                $celdaCodEmpleado.textContent = d.idEmpleado;
+
+                //Cod. Forma Pago
+                let $celdaCodFormaPago = document.createElement("td");
+                $celdaCodFormaPago.textContent = d.idFormaPago;
+
+                //Medicamento/Producto
+                let $celdaMedProd = document.createElement("td");
+                $celdaMedProd.textContent =
                     df.nombreMed != null ? df.nombreMed : df.nombreProd;
 
-                $celdaMedProd.appendChild($contenidoCeldaMedProd);
-
-                // Cantidad
+                //Cantidad
                 let $celdaCant = document.createElement("td");
-                let $contenidoCeldaCant = document.createElement("p");
-                $contenidoCeldaCant.textContent = df.cantidad;
+                $celdaCant.textContent = df.cantidad;
 
-                $celdaCant.appendChild($contenidoCeldaCant);
-
+                $fila.appendChild($celdaNroFactura);
+                $fila.appendChild($celdaSucursal);
+                $fila.appendChild($celdaFecha);
+                $fila.appendChild($celdaCodEmpleado);
+                $fila.appendChild($celdaCodFormaPago);
                 $fila.appendChild($celdaMedProd);
                 $fila.appendChild($celdaCant);
-            });
 
-            $cuerpoTabla.appendChild($fila);
+                $cuerpoTabla.appendChild($fila);
+            });
         })
         .catch(error => {
             console.error(error);
             Swal.fire("Lo sentimos, hubo problemas cargando la factura");
         });
 }
+
 
 function cargarFacturas()
 {
@@ -270,72 +222,50 @@ function cargarFacturas()
             }
 
             d.forEach(f => {
-
-                let $fila = document.createElement("tr");
-
-                // Nro. Factura
-                let $celdaNroFactura = document.createElement("td");
-                let $contenidoCeldaNroFactura = document.createElement("p");
-                $contenidoCeldaNroFactura.textContent = f.nroFactura;
-
-                // Sucursal
-                let $celdaSucursal = document.createElement("td");
-                let $contenidoCeldaSucursal = document.createElement("p");
-                $contenidoCeldaSucursal.textContent = f.nombsede;
-
-                // Fecha
-                let $celdaFecha = document.createElement("td");
-                let $contenidoCeldaFecha = document.createElement("p");
-                let fecha = dayjs(f.fecha);
-                let fechaFormateada = dayjs(fecha).format("DD/MM/YYYY");
-                $contenidoCeldaFecha.textContent = fechaFormateada;
-
-                // Cod. Empleado
-                let $celdaCodEmpleado = document.createElement("td");
-                let $contenidoCeldaEmpleado = document.createElement("p");
-                $contenidoCeldaEmpleado.textContent = f.idEmpleado;
-
-                // Cod. Forma Pago
-                let $celdaCodFormaPago = document.createElement("td");
-                let $contenidoCeldaFormaPago = document.createElement("p");
-                $contenidoCeldaFormaPago.textContent = f.idFormaPago;
-
-                $celdaNroFactura.appendChild($contenidoCeldaNroFactura);
-                $celdaSucursal.appendChild($contenidoCeldaSucursal);
-                $celdaFecha.appendChild($contenidoCeldaFecha);
-                $celdaCodEmpleado.appendChild($contenidoCeldaEmpleado);
-                $celdaCodFormaPago.appendChild($contenidoCeldaFormaPago);
-
-                $fila.appendChild($celdaNroFactura);
-                $fila.appendChild($celdaSucursal);
-                $fila.appendChild($celdaFecha);
-                $fila.appendChild($celdaCodEmpleado);
-                $fila.appendChild($celdaCodFormaPago);
-
-                // Detalles de factura
+                
                 f.detalleFacturasDto.forEach(df => {
+                    let $fila = document.createElement("tr");
 
-                    // Medicamento / Producto
+                    //Nro. Factura
+                    let $celdaNroFactura = document.createElement("td");
+                    $celdaNroFactura.textContent = f.nroFactura;
+
+                    //Sucursal
+                    let $celdaSucursal = document.createElement("td");
+                    $celdaSucursal.textContent = f.nombsede;
+
+                    //Fecha
+                    let $celdaFecha = document.createElement("td");
+                    $celdaFecha.textContent = dayjs(f.fecha).format("DD/MM/YYYY");
+
+                    //Cod. Empleado
+                    let $celdaCodEmpleado = document.createElement("td");
+                    $celdaCodEmpleado.textContent = f.idEmpleado;
+
+                    //Cod. Forma Pago
+                    let $celdaCodFormaPago = document.createElement("td");
+                    $celdaCodFormaPago.textContent = f.idFormaPago;
+
+                    //Medicamento/Producto
                     let $celdaMedProd = document.createElement("td");
-                    let $contenidoCeldaMedProd = document.createElement("p");
+                    $celdaMedProd.textContent =
+                    df.nombreMed != null ? df.nombreMed : df.nombreProd;
 
-                    $contenidoCeldaMedProd.textContent =
-                        df.nombreMed != null ? df.nombreMed : df.nombreProd;
-
-                    $celdaMedProd.appendChild($contenidoCeldaMedProd);
-
-                    // Cantidad
+                    //Cantidad
                     let $celdaCant = document.createElement("td");
-                    let $contenidoCeldaCant = document.createElement("p");
-                    $contenidoCeldaCant.textContent = df.cantidad;
+                    $celdaCant.textContent = df.cantidad;
 
-                    $celdaCant.appendChild($contenidoCeldaCant);
-
+                    //Agregar celdas a la fila
+                    $fila.appendChild($celdaNroFactura);
+                    $fila.appendChild($celdaSucursal);
+                    $fila.appendChild($celdaFecha);
+                    $fila.appendChild($celdaCodEmpleado);
+                    $fila.appendChild($celdaCodFormaPago);
                     $fila.appendChild($celdaMedProd);
                     $fila.appendChild($celdaCant);
-                });
 
-                $cuerpoTabla.appendChild($fila);
+                    $cuerpoTabla.appendChild($fila);
+                });
             });
         })
 }
