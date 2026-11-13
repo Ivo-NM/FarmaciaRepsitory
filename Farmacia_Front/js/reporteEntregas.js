@@ -1,4 +1,4 @@
 document.addEventListener("DOMContentLoaded", () =>  {
     cargarEntregas(),
-    cargarSucursales("opciones-sucursales")
+    buscarSucursales("opciones-sucursales")
 });
