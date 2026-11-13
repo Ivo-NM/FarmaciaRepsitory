@@ -75,41 +75,6 @@ function buscarFacturaPorSucursal()
         })
 }
 
-function cargarSucursales()
-{
-    const $lstSucursales = document.getElementById("opciones-sucursales");
-    $lstSucursales.replaceChildren();
-
-    let url = "https://localhost:7032/api/Sucursales/sucursales";
-
-    fetch(url)
-        .then(r => {
-
-            if (!r.ok)
-            {
-                return null;
-            }
-
-            return r.json();
-        })
-        .then(d => {
-
-            if (d === null)
-            {
-                Swal.fire("Lo sentimos, hubo un problema cargando las sucursales");
-                return;
-            }
-
-            d.forEach(s => {
-                let $opcionSucursal = document.createElement("option");
-                $opcionSucursal.value = s.nroSucursal;
-                $opcionSucursal.textContent = s.nomSede;
-
-                $lstSucursales.appendChild($opcionSucursal);
-            })
-        })
-}
-
 function cargarFactura()
 {
     let $cuerpoTabla = document.getElementById("cuerpo_tabla");
@@ -270,8 +235,8 @@ function cargarFacturas()
 
 document.getElementById("icono_lupa").addEventListener("click", cargarFactura)
 document.addEventListener("DOMContentLoaded", () => {
-    cargarFacturas();
     cargarSucursales("opciones-sucursales");
+    cargarFacturas();
 });
 
 document.getElementById("opciones-sucursales").addEventListener("change", buscarFacturaPorSucursal);

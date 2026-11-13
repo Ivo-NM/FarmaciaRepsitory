@@ -583,14 +583,14 @@
 
                                 <!-- Fecha -->
                                 <div class="row mb-3">
-                                  <label for="fechaFactura" class="col-sm-2 col-form-label">
+                                  <label for="fechaEntrega" class="col-sm-2 col-form-label">
                                     Fecha
                                   </label>
 
                                   <div class="col-sm-6">
                                     <input type="text"
                                           class="form-control"
-                                          id="fechaFactura"
+                                          id="fechaEntrega"
                                           placeholder="Seleccionar fecha y hora">
                                   </div>
                                 </div>
@@ -620,21 +620,37 @@
                                       </div>
                                     </div>
 
-                                    <!--Medicamento-->
-                                    <div class="row mb-3">
-                                      <label for="codMedicamento" class="col-sm-2 col-form-label">Codigo Medicamento</label>
-                        
-                                      <div class="col-sm-6">
-                                        <input type="number" class="form-control" id="codMedicamento"/>
-                                      </div>
+                                <!--Medicamento-->
+                                  <div class="row mb-3">
+                                    <label for="opciones-medicamentos"
+                                        class="col-sm-2 col-form-label">
+                                        Medicamento
+                                    </label>
+
+                                    <div class="col-sm-10">
+                                        <select
+                                            id="opciones-medicamentos"
+                                            class="form-select"
+                                            style="width: 60%"
+                                            required>
+                                        </select>
                                     </div>
+                                  </div>
 
                                     <!--Producto-->
                                     <div class="row mb-3">
-                                      <label for="codProducto" class="col-sm-2 col-form-label">Codigo Producto</label>
-                        
-                                      <div class="col-sm-6">
-                                        <input type="number" class="form-control" id="codProducto"/>
+                                      <label for="opciones-productos"
+                                        class="col-sm-2 col-form-label">
+                                        Producto
+                                      </label>
+
+                                      <div class="col-sm-10">
+                                        <select
+                                            id="opciones-productos"
+                                            class="form-select"
+                                            style="width: 60%"
+                                            required>
+                                        </select>
                                       </div>
                                     </div>
 
