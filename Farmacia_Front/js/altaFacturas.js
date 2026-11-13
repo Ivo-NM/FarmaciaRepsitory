@@ -22,14 +22,14 @@ function crearFactura()
         
         if (r.status === 404 || r.status === 400)
         {
-            //Para que aparezcan mensajes que manda la API
+            //Para que aparezcan mensajes personalizados que manda la API
 
             return r.json()
                 .then(d => ({
                 error: true,
-                message: d.message ?? 
-                    Object.values(d.errors ?? {}).flat().join("\n") ??
-                    "Error al procesar la solicitud"
+                message: d.message ||
+                Object.values(d.errors ?? {}).flat().join("\n") ||
+                "Error al procesar la solicitud"
             }));
         }
 
