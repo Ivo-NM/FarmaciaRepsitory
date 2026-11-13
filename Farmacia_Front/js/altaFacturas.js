@@ -197,7 +197,7 @@ function obtenerFactura()
     const $cbkReembolsado = document.getElementById("ckbReembolsado");
 
     let idSucursal = Number($inputSucursal.value);
-    let fechaHora = $inputFechaHora.value;
+    let fechaHora = dayjs($inputFechaHora.value).format("YYYY-MM-DDTHH:mm:ss");
     let idEmpleado = Number($inputIdEmpleado.value);
     let idCliente = Number($inputIdCliente.value);
     let idFormaPago = Number($inputIdFormaPago.value);
