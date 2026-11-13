@@ -11,6 +11,8 @@ function crearFactura()
 
     let putaFactura = obtenerFactura();
 
+    console.log(putaFactura);
+
     fetch(url, {
         method: "POST",
         headers: {
@@ -22,9 +24,6 @@ function crearFactura()
         
         if (r.status === 404 || r.status === 400)
         {
-            //Para que aparezcan mensajes personalizados que manda la API
-            //ARREGLAR
-
             return r.json()
                 .then(d => ({
                 error: true,
@@ -90,24 +89,6 @@ function validarDatos()
         return false;
     }
 
-    if (!putaFactura.idEmpleado)
-    {
-        Swal.fire("Ingrese el ID del empleado");
-        return false;
-    }
-
-    if (putaFactura.idEmpleado <= 0)
-    {
-        Swal.fire("El ID del empleado debe ser mayor a 0");
-        return false;
-    }
-
-    if (!Number.isInteger(putaFactura.idEmpleado))
-    {
-        Swal.fire("El ID del empleado debe ser un entero");
-        return false;
-    }
-
     if (!putaFactura.idCliente)
     {
         Swal.fire("Ingrese el ID del cliente");
@@ -168,7 +149,7 @@ function obtenerFactura()
 {
     const $inputSucursal = document.getElementById("opciones-sucursales");
     const $inputFechaHora = document.getElementById("fechaFactura");
-    const $inputIdEmpleado = document.getElementById("idEmpleado");
+    const $inputIdEmpleado = document.getElementById("opciones-empleados");
     const $inputIdCliente = document.getElementById("idCliente");
     const $inputIdFormaPago = document.getElementById("opciones-formas-pago");
     const $inputCodMed = document.getElementById("opciones-medicamentos");
@@ -225,9 +206,19 @@ function obtenerFactura()
 }
 
 document.getElementById("btn-crear-factura").addEventListener("click", crearFactura);
+
+document.getElementById("opciones-sucursales").addEventListener("change", () => {
+
+    let idSucursal = document.getElementById("opciones-sucursales").value;
+
+    buscarEmpleadosPorSucursal("opciones-empleados", idSucursal);
+
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     cargarSucursales("opciones-sucursales");
     buscarMedicamentos("opciones-medicamentos");
     buscarProductos("opciones-productos");
     buscarFormasDePago("opciones-formas-pago");
+    buscarEmpleadosPorSucursal("opciones-empleados", 1);
 });

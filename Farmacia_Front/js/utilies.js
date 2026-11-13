@@ -133,3 +133,35 @@ function buscarFormasDePago(idLstFormaPagos)
             })
         })
 }
+
+function buscarEmpleadosPorSucursal(idLstEmpleados, idSucursal)
+{
+    const $lstEmpleados = document.getElementById(idLstEmpleados);
+    $lstEmpleados.replaceChildren();
+
+    let url = `https://localhost:7032/api/Empleados/empleados/${idSucursal}`;
+
+    fetch(url)
+        .then(r => {
+            if (!r.ok)
+            {
+                return null;
+            }
+
+            return r.json();
+        })
+        .then(d => {
+            if (d === null)
+            {
+                Swal.fire("Lo sentimos, hubo un problema cargando a los empleados");
+                return;
+            }
+
+            d.forEach(e => {
+                let $opcionEmpleado = document.createElement("option");
+                $opcionEmpleado.value = e.idEmpleado;
+                $opcionEmpleado.textContent = `${e.apellEmpleado}, ${e.nomEmpleado}`;
+                $lstEmpleados.appendChild($opcionEmpleado);
+            })
+        });
+}
