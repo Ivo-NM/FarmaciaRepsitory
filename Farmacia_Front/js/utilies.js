@@ -60,7 +60,7 @@ function buscarMedicamentos(idLstMed)
             d.forEach(m => {
                 let $opcionMed = document.createElement("option");
                 $opcionMed.textContent = m.nombreMedicamento;
-                $opcionMed.value = m.nombreMedicamento;
+                $opcionMed.value = m.codMedicamento;
                 $lstMedicamentos.appendChild($opcionMed);
             })
         })
