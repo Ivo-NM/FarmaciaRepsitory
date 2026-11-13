@@ -126,24 +126,6 @@ function validarDatos()
         return false;
     }
 
-    if (!putaFactura.idFormaPago)
-    {
-        Swal.fire("Ingrese el ID de la forma de pago");
-        return false;
-    }
-
-    if (putaFactura.idFormaPago <= 0)
-    {
-        Swal.fire("El id de la forma de pago debe ser mayor a 0");
-        return false;
-    }
-
-    if (!Number.isInteger(putaFactura.idFormaPago))
-    {
-        Swal.fire("El ID de la forma de pago debe ser un entero");
-        return false;
-    }
-
     let mensaje = "";
 
     putaFactura.detalleFacturasDtos.forEach(df => {
@@ -188,7 +170,7 @@ function obtenerFactura()
     const $inputFechaHora = document.getElementById("fechaFactura");
     const $inputIdEmpleado = document.getElementById("idEmpleado");
     const $inputIdCliente = document.getElementById("idCliente");
-    const $inputIdFormaPago = document.getElementById("idFormaPago");
+    const $inputIdFormaPago = document.getElementById("opciones-formas-pago");
     const $inputCodMed = document.getElementById("opciones-medicamentos");
     const $inputCodProd = document.getElementById("opciones-productos");
     const $inputPreUnitario = document.getElementById("preUnitario");
@@ -244,7 +226,8 @@ function obtenerFactura()
 
 document.getElementById("btn-crear-factura").addEventListener("click", crearFactura);
 document.addEventListener("DOMContentLoaded", () => {
-    cargarSucursales("opciones-sucursales"),
-    buscarMedicamentos("opciones-medicamentos"),
-    buscarProductos("opciones-productos")
+    cargarSucursales("opciones-sucursales");
+    buscarMedicamentos("opciones-medicamentos");
+    buscarProductos("opciones-productos");
+    buscarFormasDePago("opciones-formas-pago");
 });

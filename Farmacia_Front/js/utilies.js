@@ -101,3 +101,35 @@ function buscarProductos(idLstProd)
             })
         })
 }
+
+function buscarFormasDePago(idLstFormaPagos)
+{
+    const $lstFormasPagos = document.getElementById(idLstFormaPagos);
+    $lstFormasPagos.replaceChildren();
+    
+    let url = "https://localhost:7032/api/FormasDePago/formaspago";
+
+    fetch(url)
+        .then(r => {
+            if (!r.ok)
+            {
+                return null;
+            }
+
+            return r.json();
+        })
+        .then(d => {
+            if (d === null)
+            {
+                Swal.fire("Lo sentimos, hubo un problema cargando las formas de pago");
+                return;
+            }
+
+            d.forEach(fp => {
+                let $opcionFormaPago = document.createElement("option");
+                $opcionFormaPago.textContent = fp.descripcion;
+                $opcionFormaPago.value = fp.idFormaPago;
+                $lstFormasPagos.appendChild($opcionFormaPago);
+            })
+        })
+}
