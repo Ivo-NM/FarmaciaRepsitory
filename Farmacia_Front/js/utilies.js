@@ -1,4 +1,4 @@
-function cargarSucursales(idLstSucursales)
+function buscarSucursales(idLstSucursales)
 {
     const $lstSucursales = document.getElementById(idLstSucursales);
     $lstSucursales.replaceChildren();
