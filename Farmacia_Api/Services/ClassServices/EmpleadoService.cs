@@ -22,5 +22,10 @@ namespace Farmacia_Api.Services.ClassServices
         {
             return await repository.GetByIdAsync(id);
         }
+
+        public async Task<List<Empleado>> ObtenerPorSedeAsync(int idSucursal)
+        {
+            return await repository.GetBySedeAsync(idSucursal);
+        }
     }
 }

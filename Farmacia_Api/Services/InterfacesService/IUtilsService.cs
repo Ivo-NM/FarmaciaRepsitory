@@ -1,4 +1,5 @@
 ﻿using Farmacia_Api.Dtos.UtilsDto;
+using Farmacia_Api.Models;
 
 namespace Farmacia_Api.Services.InterfacesService
 {
@@ -8,5 +9,6 @@ namespace Farmacia_Api.Services.InterfacesService
             Task<ReadBarrioDto> TraerBarrioPorId(int id);
             Task<List<ReadObraSocialDto>> TraerObraSocial();
             Task<ReadObraSocialDto> TraerObraSocialPorId(int id);
+            Task<List<FormasDePago>> TraerFormasPagoAsync();
     }
 }

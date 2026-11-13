@@ -31,6 +31,11 @@ namespace Farmacia_Api.Services.ClassServices
             return barriosDto;
         }
 
+        public async Task<List<FormasDePago>> TraerFormasPagoAsync()
+        {
+            return await _Repository.GetFormasPagoAsync();
+        }
+
         public async Task<List<ReadObraSocialDto>> TraerObraSocial()
         {
             var OSociales = await _Repository.GetAllObraSocialAsync();
