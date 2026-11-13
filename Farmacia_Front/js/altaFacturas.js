@@ -23,16 +23,7 @@ function crearFactura()
         if (r.status === 404 || r.status === 400)
         {
             //Para que aparezcan mensajes personalizados que manda la API
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-            //ARREGLARg
->>>>>>> c08afd9a1d73f5bf3c55fd1fb49e81ced06bcfed
-=======
-            //ARREGLARg
-=======
->>>>>>> 03451090c860b1b1febba199b05b57a0e76ab320
->>>>>>> 540c1fa8862bbe58310560eeab5e56e13c68989e
+            //ARREGLAR
 
             return r.json()
                 .then(d => ({

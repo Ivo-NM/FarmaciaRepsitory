@@ -1,3 +1,50 @@
+function crearEntrega()
+{
+    let exito = validarDatos();
+
+    if (!exito)
+    {
+        return;
+    }
+
+    let putaEntrega = obtenerEntrega();
+    let url = "https://localhost:7032/api/Entregas/entregas/crear";
+
+    console.log(putaEntrega);
+
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(putaEntrega)
+    })
+        .then(r => {
+            if (!r.ok)
+            {
+                return null;
+            }
+
+            return r.json();
+        })
+        .then(d => {
+            if (d === null)
+            {
+                return Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: `Lo sentimos, no se pudo guardar la entrega`
+                    });
+            }
+
+            return Swal.fire({
+            icon: "success",
+            title: "Exito",
+            text: "Se pudo guardar la entrega"
+            });
+        });
+}
+
 function validarDatos()
 {
     let putaEntrega = obtenerEntrega();
@@ -58,8 +105,8 @@ function validarDatos()
     let mensaje = "";
 
     putaEntrega.detalleEntregas.forEach(de => {
-        if ((de.codMed.value === "" && de.codProd.value === "") ||
-            (de.codMed.value !== "" && de.codProd.value !== ""))
+        if ((de.codMed === null && de.codProd === null) ||
+            (de.codMed !== null && de.codProd !== null))
         {
             mensaje = "Coloque un medicamento o un producto";
             return;
@@ -105,12 +152,14 @@ function obtenerEntrega()
     let idEmpleado = Number($idEmpleado.value);
 
     let codMed = null;
+
     if ($codMed.value !== "") 
     {
         codMed = Number($codMed.value);
     }
 
     let codProd = null;
+
     if ($codProd.value !== "") 
     {
         codProd = Number($codProd.value);
@@ -144,3 +193,5 @@ document.addEventListener("DOMContentLoaded", () => {
     buscarProductos("opciones-productos");
     }
 )
+
+document.getElementById("btn-crear-entrega").addEventListener("click", crearEntrega);
