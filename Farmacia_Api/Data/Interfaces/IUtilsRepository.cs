@@ -8,6 +8,6 @@ namespace Farmacia_Api.Data.Interfaces
         Task<Barrio> GetBarriosByAsync(int id);
         Task<List<ObrasSociale>> GetAllObraSocialAsync();
         Task<ObrasSociale> GetObraSocialByAsync(int id);
-
+        Task<List<FormasDePago>> GetFormasPagoAsync();
     }
 }

@@ -26,6 +26,11 @@ namespace Farmacia_Api.Data.Implementations
             return await _context.Barrios.FirstOrDefaultAsync(b => b.IdBarrio == id);
         }
 
+        public async Task<List<FormasDePago>> GetFormasPagoAsync()
+        {
+            return await _context.FormasDePagos.ToListAsync();
+        }
+
         public async Task<ObrasSociale> GetObraSocialByAsync(int id)
         {
             return await _context.ObrasSociales.FirstOrDefaultAsync(o => o.CodObraSocial == id);

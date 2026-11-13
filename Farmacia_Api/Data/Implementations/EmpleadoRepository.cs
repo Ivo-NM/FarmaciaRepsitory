@@ -24,5 +24,11 @@ namespace Farmacia_Api.Data.Implementations
             return await _context.Empleados.FirstOrDefaultAsync(e => e.IdEmpleado == id);
         }
 
+        public async Task<List<Empleado>> GetBySedeAsync(int idSucursal)
+        {
+            return await _context.Empleados
+                         .Where(e => e.NroSucursal == idSucursal)
+                         .ToListAsync();
+        }
     }
 }

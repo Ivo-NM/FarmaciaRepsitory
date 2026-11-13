@@ -6,6 +6,6 @@ namespace Farmacia_Api.Data.Interfaces
     {
         Task<Empleado>? GetByIdAsync(int id);
         Task<Empleado>? GetByIdandSedeAsync(int id,int idsucursal);
-
+        Task<List<Empleado>> GetBySedeAsync(int idSucursal);
     }
 }
