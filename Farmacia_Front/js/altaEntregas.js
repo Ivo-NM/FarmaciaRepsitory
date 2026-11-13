@@ -21,7 +21,7 @@ function crearEntrega()
     })
         .then(r => {
             if (!r.ok)
-            {
+            {                
                 return null;
             }
 
@@ -29,7 +29,7 @@ function crearEntrega()
         })
         .then(d => {
             if (d === null)
-            {
+            {                
                 return Swal.fire({
                     icon: "error",
                     title: "Error",
@@ -104,9 +104,9 @@ function validarDatos()
 
     let mensaje = "";
 
-    putaEntrega.detalleEntregas.forEach(de => {
-        if ((de.codMed === null && de.codProd === null) ||
-            (de.codMed !== null && de.codProd !== null))
+    putaEntrega.detalleEntregasDtos.forEach(de => {
+        if ((de.codMedicamento === null && de.codProducto === null) ||
+            (de.codMedicamento !== null && de.codProducto !== null))
         {
             mensaje = "Coloque un medicamento o un producto";
             return;
@@ -146,7 +146,7 @@ function obtenerEntrega()
     const $cant = document.getElementById("cantidad");
 
     let nroSucursal = Number($nroSucursal.value);
-    let fecha = $fecha.value;
+    let fecha = dayjs($fecha.value).format("YYYY-MM-DDTHH:mm:ss");
     let firmaEmpresa = $firmaEmpresa.value;
     let respuestaEntrega = $respuestaEntrega.value;
     let idEmpleado = Number($idEmpleado.value);
@@ -169,8 +169,8 @@ function obtenerEntrega()
 
     let detalleEntrega = 
     {
-        codMed: codMed,
-        codProd: codProd,
+        codMedicamento: codMed,
+        codProducto: codProd,
         cant: cant
     };
 
@@ -181,7 +181,7 @@ function obtenerEntrega()
         firmaEmpresa: firmaEmpresa,
         respuestaEntrega: respuestaEntrega,
         idEmpleado: idEmpleado,
-        detalleEntregas: [detalleEntrega]
+        detalleEntregasDtos: [detalleEntrega]
     };
 
     return putaEntrega;
