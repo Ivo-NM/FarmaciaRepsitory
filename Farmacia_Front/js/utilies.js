@@ -65,3 +65,39 @@ function buscarMedicamentos(idLstMed)
             })
         })
 }
+
+function buscarProductos(idLstProd)
+{
+    const $lstProductos = document.getElementById(idLstProd);
+    $lstProductos.replaceChildren();
+    let $opcionSinProd = document.createElement("option");
+    $opcionSinProd.textContent = "Sin producto";
+    $opcionSinProd.value = "";
+    $lstProductos.appendChild($opcionSinProd);
+
+    let url = "https://localhost:7032/api/Productos/productos";
+
+    fetch(url)
+        .then(r => {
+            if (!r.ok)
+            {
+                return null;
+            }
+
+            return r.json();
+        })
+        .then(d => {
+            if (d === null)
+            {
+                Swal.fire("Lo sentimos, hubo un problema cargando los productos");
+                return;
+            }
+
+            d.forEach(p => {
+                let $opcionProd = document.createElement("option");
+                $opcionProd.textContent = p.codProducto;
+                $opcionProd.value = p.detalle;
+                $lstProductos.appendChild($opcionProd);
+            })
+        })
+}
