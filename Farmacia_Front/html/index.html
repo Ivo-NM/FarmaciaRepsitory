@@ -396,16 +396,16 @@
                 <img
                   src="../img/logoFarmacia-removebg-preview.png"
                   class="user-image rounded-circle shadow"
-                  alt="Alexander Pierce"
+                  alt="Empleado"
                 />
-                <span class="d-none d-xl-inline">Alexander Pierce</span>
+                <span id="nombre-empleado" class="d-none d-xl-inline">Empleado</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
                 <!--begin::User Image-->
                 <li class="user-header text-bg-primary">
-                  <p>
-                    Alexander Pierce - Web Developer
-                    <small>Member since Nov. 2023</small>
+                  <p id="datos-empleado">
+                    Empleado
+                    <small>Sucursal</small>
                   </p>
                 </li>
                 <!--end::User Image-->
@@ -429,7 +429,7 @@
                 <!--begin::Menu Footer-->
                 <li class="user-footer">
                   <a href="#" class="btn btn-outline-secondary">Profile</a>
-                  <a href="#" class="btn btn-outline-danger float-end">Sign out</a>
+                  <a href="#" id="btn-cerrar-sesion" class="btn btn-outline-danger float-end">Cerrar sesión</a>
                 </li>
                 <!--end::Menu Footer-->
               </ul>
@@ -455,7 +455,7 @@
             />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
-            <span class="brand-text fw-light">City Farmacia</span>
+            <span class="brand-text fw-light" >City Farmacia</span>
             <!--end::Brand Text-->
           </a>
           <!--end::Brand Link-->
@@ -489,7 +489,7 @@
               id="navigation"
             >
               <li class="nav-item">
-                <a href="ReporteFacturas.html" class="nav-link">
+                <a href="../html/ReporteFacturas.html" class="nav-link">
                   <i class="nav-icon bi bi-receipt"></i>
                   <p>Reporte de facturas</p>
                 </a>
@@ -507,7 +507,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="../html/ReporteEntregas.html" class="nav-link">
                   <i class="nav-icon bi bi-truck"></i>
                   <p>Reportes de entregas</p>
                 </a>
@@ -539,7 +539,7 @@
             <!--begin::Row-->
             <div class="row">
               <div class="col-sm-6">
-                <h1 class="mb-0 fs-3">Home</h1>
+                <h1 id="titulo-home" class="mb-0 fs-3">Home</h1>
               </div>
               <div class="col-sm-6">
                 <nav aria-label="breadcrumb">
@@ -557,15 +557,16 @@
         <div class="app-content">
           <!--begin::Container-->
           <div class="container-fluid">
-            <!--begin::Row-->
+
+            <!--begin::Row 1: Ventas (facturas)-->
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-12">
                 <div class="card mb-4">
                   <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
                       <h3 class="card-title">Ventas Mensuales</h3>
                       <a
-                        href="javascript:void(0);"
+                        href="./ReporteFacturas.html"
                         class="link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                         >Ver Reporte</a
                       >
@@ -574,23 +575,21 @@
                   <div class="card-body">
                     <div class="d-flex">
                       <p class="d-flex flex-column">
-                        <span id="Ventas_totales" class="fw-bold fs-5">820</span>
+                        <span id="Ventas_totales" class="fw-bold fs-5">0</span>
                         <span>Ventas</span>
                       </p>
                       <p class="ms-auto d-flex flex-column text-end">
-                        <span id="subida_ventas" class="text-success-emphasis">
-                          <i  class="bi bi-arrow-up"></i> 12.5%
-                        </span>
+                        <span id="subida_ventas" class="text-body-secondary">-</span>
                         <span class="text-body-secondary">Mes pasado</span>
                       </p>
                     </div>
                     <!-- /.d-flex -->
 
-                    <div class="position-relative mb-4" style="height: 200px">
+                    <div class="position-relative mb-4" style="height: 250px">
                       <canvas
                         id="visitors-chart"
                         role="img"
-                        aria-label="Line chart of online store visitors this week and last week"
+                        aria-label="Gráfico de líneas de facturas por día, este mes y el mes pasado"
                       ></canvas>
                     </div>
 
@@ -604,20 +603,26 @@
                   </div>
                 </div>
                 <!-- /.card -->
+              </div>
+            </div>
+            <!--end::Row 1-->
 
-                <!--Card de movimiento de inventarios-->
-                <div id = "cartas" class="card mb-4">
-
-                </div>
+            <!--begin::Row 2: Movimientos de inventario + gráfico circular de entregas-->
+            <div class="row">
+              <div class="col-lg-7">
+                <!--Card de movimiento de inventarios (se arma en index.js)-->
+                <div id="cartas" class="card mb-4"></div>
                 <!-- /.card -->
-              <!-- /.col-md-6 -->
-              <div class="col-lg-4">
+              </div>
+              <!-- /.col-lg-7 -->
+
+              <div class="col-lg-5">
                 <div class="card mb-4">
                   <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
                       <h3 class="card-title">Productos Recibidos</h3>
                       <a
-                        href="javascript:void(0);"
+                        href="./ReporteEntregas.html"
                         class="link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
                         >Ver Reporte</a>
                     </div>
@@ -628,35 +633,32 @@
                         <span>Periodo</span>
                       </p>
                       <p class="ms-auto d-flex flex-column text-end">
-                        <span class="text-success-emphasis">
-                        </span>
-                        <span class="text-body-secondary">Mes actual</span>
+                        <span id="entregas-periodo" class="text-body-secondary">Mes actual</span>
                       </p>
                     </div>
                     <!-- /.d-flex -->
 
-                    <div class="position-relative mb-4" style="height: 250px">
+                    <div class="position-relative mb-2" style="height: 300px">
                       <canvas
                         id="entregas-chart"
                         role="img"
-                        aria-label="Column chart of net profit, revenue and free cash flow, February to October"
+                        aria-label="Gráfico circular de productos recibidos este mes"
                       ></canvas>
-                    </div>
-
-                    <div class="d-flex flex-row justify-content-end">
-                      <span class="me-2">
-                        <i class="bi bi-square-fill text-primary"></i> Este mes
-                      </span>
-
-                      <span> <i class="bi bi-square-fill text-body-secondary"></i> Mes pasado </span>
+                      <p
+                        id="entregas-vacio"
+                        class="position-absolute top-50 start-50 translate-middle text-body-secondary text-center d-none mb-0"
+                      >
+                        No hay entregas este mes
+                      </p>
                     </div>
                   </div>
                 </div>
                 <!-- /.card -->
               </div>
-              <!-- /.col-md-6 -->
+              <!-- /.col-lg-5 -->
             </div>
-            <!--end::Row-->
+            <!--end::Row 2-->
+
           </div>
           <!--end::Container-->
         </div>
@@ -893,75 +895,6 @@
       })();
     </script>
     <!--end::Chart.js theme preset-->
-
-    <script>
-      // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
-      // IT'S ALL JUST JUNK FOR DEMO
-      // ++++++++++++++++++++++++++++++++++++++++++
-
-      const { cssVar, areaFill } = globalThis.lteChartTheme;
-
-      new Chart(document.querySelector('#visitors-chart'), {
-        type: 'line',
-        data: {
-          labels: ['22th', '23th', '24th', '25th', '26th', '27th', '28th'],
-          datasets: [
-            {
-              label: 'High - 2023',
-              data: [100, 120, 170, 167, 180, 177, 160],
-              borderColor: '#0d6efd',
-              backgroundColor: areaFill('#0d6efd'),
-              pointBackgroundColor: '#0d6efd',
-              fill: true,
-              tension: 0.4,
-            },
-            {
-              label: 'Low - 2023',
-              data: [60, 80, 70, 67, 80, 77, 100],
-              borderColor: '#adb5bd',
-              backgroundColor: areaFill('#adb5bd'),
-              pointBackgroundColor: '#adb5bd',
-              fill: true,
-              tension: 0.4,
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            legend: {
-              display: false,
-            },
-          },
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-
-      new Chart(document.querySelector('#entregas-chart'), {
-         type: 'doughnut',
-        data: {
-          labels: ['Chrome', 'Edge', 'FireFox', 'Safari', 'Opera', 'IE'],
-          datasets: [
-            {
-              label: 'Users',
-              data: [700, 500, 400, 600, 300, 100],
-              backgroundColor: ['#0d6efd', '#20c997', '#ffc107', '#d63384', '#6f42c1', '#adb5bd'],
-            },
-          ],
-        },
-        options: {
-          cutout: '65',
-          plugins: {
-            legend: {
-              position: 'right',
-            },
-          },
-        },
-      });
-    </script>
     <!--end::Script-->
 
     <!--Theme script-->

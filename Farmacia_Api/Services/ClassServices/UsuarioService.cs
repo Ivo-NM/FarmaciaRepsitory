@@ -14,10 +14,28 @@ namespace Farmacia_Api.Services.ClassServices
             this.repository = repository;
         }
 
-        public async Task<bool> LoginUsuario(LoginUsuarioDto dto)
+        public async Task<ReadLoginUsuarioDto?> LoginUsuario(LoginUsuarioDto dto)
         {
             Usuario usuario = Mapeo(dto);
-            return await repository.LoginUsuarioAsync(usuario);
+            Usuario? usuarioEncontrado = await repository.LoginUsuarioAsync(usuario);
+
+            if (usuarioEncontrado == null)
+            {
+                return null;
+            }
+
+            Empleado empleado = usuarioEncontrado.EmpleadoNavigation;
+
+            return new ReadLoginUsuarioDto()
+            {
+                IdEmpleado = usuarioEncontrado.IdEmpleado,
+                Correo = usuarioEncontrado.Correo,
+                Nombre = empleado.NomEmpleado,
+                Apellido = empleado.ApellEmpleado,
+                Ocupacion = empleado.Ocupacion,
+                NroSucursal = empleado.NroSucursal,
+                NomSede = empleado.NroSucursalNavigation?.NomSede
+            };
         }
 
         private Usuario Mapeo(LoginUsuarioDto dto)
