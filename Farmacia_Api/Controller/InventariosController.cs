@@ -49,6 +49,24 @@ namespace Farmacia_Api.Controller
             }
         }
 
+        //Obtener los inventarios de una sucursal y sus detalles
+        [HttpGet("Inventarios/sucursal/{idSucursal}")]
+        public async Task<IActionResult> GetBySucursal(int idSucursal)
+        {
+            try
+            {
+                return Ok(await _inventarioService.ObtenerInventarioPorSucursalAsync(idSucursal));
+            }
+            catch (ArgumentException aex)
+            {
+                return BadRequest(new { message = aex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = $"ERROR: {ex.Message}" });
+            }
+        }
+
         [HttpPost("restar-stock")]
         public async Task<IActionResult> RestarStock([FromBody] ChangeInventarioDto request)
         {

@@ -13,18 +13,13 @@ namespace Farmacia_Api.Data.Implementations
             this._context = _context;
         }
 
-        public async Task<bool> LoginUsuarioAsync(Usuario usuario)
+        public async Task<Usuario?> LoginUsuarioAsync(Usuario usuario)
         {
-            Usuario? usuarioEncontrado = await _context.Usuarios
-                                     .FirstOrDefaultAsync(u => u.Correo == usuario.Correo &&
-                                                          u.Contrasenia == usuario.Contrasenia);
-        
-            if (usuarioEncontrado == null)
-            {
-                return false;
-            }
-
-            return true;
+            return await _context.Usuarios
+                                 .Include(u => u.EmpleadoNavigation)
+                                    .ThenInclude(e => e.NroSucursalNavigation)
+                                 .FirstOrDefaultAsync(u => u.Correo == usuario.Correo &&
+                                                      u.Contrasenia == usuario.Contrasenia);
         }
     }
 }

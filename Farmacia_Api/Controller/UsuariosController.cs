@@ -21,9 +21,9 @@ namespace Farmacia_Api.Controller
         {
             try
             {
-                bool exito = await service.LoginUsuario(dto);
+                ReadLoginUsuarioDto? empleado = await service.LoginUsuario(dto);
 
-                if (!exito)
+                if (empleado == null)
                 {
                     return BadRequest(new
                     {
@@ -33,7 +33,8 @@ namespace Farmacia_Api.Controller
 
                 return Ok(new
                 {
-                    message = "Inicio de sesión exitosamente"
+                    message = "Inicio de sesión exitosamente",
+                    empleado
                 });
             }
             catch (Exception ex)

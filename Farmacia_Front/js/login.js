@@ -49,15 +49,26 @@ function Login()
             if (!r.ok)
             {
                 Swal.fire("Contraseña y/o password incorrecto");
-                return;
+                return null;
             }
 
             return r.json();
         })
         .then(d => {
-                console.log(d);
-                Swal.fire(`${d.message}`);
+
+            if (d === null)
+            {
                 return;
+            }
+
+            //Guardamos los datos del empleado (incluida su sucursal) para usarlos en el index
+            sessionStorage.setItem("sesion", JSON.stringify(d.empleado));
+
+            window.location.href = "../html/index.html";
+        })
+        .catch(error => {
+            console.error(error);
+            Swal.fire("Lo sentimos, no se pudo conectar con el servidor");
         });
 }
 
