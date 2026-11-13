@@ -271,7 +271,7 @@ function cargarFacturas()
 document.getElementById("icono_lupa").addEventListener("click", cargarFactura)
 document.addEventListener("DOMContentLoaded", () => {
     cargarFacturas();
-    cargarSucursales();
+    cargarSucursales("opciones-sucursales");
 });
 
 document.getElementById("opciones-sucursales").addEventListener("change", buscarFacturaPorSucursal);
