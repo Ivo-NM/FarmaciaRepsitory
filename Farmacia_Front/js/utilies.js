@@ -95,8 +95,8 @@ function buscarProductos(idLstProd)
 
             d.forEach(p => {
                 let $opcionProd = document.createElement("option");
-                $opcionProd.textContent = p.codProducto;
-                $opcionProd.value = p.detalle;
+                $opcionProd.value = p.codProducto;
+                $opcionProd.textContent = p.detalle;
                 $lstProductos.appendChild($opcionProd);
             })
         })

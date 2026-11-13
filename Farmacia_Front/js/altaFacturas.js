@@ -1,4 +1,4 @@
-async function crearFactura()
+function crearFactura()
 {
     let exito = validarDatos();
 
@@ -9,7 +9,7 @@ async function crearFactura()
     
     let url = "https://localhost:7032/api/Facturas/facturas/crear";
 
-    let putaFactura = await obtenerFactura();
+    let putaFactura = obtenerFactura();
 
     fetch(url, {
         method: "POST",
@@ -20,43 +20,47 @@ async function crearFactura()
     })
     .then(r => {
         
-        if (r.status === 404 | r.status === 400)
+        if (r.status === 404 || r.status === 400)
         {
-            //Retorna objeto
+            //Para que aparezcan mensajes que manda la API
 
             return r.json()
                 .then(d => ({
-                    error: true,
-                    message: d.message
-                }));
+                error: true,
+                message: d.message ?? 
+                    Object.values(d.errors ?? {}).flat().join("\n") ??
+                    "Error al procesar la solicitud"
+            }));
         }
 
         if (!r.ok)
         {
-            return null;
+            return false;
         }
-        
+
         return r.json();
     })
     .then(d => {
-        //Verifica si d contiene la propiedad error
+        if (d === false)
+        {
+            Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: `Lo sentimos, no se pudo guardar la factura`
+            });
+
+            return;
+        }
 
         if (d.error)
         {
-            return Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: d.message
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: d.message
             });
-        }
 
-        if (d === null)
-        {
-            return Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Lo sentimos, no se pudo guardar la factura"
-            });
+            return;
         }
 
         return Swal.fire({
@@ -69,175 +73,144 @@ async function crearFactura()
 
 function validarDatos()
 {
-    const $inputFechaHora = document.getElementById("fechaFactura");
-    const $inputIdEmpleado = document.getElementById("idEmpleado");
-    const $inputIdCliente = document.getElementById("idCliente");
-    const $inputIdFormaPago = document.getElementById("idFormaPago");
-    const $inputCodMed = document.getElementById("codMedicamento");
-    const $inputCodProd = document.getElementById("codProducto");
-    const $inputPreUnitario = document.getElementById("preUnitario");
-    const $inputCant = document.getElementById("cantidad");
-    const $inputDescuento = document.getElementById("descuento");
-    const $cbkReembolsado = document.getElementById("ckbReembolsado");
+    let putaFactura = obtenerFactura();
+    
+    if (!putaFactura.fecha)
+    {
+        Swal.fire("Ingrese una fecha");
+        return false;
+    }
 
-    let fechaHora = dayjs($inputFechaHora.value);
     let fechaActual = dayjs();
 
-    if ($inputFechaHora.value.trim() === "")
+    if (dayjs(putaFactura.fecha).isAfter(fechaActual))
     {
-        Swal.fire("Debe ingresar una fecha");
+        Swal.fire("La fecha y hora deben ser anteriores o iguales a las actuales");
         return false;
     }
 
-    if (fechaHora.isAfter(fechaActual))
+    if (!putaFactura.idEmpleado)
     {
-        Swal.fire("La fecha de factura no puede ser posterior a la fecha actual");
+        Swal.fire("Ingrese el ID del empleado");
         return false;
     }
 
-    let idEmpleado = Number($inputIdEmpleado.value);
-
-    //Number.isInteger, comprueba que el nro sea entero
-
-    if ($inputIdEmpleado.value.trim() === "")
+    if (putaFactura.idEmpleado <= 0)
     {
-        Swal.fire("Es necesario el empleado");
+        Swal.fire("El ID del empleado debe ser mayor a 0");
         return false;
     }
 
-    if (!Number.isInteger(idEmpleado) || idEmpleado <= 0)
+    if (!Number.isInteger(putaFactura.idEmpleado))
     {
-        Swal.fire("El Id de empleado debe ser un número entero positivo");
+        Swal.fire("El ID del empleado debe ser un entero");
         return false;
     }
 
-    let idCliente = Number($inputIdCliente.value);
-
-    if ($inputIdCliente.value.trim() === "")
+    if (!putaFactura.idCliente)
     {
-        Swal.fire("Es necesario el cliente");
-        return false;
-    }
-    //Number.isInteger, comprueba que el nro sea entero
-
-    if (!Number.isInteger(idCliente) || idCliente <= 0)
-    {
-        Swal.fire("El Id del cliente debe ser un número entero positivo");
-        return false;
-    }
-    
-    let idFormaPago = Number($inputIdFormaPago.value);
-
-    //Number.isInteger, comprueba que el nro sea entero
-
-    if ($inputIdFormaPago.value.trim() === "")
-    {
-        Swal.fire("Es necesario la forma de pago");
+        Swal.fire("Ingrese el ID del cliente");
         return false;
     }
 
-    if (!Number.isInteger(idFormaPago) || idFormaPago <= 0)
+    if (putaFactura.idCliente <= 0)
     {
-        Swal.fire("El de la forma de pago debe ser un número entero positivo");
+        Swal.fire("El ID del cliente debe ser mayor a 0");
         return false;
     }
 
-    let codMed = Number($inputCodMed.value);
-    let codProd = Number($inputCodProd.value);
-
-    //Number.isInteger comprueba que el número sea entero
-
-    if (($inputCodMed.value.trim() !== "" && (!Number.isInteger(codMed) || codMed <= 0)) ||
-        ($inputCodProd.value.trim() !== "" && (!Number.isInteger(codProd) || codProd <= 0)))
+    if (!Number.isInteger(putaFactura.idCliente))
     {
-        Swal.fire("Los códigos de los productos y medicamentos deben ser números enteros positivos");
+        Swal.fire("El ID del cliente debe ser un entero");
         return false;
     }
 
-    if (($inputCodMed.value.trim() === "" && $inputCodProd.value.trim() === "") ||
-        ($inputCodMed.value.trim() !== "" && $inputCodProd.value.trim() !== ""))
+    if (!putaFactura.idFormaPago)
     {
-        Swal.fire("Coloque un producto o medicamento");
+        Swal.fire("Ingrese el ID de la forma de pago");
         return false;
     }
 
-    let preUnitario = Number($inputPreUnitario.value);
-
-    if ($inputPreUnitario.value.trim() === "")
+    if (putaFactura.idFormaPago <= 0)
     {
-        Swal.fire("Es necesario el precio unitario");
+        Swal.fire("El id de la forma de pago debe ser mayor a 0");
         return false;
     }
 
-    if (isNaN(preUnitario))
+    if (!Number.isInteger(putaFactura.idFormaPago))
     {
-        Swal.fire("El precio unitario debe ser un número entero positivo");
+        Swal.fire("El ID de la forma de pago debe ser un entero");
         return false;
     }
 
-    let cant = Number($inputCant.value);
+    let mensaje = "";
 
-    //Number.isInteger, comprueba que el nro sea entero
+    putaFactura.detalleFacturasDtos.forEach(df => {
+        if ((df.codMedicamento === null && df.codProducto === null) ||
+            (df.codMedicamento !== null && df.codProducto !== null))
+        {
+            mensaje = "Elija medicamento o producto";
+            return;
+        }
 
-    if ($inputCant.value.trim() === "")
+        if (df.preUnitario <= 0 || isNaN(df.preUnitario))
+        {
+            mensaje = "El precio unitario debe ser un número positivo";
+            return;
+        }
+
+        if (df.cantidad <= 0 || !Number.isInteger(df.cantidad))
+        {
+            mensaje = "La cantidad debe ser un número positivo entero";
+            return;
+        }
+
+        if (df.descuentoPorObraSocial < 0 || isNaN(df.descuentoPorObraSocial))
+        {
+            mensaje = "El descuento debe ser un número positivo o 0";
+            return;
+        }
+    });
+
+    if (mensaje !== "")
     {
-        Swal.fire("Es necesaria la cantidad");
-        return false;
-    }
-
-    if (!Number.isInteger(cant) || cant <= 0)
-    {
-        Swal.fire("La cantidad debe ser un número entero positivo");
-        return false;
-    }
-
-    let descuento = Number($inputDescuento.value);
-
-    if ($inputDescuento.value.trim() === "")
-    {
-        Swal.fire("Es necesario el descuento por obra social, aunque sea 0");
-        return false;
-    }
-
-    if (isNaN(descuento) || descuento < 0)
-    {
-        Swal.fire("El descuento debe ser un número entero positivo");
+        Swal.fire(mensaje);
         return false;
     }
 
     return true;
 }
 
-async function obtenerFactura()
+function obtenerFactura()
 {
     const $inputSucursal = document.getElementById("opciones-sucursales");
     const $inputFechaHora = document.getElementById("fechaFactura");
     const $inputIdEmpleado = document.getElementById("idEmpleado");
     const $inputIdCliente = document.getElementById("idCliente");
     const $inputIdFormaPago = document.getElementById("idFormaPago");
-    const $inputCodMed = document.getElementById("codMedicamento");
-    const $inputCodProd = document.getElementById("codProducto");
+    const $inputCodMed = document.getElementById("opciones-medicamentos");
+    const $inputCodProd = document.getElementById("opciones-productos");
     const $inputPreUnitario = document.getElementById("preUnitario");
     const $inputCant = document.getElementById("cantidad");
     const $inputDescuento = document.getElementById("descuento");
     const $cbkReembolsado = document.getElementById("ckbReembolsado");
 
     let idSucursal = Number($inputSucursal.value);
-    let fechaHora = new Date($inputFechaHora.value);
+    let fechaHora = $inputFechaHora.value;
     let idEmpleado = Number($inputIdEmpleado.value);
     let idCliente = Number($inputIdCliente.value);
     let idFormaPago = Number($inputIdFormaPago.value);
 
     let codMed = null;
 
-    if ($inputCodMed.value.trim() !== "")
+    if ($inputCodMed.value !== "")
     {
         codMed = Number($inputCodMed.value);
     };
     
     let codProd = null;
 
-    if ($inputCodProd.value.trim() !== "")
+    if ($inputCodProd.value !== "")
     {
         codProd = Number($inputCodProd.value);
     }
@@ -269,4 +242,8 @@ async function obtenerFactura()
 }
 
 document.getElementById("btn-crear-factura").addEventListener("click", crearFactura);
-document.addEventListener("DOMContentLoaded", cargarSucursales);
+document.addEventListener("DOMContentLoaded", () => {
+    cargarSucursales("opciones-sucursales"),
+    buscarMedicamentos("opciones-medicamentos"),
+    buscarProductos("opciones-productos")
+});
