@@ -1,0 +1,53 @@
+*   [33m1a31cae[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mbackend[m[33m, [m[1;31morigin/backend[m[33m)[m Merge branch 'backend' of https://github.com/Ivo-NM/FarmaciaRepsitory into backend
+[31m|[m[32m\[m  
+[31m|[m * [33m9faeb02[m Feat: Normalizando las paginas para que todos los enlaces lleven a las paginas mostradas, arreglando nombres y descripciones mal colocados
+* [32m|[m [33mfdb4398[m fix: Arregla altaFacturas para que valide de manera correcta los datos, mostrando los mensajes que manda la API. feat: Añade utilies.js el cual va a un ser .js que va a tener métodos reutilizables como obtenerSucursales(), obtenerMedicamentos(), obtenerProductos()
+[32m|[m[32m/[m  
+* [33m5e4e1a4[m feat: Añade altaEntregas.js, implementa cargarSucursales(), en AltaEntregas.html vincula el script js
+* [33mce1a8f9[m fix: Arregla los controladores medicamentos y productos, colocándoles el anotador [HttpGet]
+* [33ma01e138[m feat: Añade los controladores de medicamento y producto
+* [33m0e348f6[m feat: Añade a las interfaces de Medicamento y Producto el método para buscar una lista de todos los medicamentos y productos. Los servicios que implementan estas interfaces, implementan los métodos.
+* [33mc752e5a[m feat: En repositorios de medicamentos y entregas, añade el método para obtener todos. Esto es con el fin de que en JS, en el front, el usuario pueda elegir desde una lista desplegable
+* [33m50b3e87[m feat: Añade AltaEntregas.html
+* [33ma2a8f78[m feat: reporteEntregas implementa buscarEntregasPorSucursal()
+* [33m2c6f2d8[m feat: reporteEntregas implementa BuscarEntregaPorNro()
+* [33mddd8b97[m feat: Añade ReporteEntregas.html y reporteEntregas.js. reporteEntregas.js implementa cargarEntregas() y cargarSucursales()
+* [33m1e90c62[m fix: En el mapeo de entregas, cuando no haya un producto o medicamento, devuelve null y no string.empty. Esto es debido a arreglar algunos bugs en el js ya que no se ve el nombre del medicamento o producto
+* [33m92f7ac6[m fix: Añade la barra lateral de reporte facturas
+* [33m33f5318[m fix: Arregla los forEach de reporteFacturas, no se mostraban los múltiples detalles de la misma factura
+* [33m7aef34d[m fix: En los mapeos en lugar de que devuelva un string.empty si no hay medicamento o producto, devuelve null. Esto es debido a que en JS, en ReporteFacturas no aparecía el nombre del medicamento
+* [33me5d1695[m fix: Arregla la alta de facturas, ahora indica mediante SweetAlert 2 de manera correcta si se guardo o no la factura así como tambien arregla validarDatos(), devolviendo true si todas las validaciones son correctas
+* [33m9d0013b[m feat: altaFacturas.js implementa CrearFactura(), validarDatos(), cargarSucursales() y obtenerFactura(). Considere que posteriormente debe arreglar crearFactura()
+* [33maa58345[m feat: Añade la padg. AltaFactruas
+* [33m216fa5c[m feat: reporteFacturas.js implementa buscarFacturaPorSucursal() el cual usa el endpoint para obtener las facturas según el id de la sucursal, se dispara cada vez que el usuario selecciona en el select una sucursal. Implementa cargarSucursales() para que en cuanto se cargue la página, ya en el select estén las opciones para elegir las sucursales
+* [33md7adfce[m feat: En el repositorio de sucursales añade un método para obtener todas las sucursales, el servicio implementa un método similar el cual devuelve el método del repositorio y el controller usa este service. En program inyecta la dependencia. Esto es con el fin de que en js al momento de buscar por sucursal, el usuario pueda seleccionar desde un ComboBox/Select las sucursales ya cargadas
+* [33ma2d55bc[m fix: Arregla los endpoints, su ruta. Ya que puede traer problemas en JS como que no reconozca correctamente el endpoint
+* [33m9a4e27f[m feat: reporteFacturas.js implementa cargarFactura, carga la factura por nro de factura
+* [33md1b3b7a[m feat: En reporteFacturas.js, implementa cargarFacturas()
+* [33mae70a99[m feat: Añade ReporteFactyras.html a Farmacia_Front/html
+*   [33m1d47170[m Merge branch 'backend' of https://github.com/Ivo-NM/FarmaciaRepsitory into backend
+[33m|[m[34m\[m  
+[33m|[m * [33mc43ecbc[m feat: En index.html implementa CargarMovimiento()
+[33m|[m * [33m6294bc5[m fix: Corrige login.html. feat: Crea login.html la cual implementa la función Login() que consiste en verificar si el usuario puso lo que se le solicito y verificar si está registrado en el sistema o no. Añade un escuchador a btn iniciar sesión para ejecutar Login()
+* [34m|[m [33me30c1a0[m Feat: Agregando el crud funcional en users.html. Feat:Cambiando partes de las validaciones en los clientesServices. Feat:Creando controllers y toda su estrucutura para Barrios y Obras sociales
+[34m|[m[34m/[m  
+* [33m455d004[m Configurando login.html para que busque el archivo login.js
+* [33m96fb3c6[m Feat: Terminando el index, muestra todo lo necesario. Feat:Agregando id y name en los inputs del login. Feat:Agregando subcarpeta para imagenes
+* [33m7b18f5b[m feat: Configura el Program para inyectar dependencias
+* [33m0b3ff18[m feat: Añade UsuariosController a Controller/. Usa IUsuarioService la cual va a recibir en el constructor por parte del Program. Implementa Login([FromBody] LoginUsuarioDto dto). Inyecta las dependencias en el Program
+* [33mef1851b[m feat: Añade IUsuarioService a Services/Interfaces, implementa LoginUsuarioAsync(LoginUsuarioDto). Añade UsuarioService a Services/Implementations. Implementa IUsuarioService y un método privado: Usuario Mapeo(LoginUsuarioDto dto)
+* [33m157b60c[m feat: Añade IUsuarioRepository a Data/Interfaces, implementa LoginUsuario(Usuario usuario). Añade UsuarioRepository a Data/Implementations. Implementa IUsuarioRepository, implementa método LoginUsuarioAsync(Usuario usuario)
+* [33m89696c1[m style: Crea una carpeta MedicamentosDto para colocar ReadMedicamentoDto. Crea una carpeta UsuarioDto. feat: Crea LoginUsuarioDto.
+* [33mcee4f19[m feat: Añade la entidad Usuarios al dominio así como configura el DbContext para configurar la relación. Esto es con el fin de realizar un login sencillo, sin JWT
+* [33m443e4db[m Feat: Agregando pestaña de mantenimiento para paginas no necesarias. Feat: Configurando login, listo para hacer su js. Feat:Configurando index, Este ya muestra lo necesario para nuestro proyecto
+* [33m7f10596[m Feat: agregando carpeta del front para iniciar con la UI, implementando login sacado de adminLte
+[34m|[m * [33m3d55547[m[33m ([m[1;31morigin/backendAM[m[33m)[m jwt para la rama nueva
+[34m|[m[34m/[m  
+* [33m98068a4[m feat: agregando metodos de suma y resta a las EntregasServices y facturaServices segun corresponda. feat: cambiando el movimientosServices para que agrupe los productos por su tipo a la hora de mostrar los movimientos. feat: Agregando un nuevo metodo en IEmpleadoRepository que permite buscar si el empleado pertenece a esa sucursal, ademas se implemento ese metodo en todas las validaciones que sean necesarias
+* [33m68ffcec[m feat: Añade IEmpleadoService y EmpleadoService. Los repositorios que buscan un empleado por id usan esta interfaz en lugar de implementar cada una individualmente una consulta para buscar un empleado por id
+* [33m2df58c4[m feat: Añade IEmpleadoRepository EmpleadoRepository a la capa de datos. Se creará un repositorio de clientes debido a los múltiples repositorios que buscan un empleado por id
+* [33mfdf7bd4[m feat: Inyecta dependencias en Program para el repositorio de sucursales. feat: En InventarioService, EntregaService y FacturaService haz que usen ISucursalService
+* [33m9230932[m feat: Añade ISucursalService y SucursalService a la capa de servicios
+* [33m18e2d92[m feat: Añade ISucursalRepository y SucursalRepository. Se creará un repositorio de sucursales debido a los múltiples repositorios que buscan una sucursal por id
+* [33m88270fb[m feat: Añade IProductoService y ProductoService, implementan GetProductoById(int id). fix: EntregaService y FacturaService usan esa interfaz
+* [33md75b8b5[m feat: Añade IProductoRepository y ProductoRepository a la capa de datos. Se creará un repositorio de produ
