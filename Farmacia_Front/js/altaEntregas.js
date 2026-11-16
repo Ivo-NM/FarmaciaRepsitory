@@ -89,19 +89,6 @@ function validarDatos()
         return false;
     }
 
-    //Validar ID de empleado
-    if (!Number.isInteger(putaEntrega.idEmpleado)) 
-    {
-        Swal.fire("El ID del empleado debe ser un número entero");
-        return false;
-    }
-
-    if (putaEntrega.idEmpleado <= 0)
-    {
-        Swal.fire("El ID del empleado debe ser mayor a 0");
-        return false;
-    }
-
     let mensaje = "";
 
     putaEntrega.detalleEntregasDtos.forEach(de => {
@@ -140,7 +127,7 @@ function obtenerEntrega()
     const $fecha = document.getElementById("fechaEntrega");
     const $firmaEmpresa = document.getElementById("firmaEmpresa");
     const $respuestaEntrega = document.getElementById("respuestaEntrega");
-    const $idEmpleado = document.getElementById("idEmpleado");
+    const $idEmpleado = document.getElementById("opciones-empleados");
     const $codMed = document.getElementById("opciones-medicamentos");
     const $codProd = document.getElementById("opciones-productos");
     const $cant = document.getElementById("cantidad");
@@ -191,7 +178,14 @@ document.addEventListener("DOMContentLoaded", () => {
     cargarSucursales("opciones-sucursales");
     buscarMedicamentos("opciones-medicamentos");
     buscarProductos("opciones-productos");
+    buscarEmpleadosPorSucursal("opciones-empleados", 1);
     }
 )
 
 document.getElementById("btn-crear-entrega").addEventListener("click", crearEntrega);
+
+document.getElementById("opciones-sucursales").addEventListener("change", () => {
+    const $nroSucursal = document.getElementById("opciones-sucursales");
+    let nroSucursal = Number($nroSucursal.value);
+    buscarEmpleadosPorSucursal("opciones-empleados", nroSucursal);
+});
