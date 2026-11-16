@@ -1,3 +1,36 @@
+// Datos del empleado guardados por login.js (incluye su sucursal)
+function obtenerSesion()
+{
+    try
+    {
+        return JSON.parse(sessionStorage.getItem("sesion"));
+    }
+    catch
+    {
+        return null;
+    }
+}
+
+const sesion = obtenerSesion();
+
+function mostrarDatosEmpleado()
+{
+    const nombreCompleto = `${sesion.nombre} ${sesion.apellido}`;
+
+    document.getElementById("nombre-empleado").textContent = nombreCompleto;
+
+    const $datos = document.getElementById("datos-empleado");
+    $datos.replaceChildren();
+    $datos.append(`${nombreCompleto} - ${sesion.ocupacion}`);
+
+    document.getElementById("btn-cerrar-sesion").addEventListener("click", e => {
+        e.preventDefault();
+        sessionStorage.removeItem("sesion");
+        window.location.href = "../html/login.html";
+    });
+}
+
+
 // ================== CONFIGURACIÓN ==================
 const API_BASE = "https://localhost:7032/api";
 const URL_CLIENTES = `${API_BASE}/Clientes/clientes`;   // GET, POST, PUT /{id}, DELETE /{id}
@@ -8,6 +41,13 @@ const URL_OBRAS_SOCIALES = `${API_BASE}/Obras_Sociales/ObrasSociales`; // Obras_
 const REGEX_NOMBRE = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (sesion === null)
+    {
+        window.location.replace("../html/login.html");
+        return;
+    }
+    mostrarDatosEmpleado();
+    
   const tbody = document.getElementById("clientesTbody");
   const searchInput = document.getElementById("user-search");
   const modalEl = document.getElementById("modal-add-user");

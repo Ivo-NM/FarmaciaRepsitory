@@ -1,3 +1,35 @@
+// Datos del empleado guardados por login.js (incluye su sucursal)
+function obtenerSesion()
+{
+    try
+    {
+        return JSON.parse(sessionStorage.getItem("sesion"));
+    }
+    catch
+    {
+        return null;
+    }
+}
+
+const sesion = obtenerSesion();
+
+function mostrarDatosEmpleado()
+{
+    const nombreCompleto = `${sesion.nombre} ${sesion.apellido}`;
+
+    document.getElementById("nombre-empleado").textContent = nombreCompleto;
+
+    const $datos = document.getElementById("datos-empleado");
+    $datos.replaceChildren();
+    $datos.append(`${nombreCompleto} - ${sesion.ocupacion}`);
+
+    document.getElementById("btn-cerrar-sesion").addEventListener("click", e => {
+        e.preventDefault();
+        sessionStorage.removeItem("sesion");
+        window.location.href = "../html/login.html";
+    });
+}
+
 function buscarFacturaPorSucursal()
 {
     let $cuerpoTabla = document.getElementById("cuerpo_tabla");
@@ -235,6 +267,13 @@ function cargarFacturas()
 
 document.getElementById("icono_lupa").addEventListener("click", cargarFactura)
 document.addEventListener("DOMContentLoaded", () => {
+    
+    if (sesion === null)
+    {
+        window.location.replace("../html/login.html");
+        return;
+    }
+    mostrarDatosEmpleado();
     cargarSucursales("opciones-sucursales");
     cargarFacturas();
 });

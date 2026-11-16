@@ -375,6 +375,50 @@
               </ul>
             </li>
             <!--end::Color Mode Toggle-->
+            <!--begin::User Menu Dropdown-->
+            <li class="nav-item dropdown user-menu">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <img
+                  src="../img/logoFarmacia-removebg-preview.png"
+                  class="user-image rounded-circle shadow"
+                  alt="Empleado"
+                />
+                <span id="nombre-empleado" class="d-none d-xl-inline">Empleado</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                <!--begin::User Image-->
+                <li class="user-header text-bg-primary">
+                  <p id="datos-empleado">
+                    Empleado
+                    <small>Sucursal</small>
+                  </p>
+                </li>
+                <!--end::User Image-->
+                <!--begin::Menu Body-->
+                <li class="user-body">
+                  <!--begin::Row-->
+                  <div class="row">
+                    <div class="col-4 text-center">
+                      <a href="#">Followers</a>
+                    </div>
+                    <div class="col-4 text-center">
+                      <a href="#">Sales</a>
+                    </div>
+                    <div class="col-4 text-center">
+                      <a href="#">Friends</a>
+                    </div>
+                  </div>
+                  <!--end::Row-->
+                </li>
+                <!--end::Menu Body-->
+                <!--begin::Menu Footer-->
+                <li class="user-footer">
+                  <a href="#" class="btn btn-outline-secondary">Profile</a>
+                  <a href="#" id="btn-cerrar-sesion" class="btn btn-outline-danger float-end">Cerrar sesión</a>
+                </li>
+                <!--end::Menu Footer-->
+              </ul>
+            </li>
         </div>
         <!--end::Container-->
       </nav>
@@ -429,7 +473,7 @@
               <li class="nav-item">
                 <a href="ReporteFacturas.html" class="nav-link">
                   <i class="nav-icon bi bi-receipt"></i>
-                  <p>Reporte de facturas</p>
+                  <p>Reportes de facturas</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -475,14 +519,18 @@
               <div class="col-sm-6">
                 <h1 class="mb-0 fs-3">Reporte Facturas</h1>
               </div>
+              <!--begin::Row-->
+            <div class="row">
               <div class="col-sm-6">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb float-sm-end">
-                    <li class="breadcrumb-item"><a href="login.html">Login</a></li>
-                    <li class="breadcrumb-item active" aria-current="page" href = "index.html" >Home</li>
+                    <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" >Reporte</li>
                   </ol>
                 </nav>
               </div>
+            </div>
+            <!--end::Row-->
             </div>
           </div>
         </div>
