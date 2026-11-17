@@ -122,24 +122,6 @@ function validarDatos()
         return false;
     }
 
-    if (!putaFactura.idCliente)
-    {
-        Swal.fire("Ingrese el ID del cliente");
-        return false;
-    }
-
-    if (putaFactura.idCliente <= 0)
-    {
-        Swal.fire("El ID del cliente debe ser mayor a 0");
-        return false;
-    }
-
-    if (!Number.isInteger(putaFactura.idCliente))
-    {
-        Swal.fire("El ID del cliente debe ser un entero");
-        return false;
-    }
-
     let mensaje = "";
 
     putaFactura.detalleFacturasDtos.forEach(df => {
@@ -183,7 +165,7 @@ function obtenerFactura()
     const $inputSucursal = document.getElementById("opciones-sucursales");
     const $inputFechaHora = document.getElementById("fechaFactura");
     const $inputIdEmpleado = document.getElementById("opciones-empleados");
-    const $inputIdCliente = document.getElementById("idCliente");
+    const $inputIdCliente = document.getElementById("opciones-clientes");
     const $inputIdFormaPago = document.getElementById("opciones-formas-pago");
     const $inputCodMed = document.getElementById("opciones-medicamentos");
     const $inputCodProd = document.getElementById("opciones-productos");
@@ -260,4 +242,5 @@ document.addEventListener("DOMContentLoaded", () => {
     buscarProductos("opciones-productos");
     buscarFormasDePago("opciones-formas-pago");
     buscarEmpleadosPorSucursal("opciones-empleados", 1);
+    traerClientes("opciones-clientes");
 });

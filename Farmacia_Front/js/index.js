@@ -1,49 +1,3 @@
-/*
-    <div id="divCardHeader" class="card-header border-0"> ------
-        <h3 class="card-title">Movimientos de inventario</h3> -------
-    
-        <div id="divCardTools" class="card-tools"> ------
-            <a href="#" class="btn btn-tool btn-sm" aria-label="Download"> ----
-                <i class="bi bi-download"></i> ----
-            </a> ---
-
-            <a href="#" class="btn btn-tool btn-sm" aria-label="More options"> ----
-                <i class="bi bi-list"></i> ----
-            </a> ----
-        </div> -----
-    </div> -----
-
-    <div id="divCardBody" class="card-body table-responsive p-0"> -----
-        <table class="table table-striped align-middle"> ------
-            <thead> ------
-                <tr> -----
-                    <th>Producto</th> -----
-                    <th>Stock</th> -----
-                    <th>Ver Movimiento</th> -----
-                </tr> -----
-            </thead> -----
-
-        <tbody> -----
-            <tr> ----
-                <td> -----
-                    <p>Producto/Medicamento</p> ----
-                </td> ---
-
-                <td> ----
-                    <p>Stock</p> -----
-                </td> ----
-
-                <td> -----
-                    <a href="#" class="text-body-secondary" aria-label="View product details"> ----
-                        <i class="bi bi-search"></i> ----
-                    </a> ----
-                </td> -----
-            </tr> ----
-        </tbody> -----
-    </table> ---
-</div> ---
-*/
-
 
 const API = "https://localhost:7032/api";
 
@@ -524,6 +478,7 @@ function cargarVentas()
         });
 }
 
+
 // ---------------- Entregas (gráfico circular de productos recibidos este mes)
 
 function cargarEntregas()
@@ -534,9 +489,8 @@ function cargarEntregas()
         hoy.toLocaleDateString("es-AR", { month: "long", year: "numeric" });
 
     fetch(`${API}/Entregas/entregas/sedes/${sesion.nroSucursal}`)
-        .then(r => r.ok ? r.json() : null)
+        .then(r =>r.ok ? r.json() : null)
         .then(entregas => {
-
             if (entregas === null)
             {
                 Swal.fire("Lo sentimos, hubo un error al cargar las entregas");
@@ -602,10 +556,10 @@ function cargarEntregas()
         });
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // Sin sesión no hay sucursal: volvemos al login
-
     if (sesion === null)
     {
         window.location.replace("../html/login.html");

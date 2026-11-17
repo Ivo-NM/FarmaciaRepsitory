@@ -165,3 +165,35 @@ function buscarEmpleadosPorSucursal(idLstEmpleados, idSucursal)
             })
         });
 }
+
+
+function traerClientes(idLstCliente)
+{
+    const $lstClientes = document.getElementById(idLstCliente);
+    $lstClientes.replaceChildren();
+
+    let url = "https://localhost:7032/api/Clientes/clientes";
+
+    fetch(url)
+    .then(r => {
+        if (!r.ok)
+            {
+                return null;
+            }
+        
+            return r.json();
+        })
+        .then(d => {
+            if(d === null)
+                {
+                    Swal.fire("Lo sentimos, hubo problema al cargar los clientes")
+                    return;
+                }
+            d.forEach(c => {
+                let $opcionCliente = document.createElement("option");
+                $opcionCliente.value = c.idCliente;
+                $opcionCliente.textContent = `${c.nombre}, ${c.apellido}`;
+                $lstClientes.appendChild($opcionCliente);
+            })
+        })
+}
