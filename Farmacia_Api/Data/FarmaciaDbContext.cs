@@ -202,7 +202,7 @@ public partial class FarmaciaDbContext : DbContext
 
             entity.HasOne(d => d.NroFacturaNavigation).WithMany(p => p.DetalleFacturas)
                 .HasForeignKey(d => d.NroFactura)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_DETALLE_FACTURA");
         });
 
@@ -310,7 +310,7 @@ public partial class FarmaciaDbContext : DbContext
 
             entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.IdCliente)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_FACTURAS_CLIENTE");
 
             entity.HasOne(d => d.IdEmpleadoNavigation).WithMany(p => p.Facturas)

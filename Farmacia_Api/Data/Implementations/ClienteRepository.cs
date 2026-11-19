@@ -19,7 +19,9 @@ namespace Farmacia_Api.Data.Implementations
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var cliente = await _context.Clientes.FindAsync(id);
+            var cliente = await _context.Clientes
+                .Include(c => c.Facturas)
+                .FirstOrDefaultAsync(c => c.IdCliente == id);
             if (cliente != null)
             {
                 _context.Clientes.Remove(cliente);
