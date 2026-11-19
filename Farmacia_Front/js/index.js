@@ -478,7 +478,6 @@ function cargarVentas()
         });
 }
 
-
 // ---------------- Entregas (gráfico circular de productos recibidos este mes)
 
 function cargarEntregas()
@@ -489,8 +488,9 @@ function cargarEntregas()
         hoy.toLocaleDateString("es-AR", { month: "long", year: "numeric" });
 
     fetch(`${API}/Entregas/entregas/sedes/${sesion.nroSucursal}`)
-        .then(r =>r.ok ? r.json() : null)
+        .then(r => r.ok ? r.json() : null)
         .then(entregas => {
+
             if (entregas === null)
             {
                 Swal.fire("Lo sentimos, hubo un error al cargar las entregas");
@@ -556,10 +556,10 @@ function cargarEntregas()
         });
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
 
     // Sin sesión no hay sucursal: volvemos al login
+
     if (sesion === null)
     {
         window.location.replace("../html/login.html");

@@ -160,11 +160,11 @@ function cargarFactura()
 
                 //Cod. Empleado
                 let $celdaCodEmpleado = document.createElement("td");
-                $celdaCodEmpleado.textContent = d.idEmpleado;
+                $celdaCodEmpleado.textContent = d.nomEmpleado;
 
                 //Cod. Forma Pago
                 let $celdaCodFormaPago = document.createElement("td");
-                $celdaCodFormaPago.textContent = d.idFormaPago;
+                $celdaCodFormaPago.textContent = d.detalleFormaPago;
 
                 //Medicamento/Producto
                 let $celdaMedProd = document.createElement("td");
@@ -201,6 +201,7 @@ function cargarFacturas()
 
     fetch(url)
         .then(r => {
+            
 
             if (!r.ok)
             {
@@ -235,11 +236,11 @@ function cargarFacturas()
 
                     //Cod. Empleado
                     let $celdaCodEmpleado = document.createElement("td");
-                    $celdaCodEmpleado.textContent = f.idEmpleado;
+                    $celdaCodEmpleado.textContent = f.nomEmpleado;
 
                     //Cod. Forma Pago
                     let $celdaCodFormaPago = document.createElement("td");
-                    $celdaCodFormaPago.textContent = f.idFormaPago;
+                    $celdaCodFormaPago.textContent = f.detalleFormaPago;
 
                     //Medicamento/Producto
                     let $celdaMedProd = document.createElement("td");

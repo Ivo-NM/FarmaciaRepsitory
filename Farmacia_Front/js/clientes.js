@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
     mostrarDatosEmpleado();
-    
+
   const tbody = document.getElementById("clientesTbody");
   const searchInput = document.getElementById("user-search");
   const modalEl = document.getElementById("modal-add-user");
@@ -203,8 +203,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ---------- Catálogos (barrios y obras sociales) ----------
-  // Cada item trae "id + nombre". Se prueban los nombres habituales y, si el DTO usa otros,
-  // se toma el primer número como id y el primer texto como nombre.
   function leerItem(item, clavesId, clavesNombre) {
     const claves = Object.keys(item);
     const buscar = (candidatas) => {
