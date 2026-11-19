@@ -228,7 +228,9 @@ namespace Farmacia_Api.Services.ClassServices
                     Nombsede = itemF.NroSucursalNavigation.NomSede,
                     Fecha = itemF.Fecha,
                     IdEmpleado = itemF.IdEmpleado,
+                    NomEmpleado = itemF.IdEmpleadoNavigation.ApellEmpleado + ", " +itemF.IdEmpleadoNavigation.NomEmpleado,
                     IdFormaPago = itemF.IdFormaPago,
+                    DetalleFormaPago = itemF.IdFormaPagoNavigation.Descripcion,
 
                     DetalleFacturasDto = itemF.DetalleFacturas.Select(x => new ReadDetalleFacturasDto()
                     {
@@ -254,7 +256,9 @@ namespace Farmacia_Api.Services.ClassServices
                 Nombsede = factura.NroSucursalNavigation.NomSede,
                 Fecha = factura.Fecha,
                 IdEmpleado = factura.IdEmpleado,
+                NomEmpleado = factura.IdEmpleadoNavigation.ApellEmpleado + ", " + factura.IdEmpleadoNavigation.NomEmpleado,
                 IdFormaPago = factura.IdFormaPago,
+                DetalleFormaPago = factura.IdFormaPagoNavigation.Descripcion,
 
                 DetalleFacturasDto = factura.DetalleFacturas.Select(x => new ReadDetalleFacturasDto()
                 {

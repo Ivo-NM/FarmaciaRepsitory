@@ -25,6 +25,8 @@ namespace Farmacia_Api.Data.Implementations
                     .ThenInclude(df => df.CodMedicamentoNavigation)
                 .Include(f => f.DetalleFacturas)
                     .ThenInclude(df => df.CodProductoNavigation)
+                .Include(f => f.IdEmpleadoNavigation)
+                .Include(f => f.IdFormaPagoNavigation)
                 .AsSplitQuery()
                 .ToListAsync();
         }
@@ -50,6 +52,8 @@ namespace Farmacia_Api.Data.Implementations
                     .ThenInclude(df => df.CodMedicamentoNavigation)
                 .Include(f => f.DetalleFacturas)
                     .ThenInclude(df => df.CodProductoNavigation)
+                .Include(f => f.IdEmpleadoNavigation)
+                .Include(f => f.IdFormaPagoNavigation)
                 .AsSplitQuery()
                 .FirstOrDefaultAsync(f => f.NroFactura == id);
 
