@@ -170,6 +170,18 @@ function obtenerEntrega()
     let respuestaEntrega = $respuestaEntrega.value;
     let idEmpleado = Number($idEmpleado.value);
 
+    if (!fecha.value) 
+    {
+        Swal.fire("Ingrese una fecha");
+        return false;
+    }
+
+    if (dayjs(fecha.value).isAfter(dayjs())) 
+    {
+        Swal.fire("La fecha y hora deben ser anteriores o iguales a las actuales");
+        return false;
+    }
+
     let codMed = null;
 
     if ($codMed.value !== "") 

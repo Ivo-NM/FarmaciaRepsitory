@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <title>City Farmacia | Reporte Facturas</title>
+    <title>City Farmacia | Reporte Entregas</title>
 
     <!--begin::Theme Init (prevents flash of incorrect theme on load, #6043)-->
     <script>
@@ -134,7 +134,7 @@
             <li class="nav-item d-none d-md-block">
               <a href="https://adminlte.io/themes/v4/docs/introduction.html" class="nav-link">
                 <i class="bi bi-book me-1" aria-hidden="true"></i>
-                Documentation
+                Documentación
               </a>
             </li>
           </ul>
@@ -419,6 +419,7 @@
                 <!--end::Menu Footer-->
               </ul>
             </li>
+            <!--end::User Menu Dropdown-->
         </div>
         <!--end::Container-->
       </nav>
@@ -437,7 +438,7 @@
               alt="farmacia Logo"
               class="brand-image opacity-75 shadow"
             />
-            <span class="brand-text fw-light" >City Farmacia</span>
+            <span class="brand-text fw-light">City Farmacia</span>
             <!--end::Brand Text-->
           </a>
           <!--end::Brand Link-->
@@ -471,27 +472,27 @@
               id="navigation"
             >
               <li class="nav-item">
-                <a href="ReporteFacturas.html" class="nav-link">
+                <a href="RegistroFacturas.html" class="nav-link">
                   <i class="nav-icon bi bi-receipt"></i>
-                  <p>Reportes de facturas</p>
+                  <p>Registro De Facturas</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="users.html" class="nav-link">
                   <i class="nav-icon bi bi-person-lines-fill"></i>
-                  <p>Registrar cliente</p>
+                  <p>Registrar Cliente</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="ReporteInventarios.html" class="nav-link">
                   <i class="nav-icon bi bi-box-seam"></i>
-                  <p>Reportes de inventarios</p>
+                  <p>Reportes De Inventarios</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="ReporteEntregas.html" class="nav-link">
+                <a href="RegistroEntregas.html" class="nav-link">
                   <i class="nav-icon bi bi-truck"></i>
-                  <p>Reportes de entregas</p>
+                  <p>Registro De Entregas</p>
                 </a>
               </li>
             </ul>
@@ -517,39 +518,35 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-sm-6">
-                <h1 class="mb-0 fs-3">Reporte Facturas</h1>
+                <h1 class="mb-0 fs-3">Reporte Entregas</h1>
               </div>
-              <!--begin::Row-->
-            <div class="row">
               <div class="col-sm-6">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb float-sm-end">
-                    <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page" >Reporte</li>
+                    <li class="breadcrumb-item"><a href="login.html">Login</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" href = "index.html">Home</li>
                   </ol>
                 </nav>
               </div>
-            </div>
-            <!--end::Row-->
             </div>
           </div>
         </div>
         <div class="app-content">
 
             <!-- Toolbar -->
-             <!--Facturas-->
+             <!--Entregas-->
             <div class="card">
               <div class="card-header d-flex flex-wrap gap-2 align-items-center">
-                <h3 class="card-title mb-0 me-auto">Facturas</h3>
+                <h3 class="card-title mb-0 me-auto">Entregas</h3>
                 <div class="input-group input-group-sm" style="width: 16rem">
                   <span id = "icono_lupa" class="input-group-text">
                     <i class="bi bi-search" aria-hidden="true"></i>
                   </span>
                   <input
-                    id = "input-nro-factura"
+                    id = "input-nro-entrega"
                     type="search"
                     class="form-control"
-                    placeholder="Buscar Por Numero De Factura&hellip;"
+                    placeholder="Buscar Por Numero De Entrega&hellip;"
                     aria-label="Search projects"
                   />
                 </div>
@@ -561,9 +558,9 @@
                 >
                   
                 </select>
-                <a href="AltaFacturas.html" class="btn btn-primary btn-sm">
+                <a href = "AltaEntregas.html" class="btn btn-primary btn-sm">
                   <i class="bi bi-plus-lg me-1" aria-hidden="true"></i>
-                  Nueva Factura
+                  Nueva Entrega
                 </a>
               </div>
               <div id = "cartas" class="card-body p-0">
@@ -571,11 +568,10 @@
                   <table class="table align-middle mb-0">
                     <thead>
                       <tr>
-                        <th>Número Factura</th>
-                        <th>Sucursal</th>
+                        <th>Número Entrega</th>
                         <th>Fecha</th>
+                        <th>Respuesta Entrega</th>
                         <th>Empleado</th>
-                        <th>Forma Pago</th>
                         <th>Medicamento/Producto</th>
                         <th>Cantidad</th>
                       </tr>
@@ -593,7 +589,7 @@
                 </div>
               </div>
               <div class="card-footer d-flex justify-content-between align-items-center">
-                <small class="text-secondary"> Mostrando Facturas </small>
+                <small class="text-secondary"> Mostrando Entregas </small>
               </div>
             </div>
           </div>
@@ -651,6 +647,6 @@
      in <head> stays inline, because it must run before first paint. -->
     <!--end::Color Mode Toggle-->
     <script src = "../js/utilies.js"></script>
-    <script src = "../js/reporteFacturas.js"></script>
+    <script src = "../js/registroEntregas.js"></script>
   </body>
 </html>

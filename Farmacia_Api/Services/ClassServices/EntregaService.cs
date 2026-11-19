@@ -139,7 +139,6 @@ namespace Farmacia_Api.Services.ClassServices
             var lstEntregas = Mapeo(entregas);
             return lstEntregas;
         }
-
         public async Task<IEnumerable<ReadEntregaDto>> RecuperarEntregasPorSedeAsync(int id)
         {
             //La sucursal debe existir
@@ -166,7 +165,7 @@ namespace Farmacia_Api.Services.ClassServices
                     NroEntrega = entrega.NroEntrega,
                     Fecha = entrega.Fecha,
                     RespuestaEntrega = entrega.RespEntrega,
-                    IdEmpleado = entrega.IdEmpleado,
+                    Empleado = entrega.IdEmpleadoNavigation.ApellEmpleado + ", " + entrega.IdEmpleadoNavigation.NomEmpleado,
                     DetalleEntregasDtos = entrega.DetalleEntregas.Select(de => new ReadDetalleEntregasDto()
                     {
                         CodMedicamento = de.CodMedicamento,
@@ -189,7 +188,7 @@ namespace Farmacia_Api.Services.ClassServices
                 NroEntrega = entrega.NroEntrega,
                 Fecha = entrega.Fecha,
                 RespuestaEntrega = entrega.RespEntrega,
-                IdEmpleado = entrega.IdEmpleado,
+                Empleado = entrega.IdEmpleadoNavigation.ApellEmpleado + ", " + entrega.IdEmpleadoNavigation.NomEmpleado,
                 DetalleEntregasDtos = entrega.DetalleEntregas.Select(de => new ReadDetalleEntregasDto()
                 {
                     CodMedicamento = de.CodMedicamento,
