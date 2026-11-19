@@ -25,6 +25,7 @@ namespace Farmacia_Api.Data.Implementations
                 .ThenInclude(de => de.CodMedicamentoNavigation)
                 .Include(e => e.DetalleEntregas)
                 .ThenInclude(de => de.CodProductoNavigation)
+                .Include(e => e.IdEmpleadoNavigation)
                 .AsSplitQuery()
                 .ToListAsync();
         }
@@ -36,6 +37,7 @@ namespace Farmacia_Api.Data.Implementations
                   .ThenInclude(de => de.CodMedicamentoNavigation)
                 .Include(e => e.DetalleEntregas)
                   .ThenInclude(de => de.CodProductoNavigation)
+                .Include(e => e.IdEmpleadoNavigation)
                 .AsSplitQuery()
                 .ToListAsync();
         }
@@ -48,6 +50,7 @@ namespace Farmacia_Api.Data.Implementations
                 .ThenInclude(de => de.CodMedicamentoNavigation)
                 .Include(e => e.DetalleEntregas)
                 .ThenInclude(de => de.CodProductoNavigation)
+                .Include(e => e.IdEmpleadoNavigation)
                 .AsSplitQuery()
                 .FirstOrDefaultAsync();
         }

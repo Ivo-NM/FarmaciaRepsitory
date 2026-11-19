@@ -166,7 +166,7 @@ namespace Farmacia_Api.Services.ClassServices
                     NroEntrega = entrega.NroEntrega,
                     Fecha = entrega.Fecha,
                     RespuestaEntrega = entrega.RespEntrega,
-                    IdEmpleado = entrega.IdEmpleado,
+                    Empleado = entrega.IdEmpleadoNavigation.NomEmpleado,
                     DetalleEntregasDtos = entrega.DetalleEntregas.Select(de => new ReadDetalleEntregasDto()
                     {
                         CodMedicamento = de.CodMedicamento,
@@ -189,7 +189,7 @@ namespace Farmacia_Api.Services.ClassServices
                 NroEntrega = entrega.NroEntrega,
                 Fecha = entrega.Fecha,
                 RespuestaEntrega = entrega.RespEntrega,
-                IdEmpleado = entrega.IdEmpleado,
+                Empleado = entrega.IdEmpleadoNavigation.NomEmpleado,
                 DetalleEntregasDtos = entrega.DetalleEntregas.Select(de => new ReadDetalleEntregasDto()
                 {
                     CodMedicamento = de.CodMedicamento,
