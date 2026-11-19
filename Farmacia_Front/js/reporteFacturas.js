@@ -75,13 +75,13 @@ function buscarFacturaPorSucursal()
                     let $celdaFecha = document.createElement("td");
                     $celdaFecha.textContent = dayjs(f.fecha).format("DD/MM/YYYY");
 
-                    //Cod. Empleado
-                    let $celdaCodEmpleado = document.createElement("td");
-                    $celdaCodEmpleado.textContent = f.idEmpleado;
+                    //Empleado
+                    let $celdaEmpleado = document.createElement("td");
+                    $celdaEmpleado.textContent = f.nomEmpleado;
 
-                    //Cod. Forma Pago
-                    let $celdaCodFormaPago = document.createElement("td");
-                    $celdaCodFormaPago.textContent = f.idFormaPago;
+                    //Forma Pago
+                    let $celdaFormaPago = document.createElement("td");
+                    $celdaFormaPago.textContent = f.detalleFormaPago;
 
                     //Medicamento/Producto
                     let $celdaMedProd = document.createElement("td");
@@ -96,8 +96,8 @@ function buscarFacturaPorSucursal()
                     $fila.appendChild($celdaNroFactura);
                     $fila.appendChild($celdaSucursal);
                     $fila.appendChild($celdaFecha);
-                    $fila.appendChild($celdaCodEmpleado);
-                    $fila.appendChild($celdaCodFormaPago);
+                    $fila.appendChild($celdaEmpleado);
+                    $fila.appendChild($celdaFormaPago);
                     $fila.appendChild($celdaMedProd);
                     $fila.appendChild($celdaCant);
 

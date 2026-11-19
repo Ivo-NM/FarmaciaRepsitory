@@ -72,9 +72,9 @@ function cargarEntregasPorNro()
                     let $respuestaEntrega = document.createElement("td");
                     $respuestaEntrega.textContent = e.respuestaEntrega;
 
-                    //Cod. Empleado
-                    let $codEmpleado = document.createElement("td");
-                    $codEmpleado.textContent = e.idEmpleado;
+                    //Empleado
+                    let $empleado = document.createElement("td");
+                    $empleado.textContent = e.empleado;
 
                     //Med/Producto
                     let $medProd = document.createElement("td");
@@ -87,7 +87,7 @@ function cargarEntregasPorNro()
                     $fila.appendChild($nroEntrega);
                     $fila.appendChild($fecha);
                     $fila.appendChild($respuestaEntrega);
-                    $fila.appendChild($codEmpleado);
+                    $fila.appendChild($empleado);
                     $fila.appendChild($medProd);
                     $fila.appendChild($cant);
 
@@ -138,9 +138,9 @@ function cargarEntregasPorSucursal()
                     let $respuestaEntrega = document.createElement("td");
                     $respuestaEntrega.textContent = e.respuestaEntrega;
 
-                    //Cod. Empleado
-                    let $codEmpleado = document.createElement("td");
-                    $codEmpleado.textContent = e.idEmpleado;
+                    //Empleado
+                    let $empleado = document.createElement("td");
+                    $empleado.textContent = e.empleado;
 
                     //Med/Producto
                     let $medProd = document.createElement("td");
@@ -153,7 +153,7 @@ function cargarEntregasPorSucursal()
                     $fila.appendChild($nroEntrega);
                     $fila.appendChild($fecha);
                     $fila.appendChild($respuestaEntrega);
-                    $fila.appendChild($codEmpleado);
+                    $fila.appendChild($empleado);
                     $fila.appendChild($medProd);
                     $fila.appendChild($cant);
 
@@ -202,9 +202,9 @@ function cargarEntregas()
                     let $respuestaEntrega = document.createElement("td");
                     $respuestaEntrega.textContent = e.respuestaEntrega;
 
-                    //Cod. Empleado
-                    let $codEmpleado = document.createElement("td");
-                    $codEmpleado.textContent = e.idEmpleado;
+                    //Empleado
+                    let $empleado = document.createElement("td");
+                    $empleado.textContent = e.empleado;
 
                     //Med/Producto
                     let $medProd = document.createElement("td");
@@ -217,7 +217,7 @@ function cargarEntregas()
                     $fila.appendChild($nroEntrega);
                     $fila.appendChild($fecha);
                     $fila.appendChild($respuestaEntrega);
-                    $fila.appendChild($codEmpleado);
+                    $fila.appendChild($empleado);
                     $fila.appendChild($medProd);
                     $fila.appendChild($cant);
 
