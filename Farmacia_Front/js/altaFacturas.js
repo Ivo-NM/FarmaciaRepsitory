@@ -30,7 +30,6 @@ function mostrarDatosEmpleado()
     });
 }
 
-
 function crearFactura()
 {
     let exito = validarDatos();
@@ -43,8 +42,6 @@ function crearFactura()
     let url = "https://localhost:7032/api/Facturas/facturas/crear";
 
     let putaFactura = obtenerFactura();
-
-    console.log(putaFactura);
 
     fetch(url, {
         method: "POST",
