@@ -56,6 +56,7 @@ public partial class FarmaciaDbContext : DbContext
 
     public virtual DbSet<Sucursale> Sucursales { get; set; }
 
+    public virtual DbSet<Usuario> Usuarios { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -102,11 +103,11 @@ public partial class FarmaciaDbContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.NroTelefono).HasColumnName("Nro_telefono");
 
-            entity.HasOne(d => d.CodObraSocialNavigation).WithMany(p => p.Clientes)
+            entity.HasOne(d => d.ObraSocialNavigation).WithMany(p => p.Clientes)
                 .HasForeignKey(d => d.CodObraSocial)
                 .HasConstraintName("FK_CLIENTE_ObraSocial");
 
-            entity.HasOne(d => d.IdBarrioNavigation).WithMany(p => p.Clientes)
+            entity.HasOne(d => d.BarrioNavigation).WithMany(p => p.Clientes)
                 .HasForeignKey(d => d.IdBarrio)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CLIENTE_BARRIO");
@@ -201,7 +202,7 @@ public partial class FarmaciaDbContext : DbContext
 
             entity.HasOne(d => d.NroFacturaNavigation).WithMany(p => p.DetalleFacturas)
                 .HasForeignKey(d => d.NroFactura)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_DETALLE_FACTURA");
         });
 
@@ -309,7 +310,7 @@ public partial class FarmaciaDbContext : DbContext
 
             entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Facturas)
                 .HasForeignKey(d => d.IdCliente)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_FACTURAS_CLIENTE");
 
             entity.HasOne(d => d.IdEmpleadoNavigation).WithMany(p => p.Facturas)
@@ -523,6 +524,13 @@ public partial class FarmaciaDbContext : DbContext
         });
 
         OnModelCreatingPartial(modelBuilder);
+
+        modelBuilder.Entity<Usuario>()
+        .HasKey(u => u.IdEmpleado);
+        modelBuilder.Entity<Usuario>()
+            .HasOne(u => u.EmpleadoNavigation)
+            .WithOne(e => e.UsuarioNavigation)
+            .HasForeignKey<Usuario>(u => u.IdEmpleado);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

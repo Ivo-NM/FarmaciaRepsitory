@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+  <!--begin::Head-->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <!-- Primary AdminLTE CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4/dist/css/adminlte.min.css">
+      <!-- Required Plugins CSS -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.0.12/index.css" integrity="sha256-tXJfXfp6Ewt1ilPzLDutQn5406J9Lg3jZJv87x58l88=" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.10.1/styles/overlayscrollbars.min.css" integrity="sha256-tZHrRjVqNSRyWg2wbppGVT833E/Ys0DHWGwT04GqQg=" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" integrity="sha256-9kPW/n5nn53j4WMRYAxe9c1rCY96Oogo/MKSVdKzPmI=" crossorigin="anonymous">
+    <title>City Farmacia | Users</title>
+
+    <!--begin::Theme Init (prevents flash of incorrect theme on load, #6043)-->
+    <script>
+      (() => {
+        'use strict';
+        const root = document.documentElement;
+
+        if (root.getAttribute('data-lte-color-mode') === 'off') {
+          return;
+        }
+
+        const STORAGE_KEY = 'lte-theme';
+        let stored = null;
+        try {
+          stored = localStorage.getItem(STORAGE_KEY);
+        } catch {}
+        
+        const authored = root.getAttribute('data-bs-theme');
+        let resolved = 'light';
+        if (stored === 'dark' || stored === 'light') {
+          resolved = stored;
+        } else if (authored === 'dark' || authored === 'light') {
+          resolved = authored;
+        } else if (globalThis.matchMedia('(prefers-color-scheme: dark)').matches) {
+          resolved = 'dark';
+        }
+        root.setAttribute('data-bs-theme', resolved);
+        root.style.colorScheme = resolved;
+        if (resolved !== authored) {
+          root.setAttribute('data-lte-theme-resolved', '');
+        }
+      })();
+    </script>
+    <!--end::Theme Init-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#007bff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+
+    <link rel="preload" href="./css/adminlte.css" as="style" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource/source-sans-3@5.3.0/index.css"
+      integrity="sha256-5UwXtC6TaPHCAbVQ59waEAqOssHyhn/twyuLRRWszzo="
+      crossorigin="anonymous"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.16.0/styles/overlayscrollbars.min.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/adminlte.css" />
+  </head>
+  <!--end::Head-->
+  <!--begin::Body-->
+  <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <!--begin::App Wrapper-->
+    <div class="app-wrapper">
+      <!--begin::Header-->
+      <nav class="app-header navbar navbar-expand bg-body">
+        <!--begin::Container-->
+        <div class="container-fluid">
+          <!--begin::Start Navbar Links-->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                data-lte-toggle="sidebar"
+                href="#"
+                role="button"
+                aria-label="Toggle sidebar"
+              >
+                <i class="bi bi-list"></i>
+              </a>
+            </li>
+
+            <li class="nav-item d-none d-md-block">
+              <a href="../html/Mantenimiento.html" class="nav-link">
+                <i class="bi bi-grid-1x2 me-1" aria-hidden="true"></i>
+                Live preview
+              </a>
+            </li>
+            <li class="nav-item d-none d-md-block">
+              <a href="https://adminlte.io/themes/v4/docs/introduction.html" class="nav-link">
+                <i class="bi bi-book me-1" aria-hidden="true"></i>
+                Documentación
+              </a>
+            </li>
+          </ul>
+          <!--end::Start Navbar Links-->
+
+          <!--begin::Navbar Search-->
+          <form
+            class="navbar-search d-none d-xl-block ms-3"
+            role="search"
+            action="./pages/search-results.html"
+          >
+            <label for="navbar-search-input" class="visually-hidden">Search</label>
+            <div class="navbar-search-field">
+              <input
+                type="search"
+                id="navbar-search-input"
+                name="q"
+                class="form-control"
+                placeholder="Search…"
+                autocomplete="off"
+              />
+              <button class="navbar-search-submit" type="submit" aria-label="Submit search">
+                <i class="bi bi-search" aria-hidden="true"></i>
+              </button>
+            </div>
+          </form>
+          <!--end::Navbar Search-->
+
+          <!--begin::End Navbar Links-->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item d-xl-none">
+              <a class="nav-link" href="./pages/search-results.html" aria-label="Search">
+                <i class="bi bi-search" aria-hidden="true"></i>
+              </a>
+            </li>
+            <!--begin::Messages Dropdown Menu-->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                data-bs-toggle="dropdown"
+                href="#"
+                aria-label="Messages: 3 unread"
+              >
+                <i class="bi bi-chat-text"></i>
+                <span class="navbar-badge badge text-bg-danger">3</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                <a href="#" class="dropdown-item">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0">
+                      <img
+                        src="./assets/img/user1-128x128.jpg"
+                        alt=""
+                        class="img-size-50 rounded-circle me-3"
+                      />
+                    </div>
+                    <div class="flex-grow-1">
+                      <p class="dropdown-item-title">
+                        Brad Diesel
+                        <span class="float-end fs-7 text-danger"
+                          ><i class="bi bi-star-fill"></i
+                        ></span>
+                      </p>
+                      <p class="fs-7">Call me whenever you can...</p>
+                      <p class="fs-7 text-secondary">
+                        <i class="bi bi-clock-fill me-1"></i> 4 Hours Ago
+                      </p>
+                    </div>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+              </div>
+            </li>
+            <!--end::Messages Dropdown Menu-->
+
+            <!--begin::Notifications Dropdown Menu-->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                data-bs-toggle="dropdown"
+                href="#"
+                aria-label="Notifications: 15 unread"
+              >
+                <i class="bi bi-bell-fill"></i>
+                <span class="navbar-badge badge text-bg-warning">15</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                <span class="dropdown-item dropdown-header">15 Notifications</span>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer"> See All Notifications </a>
+              </div>
+            </li>
+            <!--end::Notifications Dropdown Menu-->
+
+            <!--begin::Language Menu-->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                href="#"
+                id="language-menu"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-label="Change language"
+              >
+                <i class="bi bi-translate" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="language-menu">
+                <li>
+                  <a class="dropdown-item active" href="#" hreflang="en" aria-current="true">
+                    Español
+                    <i class="bi bi-check-lg ms-2" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <li><a class="dropdown-item" href="#" hreflang="es">English</a></li>
+              </ul>
+            </li>
+            <!--end::Language Menu-->
+
+            <!--begin::Fullscreen Toggle-->
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                data-lte-toggle="fullscreen"
+                aria-label="Toggle fullscreen"
+              >
+                <i data-lte-icon="maximize" class="bi bi-arrows-fullscreen"></i>
+                <i data-lte-icon="minimize" class="bi bi-fullscreen-exit d-none"></i>
+              </a>
+            </li>
+            <!--end::Fullscreen Toggle-->
+
+            <!--begin::Color Mode Toggle-->
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                href="#"
+                id="bd-theme"
+                aria-label="Toggle color scheme"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-sun-fill" data-lte-theme-icon="light"></i>
+                <i class="bi bi-moon-fill d-none" data-lte-theme-icon="dark"></i>
+                <i class="bi bi-circle-half d-none" data-lte-theme-icon="auto"></i>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="bd-theme"
+                style="--bs-dropdown-min-width: 8rem"
+              >
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="light"
+                    aria-pressed="false"
+                  >
+                    <i class="bi bi-sun-fill me-2"></i>
+                    Light
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center"
+                    data-bs-theme-value="dark"
+                    aria-pressed="false"
+                  >
+                    <i class="bi bi-moon-fill me-2"></i>
+                    Dark
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item d-flex align-items-center active"
+                    data-bs-theme-value="auto"
+                    aria-pressed="true"
+                  >
+                    <i class="bi bi-circle-half me-2"></i>
+                    Auto
+                  </button>
+                </li>
+              </ul>
+            </li>
+            <!--end::Color Mode Toggle-->
+            <!--begin::User Menu Dropdown-->
+            <li class="nav-item dropdown user-menu">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <img
+                  src="../img/logoFarmacia-removebg-preview.png"
+                  class="user-image rounded-circle shadow"
+                  alt="Empleado"
+                />
+                <span id="nombre-empleado" class="d-none d-xl-inline">Empleado</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
+                <!--begin::User Image-->
+                <li class="user-header text-bg-primary">
+                  <p id="datos-empleado">
+                    Empleado
+                    <small>Sucursal</small>
+                  </p>
+                </li>
+                <!--end::User Image-->
+                <!--begin::Menu Body-->
+                <li class="user-body">
+                  <!--begin::Row-->
+                  <div class="row">
+                    <div class="col-4 text-center">
+                      <a href="#">Followers</a>
+                    </div>
+                    <div class="col-4 text-center">
+                      <a href="#">Sales</a>
+                    </div>
+                    <div class="col-4 text-center">
+                      <a href="#">Friends</a>
+                    </div>
+                  </div>
+                  <!--end::Row-->
+                </li>
+                <!--end::Menu Body-->
+                <!--begin::Menu Footer-->
+                <li class="user-footer">
+                  <a href="#" class="btn btn-outline-secondary">Profile</a>
+                  <a href="#" id="btn-cerrar-sesion" class="btn btn-outline-danger float-end">Cerrar sesión</a>
+                </li>
+                <!--end::Menu Footer-->
+              </ul>
+            </li>
+            <!--end::User Menu Dropdown-->
+          </ul>
+          <!--end::End Navbar Links-->
+        </div>
+        <!--end::Container-->
+      </nav>
+      <!--end::Header-->
+
+      <!--begin::Sidebar-->
+      <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+        <!--begin::Sidebar Brand-->
+        <div class="sidebar-brand">
+          <!--begin::Brand Link-->
+          <a href="./index.html" class="brand-link">
+            <!--begin::Brand Image-->
+            <img
+              src="../img/logoFarmacia-removebg-preview.png"
+              alt="farmacia Logo"
+              class="brand-image opacity-75 shadow"
+            />
+            <!--end::Brand Image-->
+            <!--begin::Brand Text-->
+            <span class="brand-text fw-light">City Farmacia</span>
+            <!--end::Brand Text-->
+          </a>
+          <!--end::Brand Link-->
+        </div>
+        <!--end::Sidebar Brand-->
+        <!--begin::Sidebar Search-->
+        <div class="sidebar-search" role="search">
+          <label for="sidebar-search-input" class="visually-hidden">Filter menu</label>
+          <input
+            type="search"
+            id="sidebar-search-input"
+            class="form-control form-control-sm"
+            placeholder="Filter menu…"
+            autocomplete="off"
+            data-lte-toggle="sidebar-search"
+            data-lte-target="#navigation"
+          />
+          <p class="fs-7 text-secondary mt-2 mb-0" data-lte-search-empty role="status" hidden>
+            No matching pages.
+          </p>
+        </div>
+        <!--end::Sidebar Search-->
+        <!--begin::Sidebar Wrapper-->
+        <div class="sidebar-wrapper">
+          <nav class="mt-2" aria-label="Main navigation">
+            <!--begin::Sidebar Menu-->
+            <ul
+              class="nav sidebar-menu flex-column"
+              data-lte-toggle="treeview"
+              data-accordion="false"
+              id="navigation"
+            >
+              <li class="nav-item">
+                <a href="RegistroFacturas.html" class="nav-link">
+                  <i class="nav-icon bi bi-receipt"></i>
+                  <p>Registro De Facturas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="users.html" class="nav-link">
+                  <i class="nav-icon bi bi-person-lines-fill"></i>
+                  <p>Registrar Cliente</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="ReporteInventarios.html" class="nav-link">
+                  <i class="nav-icon bi bi-box-seam"></i>
+                  <p>Reportes De Inventarios</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="RegistroEntregas.html" class="nav-link">
+                  <i class="nav-icon bi bi-truck"></i>
+                  <p>Registro De Entregas</p>
+                </a>
+              </li>
+            </ul>
+            <!--end::Sidebar Menu-->
+          </nav>
+        </div>
+        <!--end::Sidebar Wrapper-->
+      </aside>
+      <!--end::Sidebar-->
+
+      <!--begin::App Main-->
+      <main class="app-main">
+        <!--begin::App Content Header-->
+        <div class="app-content-header">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6">
+                <h1 class="mb-0 fs-3">Clientes</h1>
+              </div>
+              <div class="col-sm-6">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb float-sm-end">
+                    <li class="breadcrumb-item"><a href="./index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Clientes</li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--end::App Content Header-->
+
+        <!--begin::App Content (Contenido propio de la tabla de clientes)-->
+        <div class="app-content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12">
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <div class="row g-2 align-items-center">
+                      <div class="col-12 col-md-4">
+                        <h3 class="card-title">Directorio de clientes</h3>
+                      </div>
+                      <div class="col-12 col-md-8">
+                        <div class="d-flex flex-wrap justify-content-md-end gap-2">
+                          <div class="input-group input-group-sm w-auto">
+                            <span class="input-group-text">
+                              <i class="bi bi-search" aria-hidden="true"></i>
+                            </span>
+                            <input
+                              type="search"
+                              id="user-search"
+                              class="form-control"
+                              placeholder="Buscar Cliente"
+                              aria-label="Search users"
+                              style="width: 180px"
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            class="btn btn-sm btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#modal-add-user"
+                          >
+                            <i class="bi bi-person-plus-fill me-1" aria-hidden="true"></i>
+                            Nuevo cliente
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--begin::Card Body-->
+                  <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table class="table table-hover align-middle m-0">
+                        <thead>
+                          <tr>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Obra social</th>
+                            <th class="text-end">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody id="clientesTbody">
+                          <tr><td colspan="4" class="text-center text-secondary py-4">Cargando clientes...</td></tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+           <!--begin::Add User Modal (Cliente)-->
+           <div class="modal fade" id="modal-add-user" tabindex="-1" aria-labelledby="modal-add-user-label" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form id="formRegistrarCliente">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-add-user-label">Registrar Nuevo Cliente</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <!-- Nombre -->
+                                 <div class="col-md-6 mb-3">
+                                    <label for="nombre" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" maxlength="20" required />
+                                </div>
+                                <!-- Apellido -->
+                                 <div class="col-md-6 mb-3">
+                                    <label for="apellido" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellido" maxlength="20" required />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Documento -->
+                                 <div class="col-md-6 mb-3">
+                                    <label for="documento" class="form-label">Documento</label>
+                                    <input type="number" class="form-control" id="documento" required />
+                                </div>
+                                <!-- Email -->
+                                 <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" maxlength="30" />
+                                </div>
+                             </div>
+                             <div class="row">
+                                <!-- Calle -->
+                                 <div class="col-md-8 mb-3">
+                                    <label for="calle" class="form-label">Calle</label>
+                                    <input type="text" class="form-control" id="calle" maxlength="30" />
+                                </div>
+                                <!-- Altura -->
+                                 <div class="col-md-4 mb-3">
+                                    <label for="altura" class="form-label">Altura</label>
+                                    <input type="number" class="form-control" id="altura" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Teléfono -->
+                                 <div class="col-md-6 mb-3">
+                                    <label for="nroTelefono" class="form-label">Teléfono</label>
+                                    <input type="number" class="form-control" id="nroTelefono" />
+                                </div>
+                                <!-- Barrio (Combobox) -->
+                                 <div class="col-md-6 mb-3">
+                                    <label for="idBarrio" class="form-label">Barrio</label>
+                                    <select class="form-select" id="idBarrio" required>
+                                        <option value="" selected disabled>Seleccione un barrio...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Obra Social (Combobox) -->
+                                 <div class="col-md-12 mb-3">
+                                    <label for="codObraSocial" class="form-label">Obra Social</label>
+                                    <select class="form-select" id="codObraSocial">
+                                        <option value="" selected>Sin obra social</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+           </div>
+           <!--end::Add User Modal-->
+           <!--begin::Delete User Modal (Cliente)-->
+           <div class="modal fade" id="modal-delete-user" tabindex="-1" aria-labelledby="modal-delete-user-label" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modal-delete-user-label">Eliminar cliente</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p class="mb-0">¿Seguro que deseas eliminar a <strong id="borrarNombre"></strong>? Esta acción ademas borrara todas sus facturas asociadas y 
+                    no se puede deshacer.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-danger" id="btnConfirmarBorrar">Eliminar</button>
+                </div>
+              </div>
+            </div>
+           </div>
+           <!--end::Delete User Modal-->
+        </div>
+        <!--end::App Content-->
+      </main>
+      <!--end::App Main-->
+
+      <!--begin::Footer-->
+      <footer class="app-footer">
+        <div class="float-end d-none d-sm-inline"><a href="https://docs.google.com/spreadsheets/d/1KV6eDhowblJ_In2WkyGC5iXtyWT2BHH2/edit?gid=1337959772#gid=1337959772">Sobre Nosotros</a></div>
+        <strong>
+          Copyright &copy; 2014-2026&nbsp;
+          <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>.
+        </strong>
+        All rights reserved.
+      </footer>
+      <!--end::Footer-->
+    </div>
+    <!--end::App Wrapper-->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.16.0/browser/overlayscrollbars.browser.es6.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="../js/adminlte.js"></script>
+    <script src="../js/clientes.js"></script>
+    
+    <script>
+      const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+      const Default = {
+        scrollbarTheme: 'os-theme-light',
+        scrollbarAutoHide: 'leave',
+        scrollbarClickScroll: true,
+      };
+      document.addEventListener('DOMContentLoaded', function () {
+        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+        const isMobile = window.innerWidth <= 992;
+        if (sidebarWrapper && globalThis.OverlayScrollbarsGlobal?.OverlayScrollbars !== undefined && !isMobile) {
+          OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+            scrollbars: {
+              theme: Default.scrollbarTheme,
+              autoHide: Default.scrollbarAutoHide,
+              clickScroll: Default.scrollbarClickScroll,
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

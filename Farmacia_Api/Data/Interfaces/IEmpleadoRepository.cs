@@ -1,0 +1,11 @@
+﻿using Farmacia_Api.Models;
+
+namespace Farmacia_Api.Data.Interfaces
+{
+    public interface IEmpleadoRepository
+    {
+        Task<Empleado>? GetByIdAsync(int id);
+        Task<Empleado>? GetByIdandSedeAsync(int id,int idsucursal);
+        Task<List<Empleado>> GetBySedeAsync(int idSucursal);
+    }
+}

@@ -30,4 +30,5 @@ public partial class Empleado
     public virtual ICollection<Inventario> Inventarios { get; set; } = new List<Inventario>();
 
     public virtual Sucursale NroSucursalNavigation { get; set; } = null!;
+    public virtual Usuario UsuarioNavigation { get; set; } = null!;
 }
